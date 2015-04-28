@@ -9,7 +9,7 @@ TroyTroestrup - Alexander Trøstrup Steuernagel
 
 * DennisLund - *Dennis Lund Christiansen*
 * TheMesterDK - *Thomas Sidelmann Kokholm*
-* TroyTroestrup - *Alexander Trøstrup Steuernagel*
+* TroyTroestrup - *Alexander Troestrup Steuernagel* - 30615843
 
 *
 
