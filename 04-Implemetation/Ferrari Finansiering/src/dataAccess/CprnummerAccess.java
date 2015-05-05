@@ -1,6 +1,6 @@
 package dataAccess;
 
-public class KundeAccess
+public class CprnummerAccess
 {
   private static final String SELECT = "SELECT  FROM  WHERE ";
   private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
@@ -9,11 +9,10 @@ public class KundeAccess
   private static final String DELETE = "DELETE FROM  WHERE  = ?";
   
   
-  public KundeAccess()
+  public CprnummerAccess()
   {
     
   }
-  
   
   
   
