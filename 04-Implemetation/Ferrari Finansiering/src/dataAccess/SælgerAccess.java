@@ -1,5 +1,9 @@
 package dataAccess;
 
+import java.sql.*;
+import java.util.*;
+
+
 public class SælgerAccess
 {
   private static final String SELECT = "SELECT navn FROM sælger WHERE sælgerid = ?";

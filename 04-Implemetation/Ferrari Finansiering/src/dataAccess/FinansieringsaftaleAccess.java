@@ -1,5 +1,10 @@
 package dataAccess;
 
+import java.sql.*;
+import java.util.*;
+
+
+
 public class FinansieringsaftaleAccess
 {
   private static final String SELECT = "SELECT beløb, rente, afviklingsperiode, oprettelsesdato FROM finansieringsaftale WHERE aftaleid = ?";

@@ -1,5 +1,10 @@
 package dataAccess;
 
+import java.sql.*;
+import java.util.*;
+
+
+
 public class BilAccess
 {
   private static final String SELECT = "SELECT registreringsnummer, pris, model, årgang, bemærkninger FROM bil WHERE chassisnummer = ?";
