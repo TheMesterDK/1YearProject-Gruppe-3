@@ -2,11 +2,11 @@ package dataAccess;
 
 public class FinansieringsaftaleAccess
 {
-  private static final String SELECT = "SELECT  FROM  WHERE ";
-  private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
-  private static final String INSERT = "INSERT INTO  VALUES (?)";
-  private static final String UPDATE = "UPDATE  SET  WHERE = ?";
-  private static final String DELETE = "DELETE FROM  WHERE  = ?";
+  private static final String SELECT = "SELECT beløb, rente, afviklingsperiode, oprettelsesdato FROM finansieringsaftale WHERE aftaleid = ?";
+//  private static final String SELECT_MANY = "SELECT  FROM finansieringsaftale WHERE ";
+  private static final String INSERT = "INSERT INTO finansieringsaftale(beløb, rente, afviklingsperiode, oprettelsesdato) VALUES (?, ?, ?, ?)";
+  private static final String UPDATE = "UPDATE finansieringsaftale SET beløb = ?, rente = ?, afviklingsperiode = ?, oprettelsesdato = ? WHERE aftaleid = ?";
+  private static final String DELETE = "DELETE FROM finansieringsaftale WHERE aftaleid = ?";
   
   
   public FinansieringsaftaleAccess()
