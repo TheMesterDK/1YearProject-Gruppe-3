@@ -3,6 +3,7 @@ package domain;
 public class Kunde
 {
   private int cprid;
+  private String cprnummer;
   private String navn;
   private String adresse;
   private String telefonnummer;
@@ -22,6 +23,17 @@ public class Kunde
   }
   
   
+  public String getCprnummer()
+  {
+    return cprnummer;
+  }
+
+  public void setCprnummer( String cprnummer )
+  {
+    this.cprnummer = cprnummer;
+  }
+  
+
   public String getNavn()
   {
     return navn;

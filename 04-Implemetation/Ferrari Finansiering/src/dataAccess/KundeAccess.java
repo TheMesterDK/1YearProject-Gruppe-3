@@ -24,7 +24,46 @@ public class KundeAccess
   /*
    * Create
    */
-  
+//  public void createKunde(Kunde kunde) throws SQLException
+//  {
+//    Connection connection = null;
+//    try
+//    {
+//      connection = new DbConnection().getConnection();
+//      createKunde( connection, kunde );
+//    }
+//    finally
+//    {
+//      if ( connection != null )
+//      {
+//        connection.close();
+//      }
+//    }
+//  }
+//  
+//  public void createKunde(Connection connection, Kunde kunde) throws SQLException
+//  {
+//    PreparedStatement statement = null;
+//    ResultSet resultset = null;
+//    CprnummerAccess cpraccess = new CprnummerAccess();
+//    int cprid =0;
+//    try
+//    {
+//      
+//    }
+//    finally
+//    {
+//      if ( resultset != null )
+//      {
+//        resultset.close();
+//      }
+//      if ( statement != null )
+//      {
+//        statement.close();
+//      }
+//    }
+//
+//  }
   
   
   /*

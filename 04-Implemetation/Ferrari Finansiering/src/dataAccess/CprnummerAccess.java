@@ -22,7 +22,43 @@ public class CprnummerAccess
   /*
    * Create
    */
-  
+//  void createCprnummer(String cprnummer) throws SQLException
+//  {
+//    Connection connection = null;
+//    try
+//    {
+//      connection = new DbConnection().getConnection();
+//      createCprnummer(connection, cprnummer);
+//    }
+//    finally
+//    {
+//      if(connection != null)
+//      {
+//        connection.close();
+//      }
+//    }
+//  }
+//  
+//  void createCprnummer(Connection connection, String cprnummer) throws SQLException
+//  {
+//    PreparedStatement statement = null;
+//    ResultSet resultset = null;
+//    try 
+//    {
+//      statement = connection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+//      statement.setString(1, cprnummer);
+//      statement.execute();
+//      resultset = statement.getGeneratedKeys();
+//      
+//    } 
+//    finally 
+//    {
+//      if (statement != null) 
+//      {
+//        statement.close();
+//      }
+//    }
+//  }
   
   
   /*
