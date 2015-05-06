@@ -3,6 +3,7 @@ package dataAccess;
 import java.sql.*;
 import java.util.*;
 
+import domain.Bil;
 
 
 public class BilAccess
@@ -18,6 +19,29 @@ public class BilAccess
   {
     
   }
+  
+  
+  /*
+   * Create
+   */
+  
+  
+  
+  /*
+   * Read
+   */
+  
+  
+  
+  /*
+   * Update
+   */
+  
+  
+  
+  /*
+   * Delete
+   */
   
   
   

@@ -21,6 +21,27 @@ public class KundeAccess
   }
   
   
+  /*
+   * Create
+   */
+  
+  
+  
+  /*
+   * Read
+   */
+  
+  
+  
+  /*
+   * Update
+   */
+  
+  
+  
+  /*
+   * Delete
+   */
   
   
   

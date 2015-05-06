@@ -3,6 +3,8 @@ package dataAccess;
 import java.sql.*;
 import java.util.*;
 
+import domain.Sælger;
+
 
 public class SælgerAccess
 {
@@ -17,6 +19,29 @@ public class SælgerAccess
   {
     
   }
+  
+  
+  /*
+   * Create
+   */
+  
+  
+  
+  /*
+   * Read
+   */
+  
+  
+  
+  /*
+   * Update
+   */
+  
+  
+  
+  /*
+   * Delete
+   */
   
   
   

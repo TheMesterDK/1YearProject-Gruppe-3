@@ -3,6 +3,7 @@ package dataAccess;
 import java.sql.*;
 import java.util.*;
 
+import domain.Finansieringsaftale;
 
 
 public class FinansieringsaftaleAccess
@@ -18,6 +19,29 @@ public class FinansieringsaftaleAccess
   {
     
   }
+  
+  
+  /*
+   * Create
+   */
+  
+  
+  
+  /*
+   * Read
+   */
+  
+  
+  
+  /*
+   * Update
+   */
+  
+  
+  
+  /*
+   * Delete
+   */
   
   
   

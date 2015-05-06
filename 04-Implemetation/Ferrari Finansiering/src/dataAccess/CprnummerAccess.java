@@ -19,5 +19,28 @@ public class CprnummerAccess
   }
   
   
+  /*
+   * Create
+   */
+  
+  
+  
+  /*
+   * Read
+   */
+  
+  
+  
+  /*
+   * Update
+   */
+  
+  
+  
+  /*
+   * Delete
+   */
+  
+  
   
 }
