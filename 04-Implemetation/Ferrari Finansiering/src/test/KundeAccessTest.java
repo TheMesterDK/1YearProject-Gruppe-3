@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import domain.Kunde;
 import dataAccess.CprnummerAccess;
-import dataAccess.KundeAccess;
+
 
 public class KundeAccessTest
 {
