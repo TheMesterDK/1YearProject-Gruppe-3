@@ -3,80 +3,86 @@ package dataAccess;
 import java.sql.*;
 import java.util.*;
 
+import domain.Kunde;
 
 public class CprnummerAccess
 {
   private static final String SELECT = "SELECT cprnummer FROM cprnummer WHERE cprid = ?";
-//  private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
+  // private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
   private static final String INSERT = "INSERT INTO cprnummer(cprnummer) VALUES(?)";
   private static final String UPDATE = "UPDATE cprnummer SET cprnummer = ? WHERE cprid = ?";
   private static final String DELETE = "DELETE FROM cprnummer WHERE cprid = ?";
-  
   
   public CprnummerAccess()
   {
     
   }
   
-  
   /*
    * Create
    */
-  void createCprnummer(String cprnummer) throws SQLException
+  public void createCprnummer( Kunde kunde ) throws SQLException
   {
     Connection connection = null;
     try
     {
       connection = new DbConnection().getConnection();
-      createCprnummer(connection, cprnummer);
+      createCprnummer( connection, kunde );
     }
     finally
     {
-      if(connection != null)
+      if ( connection != null )
       {
         connection.close();
       }
     }
   }
   
-  void createCprnummer(Connection connection, String cprnummer) throws SQLException
+  public void createCprnummer( Connection connection, Kunde kunde ) throws SQLException
   {
     PreparedStatement statement = null;
     ResultSet resultset = null;
-    try 
+    KundeAccess ka = new KundeAccess();
+    try
     {
-      statement = connection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-      statement.setString(1, cprnummer);
+      statement = connection.prepareStatement( INSERT, PreparedStatement.RETURN_GENERATED_KEYS );
+      statement.setString( 1, kunde.getCprnummer() );
       statement.execute();
       resultset = statement.getGeneratedKeys();
+      if ( resultset.next() )
+      {
+        kunde.setCprid( resultset.getInt( 1 ) );
+        ka.createKunde( kunde );
+      }
       
-    } 
-    finally 
+    }
+    finally
     {
-      if (statement != null) 
+      if ( resultset != null )
+      {
+        resultset.close();
+        System.out.println("cprnummeracces:");
+        System.out.println("Resultset er lukket");
+      }
+      if ( statement != null )
       {
         statement.close();
+        System.out.println("cprnummeracces:");
+        System.out.println("Statement er lukket");
       }
     }
   }
-  
   
   /*
    * Read
    */
   
-  
-  
   /*
    * Update
    */
   
-  
-  
   /*
    * Delete
    */
-  
-  
   
 }

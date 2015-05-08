@@ -14,7 +14,7 @@ public class DbConnection
   public DbConnection() throws SQLException
   {
     connection = DriverManager.getConnection( CONNECTION_URL, DB_USER, DB_PASSWORD );
-    connection.setAutoCommit( false );
+//    connection.setAutoCommit( false );
   }
   
   
