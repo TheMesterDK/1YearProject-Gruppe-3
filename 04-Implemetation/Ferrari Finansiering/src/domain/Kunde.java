@@ -103,7 +103,7 @@ public class Kunde
   @Override
   public String toString()
   {
-    return "Kunde [cprid=" + cprid + ", navn=" + navn + ", adresse=" + adresse + ", telefonnummer=" + telefonnummer + ", postnummer=" + postnummer + ", email=" + email + ", kommentar=" + kommentar + "]";
+    return "Kunde [cprid=" + cprid + ", cprnummer" + cprnummer + ", navn=" + navn + ", adresse=" + adresse + ", telefonnummer=" + telefonnummer + ", postnummer=" + postnummer + ", email=" + email + ", kommentar=" + kommentar + "]";
   }
   
   

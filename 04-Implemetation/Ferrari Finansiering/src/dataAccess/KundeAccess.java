@@ -108,12 +108,15 @@ public class KundeAccess
       resultset = statement.executeQuery();
       kunde = new Kunde();
       kunde.setCprid( cprid );
+      while ( resultset.next() )
+      {
       kunde.setNavn( resultset.getString( "navn" ) );
       kunde.setAdresse( resultset.getString( "adresse" ) );
       kunde.setPostnummer( resultset.getString( "postnummer" ) );
       kunde.setTelefonnummer( resultset.getString( "telefonnummer" ) );
       kunde.setEmail( resultset.getString( "email" ) );
-      kunde.setKommentar( resultset.getString( "kommentar" ) );  
+      kunde.setKommentar( resultset.getString( "kommentar" ) );
+      }
       return kunde;
     }
     finally
