@@ -24,7 +24,7 @@ public class KundeLogik
       dbcon = new DbConnection();
       CprnummerAccess cpraccess = new CprnummerAccess();
       cpraccess.createCprnummer( kunde );
-      dbcon.commit();
+//      dbcon.commit();
     }
     catch ( Exception e )
     {
@@ -56,7 +56,7 @@ public class KundeLogik
       dbcon = new DbConnection();
     KundeAccess kundeaccess = new KundeAccess();
     Kunde kunde = kundeaccess.readKunde( cprid );
-    dbcon.commit();
+//    dbcon.commit();
     return kunde;
     }
     catch ( Exception e )
@@ -90,7 +90,7 @@ public class KundeLogik
       dbcon = new DbConnection();
     KundeAccess kundeaccess = new KundeAccess();
     kundeaccess.updateKunde( kunde );
-    dbcon.commit();
+//    dbcon.commit();
     }
     catch ( Exception e )
     {
@@ -123,7 +123,7 @@ public class KundeLogik
         dbcon = new DbConnection();
       CprnummerAccess cpraccess = new CprnummerAccess();
       cpraccess.deleteCprnummer( cprid );
-      dbcon.commit();
+//      dbcon.commit();
       }
       catch ( Exception e )
       {

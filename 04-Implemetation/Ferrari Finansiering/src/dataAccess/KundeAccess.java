@@ -2,7 +2,6 @@ package dataAccess;
 
 import java.sql.*;
 
-
 import domain.Kunde;
 
 
@@ -58,16 +57,19 @@ public class KundeAccess
       statement.setString( 6, kunde.getEmail() );
       statement.setString( 7, kunde.getKommentar() );
       statement.execute();
+      connection.commit();
     }
     finally
     {
-      if ( resultset != null )
-      {
-        resultset.close();
-      }
+//      if ( resultset != null )
+//      {
+//        resultset.close();
+//        System.out.println("Kunde, resultset close");
+//      }
       if ( statement != null )
       {
         statement.close();
+//        System.out.println("Kunde, statement close");
       }
     }
     

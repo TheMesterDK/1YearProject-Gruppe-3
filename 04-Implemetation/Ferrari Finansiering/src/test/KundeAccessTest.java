@@ -3,13 +3,14 @@ package test;
 import java.sql.SQLException;
 
 import domain.Kunde;
-import dataAccess.CprnummerAccess;
-
+import exceptions.KundeAllreadyExist;
+//import dataAccess.CprnummerAccess;
+import logic.KundeLogik;
 
 public class KundeAccessTest
 {
   
-  public static void main( String[] args ) throws SQLException
+  public static void main( String[] args ) throws SQLException, KundeAllreadyExist
   {
     /*
      * Test createCprnummer (Og derigennem createKunde).
@@ -23,11 +24,11 @@ public class KundeAccessTest
     kunde.setEmail( "Anders@Aagade.dk" );
     kunde.setKommentar( "God Kunde" );
     
-    CprnummerAccess cpraccess = new CprnummerAccess();
-    
-    cpraccess.createCprnummer(kunde);
+//    CprnummerAccess cpraccess = new CprnummerAccess();   
+//    cpraccess.createCprnummer(kunde);
 
-    
+    KundeLogik kl = new KundeLogik();
+    kl.createKunde( kunde );
     
   }
   

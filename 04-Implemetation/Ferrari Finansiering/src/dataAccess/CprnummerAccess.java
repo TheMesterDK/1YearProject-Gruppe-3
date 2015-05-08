@@ -34,6 +34,7 @@ public class CprnummerAccess
       if ( connection != null )
       {
         connection.close();
+//        System.out.println("Cpr, connection close");
       }
     }
   }
@@ -61,10 +62,12 @@ public class CprnummerAccess
       if ( resultset != null )
       {
         resultset.close();
+//        System.out.println("Cpr, resultset close");
       }
       if ( statement != null )
       {
         statement.close();
+//        System.out.println("Cpr, statement close");
       }
     }
   }

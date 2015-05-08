@@ -14,7 +14,7 @@ public class DbConnection
   public DbConnection() throws SQLException
   {
     connection = DriverManager.getConnection( CONNECTION_URL, DB_USER, DB_PASSWORD );
-//    connection.setAutoCommit( false );
+    connection.setAutoCommit( false );
   }
   
   
@@ -32,17 +32,17 @@ public class DbConnection
   }
   
   
-  public void commit() throws SQLException
-  {
-    if ( this.connection != null )
-    {
-      this.connection.commit();
-    }
-    else
-    {
-      throw new SQLException( "Connection not available (null). Not committed" );
-    }
-  }
+//  public void commit() throws SQLException
+//  {
+//    if ( this.connection != null )
+//    {
+//      this.connection.commit();
+//    }
+//    else
+//    {
+//      throw new SQLException( "Connection not available (null). Not committed" );
+//    }
+//  }
   
   
   public void rollback() throws SQLException
