@@ -68,8 +68,6 @@ public class KundeAccess
       if ( statement != null )
       {
         statement.close();
-        System.out.println("kundeacces:");
-        System.out.println("Statement er lukket");
       }
     }
 

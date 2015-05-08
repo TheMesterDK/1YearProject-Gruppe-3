@@ -61,14 +61,10 @@ public class CprnummerAccess
       if ( resultset != null )
       {
         resultset.close();
-        System.out.println("cprnummeracces:");
-        System.out.println("Resultset er lukket");
       }
       if ( statement != null )
       {
         statement.close();
-        System.out.println("cprnummeracces:");
-        System.out.println("Statement er lukket");
       }
     }
   }
