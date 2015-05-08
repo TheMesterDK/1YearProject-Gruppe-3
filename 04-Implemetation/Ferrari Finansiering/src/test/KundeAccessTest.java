@@ -11,6 +11,9 @@ public class KundeAccessTest
   
   public static void main( String[] args ) throws SQLException
   {
+    /*
+     * Test createCprnummer (Og derigennem createKunde).
+     */
     Kunde kunde = new Kunde();
     kunde.setCprnummer( "0406841545" );
     kunde.setNavn( "Anders" );
