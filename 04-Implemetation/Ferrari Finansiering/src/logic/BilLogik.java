@@ -78,7 +78,7 @@ public class BilLogik
   /*
    * Update
    */
-  public void updateBil(Connection connection, Bil bil) throws SQLException
+  public void updateBil(Bil bil) throws SQLException
   {
     DbConnection dbcon = null;
     try

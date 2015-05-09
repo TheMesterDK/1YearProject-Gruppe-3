@@ -9,7 +9,7 @@ public class BilAccess
 {
   private static final String SELECT = "SELECT registreringsnummer, pris, model, årgang, bemærkninger FROM bil WHERE chassisnummer = ?";
 //  private static final String SELECT_MANY = "SELECT registreringsnummer, pris, model, årgang, bemærkninger FROM bil WHERE ";
-  private static final String INSERT = "INSERT INTO bil(chassisnummer, registreringsnummer, pris, model, årgang, cprid, bemærkninger) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  private static final String INSERT = "INSERT INTO bil(chassisnummer, registreringsnummer, pris, model, årgang, bemærkninger) VALUES (?, ?, ?, ?, ?, ?)";
   private static final String UPDATE = "UPDATE bil SET registreringsnummer = ?, pris = ?, model = ?, årgang = ?, bemærkninger = ? WHERE chassisnummer = ?";
   private static final String DELETE = "DELETE FROM bil WHERE chassisnummer = ?";
   
@@ -52,8 +52,7 @@ public class BilAccess
       statement.setDouble( 3, bil.getPris() );
       statement.setString( 4, bil.getModel() );
       statement.setString( 5, bil.getÅrgang() );
-      statement.setInt( 6, bil.getCprid() );
-      statement.setString( 7, bil.getBemærkninger() );
+      statement.setString( 6, bil.getBemærkninger() );
       statement.execute();
       connection.commit();
     }
@@ -159,13 +158,12 @@ public class BilAccess
     try
     {
       statement = connection.prepareStatement( UPDATE );
-      statement.setString( 1, bil.getChassisnummer() );
-      statement.setString( 2, bil.getRegistreringsnummer() );
-      statement.setDouble( 3, bil.getPris() );
-      statement.setString( 4, bil.getModel() );
-      statement.setString( 5, bil.getÅrgang() );
-      statement.setInt( 6, bil.getCprid() );
-      statement.setString( 7, bil.getBemærkninger() );
+      statement.setString( 1, bil.getRegistreringsnummer() );
+      statement.setDouble( 2, bil.getPris() );
+      statement.setString( 3, bil.getModel() );
+      statement.setString( 4, bil.getÅrgang() );
+      statement.setString( 5, bil.getBemærkninger() );
+      statement.setString( 6, bil.getChassisnummer() );
       statement.execute();
       connection.commit();
     }
@@ -209,6 +207,7 @@ public class BilAccess
         statement = connection.prepareStatement( DELETE );
         statement.setString( 1, chassisnummer );
         statement.execute();
+        connection.commit();
       }
       finally
       {
