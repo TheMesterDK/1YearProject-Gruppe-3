@@ -32,7 +32,7 @@ public class KundeAccessTest
     
     
     /*
-     * test af readkunde    PASSED
+     * test af readkunde      PASSED
      */
 ////    KundeAccess ka = new KundeAccess();
 //    KundeLogik kl = new KundeLogik();
@@ -40,8 +40,29 @@ public class KundeAccessTest
 
     
     /*
-     * test af updatekunde
+     * test af updatekunde    PASSED
      */
+//  Kunde kunde = new Kunde();
+//  kunde.setCprid( 18 );
+//  kunde.setCprnummer( "0406841545" );
+//  kunde.setNavn( "Arne" );
+//  kunde.setAdresse( "Aastræde 12" );
+//  kunde.setPostnummer( "8660" );
+//  kunde.setTelefonnummer( "87654321" );
+//  kunde.setEmail( "Arne@Aastræde.dk" );
+//  kunde.setKommentar( "Problem-Kunde" );
+//
+//  KundeLogik kl = new KundeLogik();
+//  kl.updateKunde( kunde );
+  
+  
+  /*
+   * Test af deleteKunde        PASSED
+   */
+//  KundeLogik kl = new KundeLogik();
+//  kl.deleteKunde( 18 );
+  
+  
     
     
     

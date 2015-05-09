@@ -80,7 +80,7 @@ public class KundeLogik
   /*
    * Update
    */
-  public void updateKunde(Connection connection, Kunde kunde) throws SQLException, KundeAllreadyExist
+  public void updateKunde(Kunde kunde) throws SQLException, KundeAllreadyExist
   {
     DbConnection dbcon = null;
     try
