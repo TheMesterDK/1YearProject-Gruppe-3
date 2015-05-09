@@ -2,25 +2,24 @@ package logic;
 
 import java.sql.SQLException;
 
+import dataAccess.FinansieringsaftaleAccess;
 import dataAccess.DbConnection;
-import dataAccess.BilAccess;
-import domain.Bil;
+import domain.Finansieringsaftale;
 
-
-public class BilLogik
+public class FinansieringsaftaleLogik
 {
   
   /*
    * Create
    */
-  public void createBil(Bil bil) throws SQLException
+  public void createFinansieringsaftale(Finansieringsaftale aftale) throws SQLException
   {
     DbConnection dbcon = null;
     try
     {
       dbcon = new DbConnection();
-      BilAccess bilaccess = new BilAccess();
-      bilaccess.createBil( bil );
+      FinansieringsaftaleAccess aftaleaccess = new FinansieringsaftaleAccess();
+      aftaleaccess.createFinansieringsaftale( aftale );
     }
     catch ( Exception e )
     {
@@ -44,15 +43,15 @@ public class BilLogik
   /*
    * Read
    */
-  public Bil readBil(String chassisnummer) throws SQLException
+  public Finansieringsaftale readFinansieringsaftale(int aftaleid) throws SQLException
   {
     DbConnection dbcon = null;
     try
     {
       dbcon = new DbConnection();
-      BilAccess bilaccess = new BilAccess();
-      Bil bil = bilaccess.readBil( chassisnummer );
-    return bil;
+      FinansieringsaftaleAccess aftaleaccess = new FinansieringsaftaleAccess();
+      Finansieringsaftale aftale = aftaleaccess.readFinansieringsaftale( aftaleid );
+    return aftale;
     }
     catch ( Exception e )
     {
@@ -77,14 +76,14 @@ public class BilLogik
   /*
    * Update
    */
-  public void updateBil(Bil bil) throws SQLException
+  public void updateFinansieringsaftale(Finansieringsaftale aftale) throws SQLException
   {
     DbConnection dbcon = null;
     try
     {
       dbcon = new DbConnection();
-      BilAccess bilaccess = new BilAccess();
-      bilaccess.updateBil( bil );
+      FinansieringsaftaleAccess aftaleaccess = new FinansieringsaftaleAccess();
+      aftaleaccess.updateFinansieringsaftale( aftale );
     }
     catch ( Exception e )
     {
@@ -109,14 +108,14 @@ public class BilLogik
     /*
      * Delete
      */  
-    public void deleteBil(String chassisnummer) throws SQLException
+    public void deleteFinansieringsaftale(int aftaleid) throws SQLException
     {
       DbConnection dbcon = null;
       try
       {
         dbcon = new DbConnection();
-        BilAccess bilaccess = new BilAccess();
-        bilaccess.deleteBil( chassisnummer );
+        FinansieringsaftaleAccess aftaleaccess = new FinansieringsaftaleAccess();
+        aftaleaccess.deleteFinansieringsaftale( aftaleid );
 //      dbcon.commit();
       }
       catch ( Exception e )
@@ -136,4 +135,5 @@ public class BilLogik
       }
     }
   
+    
 }
