@@ -9,6 +9,7 @@ public class Finansieringsaftale
   private int sælgerid;
   private String chassisnummer;
   private double beløb;
+  private double udbetaling;
   private double rente;
   private int afviklingsperiode;
   private Timestamp oprettelsestidspunkt;
@@ -69,6 +70,17 @@ public class Finansieringsaftale
   }
   
   
+  public double getUdbetaling()
+  {
+    return udbetaling;
+  }
+
+  public void setUdbetaling( double udbetaling )
+  {
+    this.udbetaling = udbetaling;
+  }
+
+  
   public double getRente()
   {
     return rente;
@@ -105,7 +117,7 @@ public class Finansieringsaftale
   @Override
   public String toString()
   {
-    return "Finansieringsaftale [aftaleid=" + aftaleid + ", cprid=" + cprid + ", sælgerid=" + sælgerid + ", chassisnummer=" + chassisnummer + ", beløb=" + beløb + ", rente=" + rente + ", afviklingsperiode=" + afviklingsperiode + ", oprettelsestidspunkt=" + oprettelsestidspunkt + "]";
+    return "Finansieringsaftale [aftaleid=" + aftaleid + ", cprid=" + cprid + ", sælgerid=" + sælgerid + ", chassisnummer=" + chassisnummer + ", beløb=" + beløb + ", udbetaling=" + udbetaling + ", rente=" + rente + ", afviklingsperiode=" + afviklingsperiode + ", oprettelsestidspunkt=" + oprettelsestidspunkt + "]";
   }
   
   
