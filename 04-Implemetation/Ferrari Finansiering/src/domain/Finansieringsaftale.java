@@ -12,7 +12,7 @@ public class Finansieringsaftale
   private double udbetaling;
   private double rente;
   private int afviklingsperiode;
-  private Timestamp oprettelsestidspunkt;
+  private String oprettelsesdato;
   
   
   public int getAftaleid()
@@ -103,21 +103,21 @@ public class Finansieringsaftale
   }
   
   
-  public Timestamp getOprettelsestidspunkt()
+  public String getOprettelsesdato()
   {
-    return oprettelsestidspunkt;
+    return oprettelsesdato;
   }
   
-  public void setOprettelsestidspunkt( Timestamp oprettelsestidspunkt )
+  public void setOprettelsesdato( String oprettelsesdato )
   {
-    this.oprettelsestidspunkt = oprettelsestidspunkt;
+    this.oprettelsesdato = oprettelsesdato;
   }
 
   
   @Override
   public String toString()
   {
-    return "Finansieringsaftale [aftaleid=" + aftaleid + ", cprid=" + cprid + ", sælgerid=" + sælgerid + ", chassisnummer=" + chassisnummer + ", beløb=" + beløb + ", udbetaling=" + udbetaling + ", rente=" + rente + ", afviklingsperiode=" + afviklingsperiode + ", oprettelsestidspunkt=" + oprettelsestidspunkt + "]";
+    return "Finansieringsaftale [aftaleid=" + aftaleid + ", cprid=" + cprid + ", sælgerid=" + sælgerid + ", chassisnummer=" + chassisnummer + ", beløb=" + beløb + ", udbetaling=" + udbetaling + ", rente=" + rente + ", afviklingsperiode=" + afviklingsperiode + ", oprettelsesdato=" + oprettelsesdato + "]";
   }
   
   

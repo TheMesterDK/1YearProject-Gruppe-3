@@ -7,10 +7,10 @@ import domain.Finansieringsaftale;
 
 public class FinansieringsaftaleAccess
 {
-  private static final String SELECT = "SELECT beløb, udbetaling, rente, afviklingsperiode, oprettelsestidspunkt, sælgerid, chassisnummer, cprid FROM finansieringsaftale WHERE aftaleid = ?";
+  private static final String SELECT = "SELECT beløb, udbetaling, rente, afviklingsperiode, oprettelsesdato, sælgerid, chassisnummer, cprid FROM finansieringsaftale WHERE aftaleid = ?";
 //  private static final String SELECT_MANY = "SELECT  FROM finansieringsaftale WHERE ";
-  private static final String INSERT = "INSERT INTO finansieringsaftale(beløb, udbetaling, rente, afviklingsperiode, oprettelsestidspunkt, sælgerid, chassisnummer, cprid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-  private static final String UPDATE = "UPDATE finansieringsaftale SET beløb = ?, udbetaling = ?, rente = ?, afviklingsperiode = ?, oprettelsestidspunkt = ?, sælgerid = ?, chassisnummer = ?, cprid = ? WHERE aftaleid = ?";
+  private static final String INSERT = "INSERT INTO finansieringsaftale(beløb, udbetaling, rente, afviklingsperiode, oprettelsesdato, sælgerid, chassisnummer, cprid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+  private static final String UPDATE = "UPDATE finansieringsaftale SET beløb = ?, udbetaling = ?, rente = ?, afviklingsperiode = ?, oprettelsesdato = ?, sælgerid = ?, chassisnummer = ?, cprid = ? WHERE aftaleid = ?";
   private static final String DELETE = "DELETE FROM finansieringsaftale WHERE aftaleid = ?";
   
   
@@ -50,9 +50,10 @@ public class FinansieringsaftaleAccess
       statement.setDouble( 2, aftale.getUdbetaling() );
       statement.setDouble( 3, aftale.getRente() );
       statement.setInt( 4, aftale.getAfviklingsperiode() );
-      statement.setInt( 5, aftale.getSælgerid() );
-      statement.setString( 6, aftale.getChassisnummer() );
-      statement.setInt( 7, aftale.getCprid() );
+      statement.setString( 5, aftale.getOprettelsesdato() );
+      statement.setInt( 6, aftale.getSælgerid() );
+      statement.setString( 7, aftale.getChassisnummer() );
+      statement.setInt( 8, aftale.getCprid() );
       statement.execute();
       connection.commit();
     }
@@ -106,7 +107,7 @@ public class FinansieringsaftaleAccess
       aftale.setUdbetaling( resultset.getDouble( "udbetaling" ) );
       aftale.setRente( resultset.getDouble( "rente" ) );
       aftale.setAfviklingsperiode( resultset.getInt( "afviklingsperiode" ) );
-      aftale.setOprettelsestidspunkt( resultset.getTimestamp( "oprettelsestidspunkt" ) );
+      aftale.setOprettelsesdato( resultset.getString( "oprettelsesdato" ) );
       aftale.setSælgerid( resultset.getInt( "sælgerid" ) );
       aftale.setChassisnummer( resultset.getString( "chassisnummer" ) );
       aftale.setCprid( resultset.getInt( "cprid" ) );
@@ -159,10 +160,11 @@ public class FinansieringsaftaleAccess
       statement.setDouble( 2, aftale.getUdbetaling() );
       statement.setDouble( 3, aftale.getRente() );
       statement.setInt( 4, aftale.getAfviklingsperiode() );
-      statement.setTimestamp( 5, aftale.getOprettelsestidspunkt() );
+      statement.setString( 5, aftale.getOprettelsesdato() );
       statement.setInt( 6, aftale.getSælgerid() );
       statement.setString( 7, aftale.getChassisnummer() );
       statement.setInt( 8, aftale.getCprid() );
+      statement.setInt( 9, aftale.getAftaleid() );
       statement.execute();
       connection.commit();
     }

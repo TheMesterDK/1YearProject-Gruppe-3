@@ -12,17 +12,17 @@ public class SælgerAccessTest
     /*
      * Test af createSælger     PASSED
      */
-//    Sælger sælger = new Sælger();
-//    sælger.setSælgernavn( "Ane Akselsen" );
-//    SælgerLogik sl = new SælgerLogik();
-//    sl.createSælger( sælger );
+    Sælger sælger = new Sælger();
+    sælger.setSælgernavn( "Ane Akselsen" );
+    SælgerLogik sl = new SælgerLogik();
+    sl.createSælger( sælger );
     
     
     /*
      * Test af readSælger       PASSED
      */
 //    SælgerLogik sl = new SælgerLogik();
-//    System.out.println(sl.readSælger( 0 ).toString());
+//    System.out.println(sl.readSælger( 1 ).toString());
     
     
     /*
@@ -30,7 +30,7 @@ public class SælgerAccessTest
      */
 //  Sælger sælger = new Sælger();
 //  sælger.setSælgernavn( "Anne Akselsen" );
-//  sælger.setSælgerid( 0 );
+//  sælger.setSælgerid( 1 );
 //  SælgerLogik sl = new SælgerLogik();
 //  sl.updateSælger( sælger );
     
@@ -39,7 +39,7 @@ public class SælgerAccessTest
      * Test af deleteSælger       PASSED
      */
 //  SælgerLogik sl = new SælgerLogik();
-//  sl.deleteSælger( 0 );
+//  sl.deleteSælger( 1 );
     
     
     
