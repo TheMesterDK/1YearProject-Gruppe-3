@@ -169,6 +169,7 @@ public class KundeAccess
       statement.setString( 6, kunde.getKommentar() );
       statement.setInt( 7, kunde.getCprid() );
       statement.execute();
+      connection.commit();
     }
     finally
     {

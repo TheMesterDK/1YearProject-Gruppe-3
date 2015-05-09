@@ -13,7 +13,7 @@ public class KundeAccessTest
   public static void main( String[] args ) throws SQLException, KundeAllreadyExist
   {
 //    /*
-//     * Test createCprnummer (Og derigennem createKunde).
+//     * Test createCprnummer (Og derigennem createKunde).    PASSED
 //     */
 //    Kunde kunde = new Kunde();
 //    kunde.setCprnummer( "0406841545" );
@@ -30,13 +30,18 @@ public class KundeAccessTest
 //    KundeLogik kl = new KundeLogik();
 //    kl.createKunde( kunde );
     
+    
     /*
-     * test af readkunde
+     * test af readkunde    PASSED
      */
-//    KundeAccess ka = new KundeAccess();
-    KundeLogik kl = new KundeLogik();
-    System.out.println(kl.readKunde( 18 ).toString());
+////    KundeAccess ka = new KundeAccess();
+//    KundeLogik kl = new KundeLogik();
+//    System.out.println(kl.readKunde( 18 ).toString());
 
+    
+    /*
+     * test af updatekunde
+     */
     
     
     

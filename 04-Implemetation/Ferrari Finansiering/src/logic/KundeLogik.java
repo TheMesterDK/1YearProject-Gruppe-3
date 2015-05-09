@@ -88,7 +88,6 @@ public class KundeLogik
       dbcon = new DbConnection();
     KundeAccess kundeaccess = new KundeAccess();
     kundeaccess.updateKunde( kunde );
-//    dbcon.commit();
     }
     catch ( Exception e )
     {
