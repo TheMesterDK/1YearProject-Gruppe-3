@@ -7,10 +7,10 @@ import domain.Sælger;
 
 public class SælgerAccess
 {
-  private static final String SELECT = "SELECT navn FROM sælger WHERE sælgerid = ?";
+  private static final String SELECT = "SELECT sælgernavn FROM sælger WHERE sælgerid = ?";
   //  private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
   private static final String INSERT = "INSERT INTO sælger(sælgernavn) VALUES (?)";
-  private static final String UPDATE = "UPDATE sælger SET sælgernavn WHERE sælgerid = ?";
+  private static final String UPDATE = "UPDATE sælger SET sælgernavn = ? WHERE sælgerid = ?";
   private static final String DELETE = "DELETE FROM sælger WHERE sælgerid = ?";
   
   
@@ -49,6 +49,7 @@ public class SælgerAccess
       statement = connection.prepareStatement( INSERT ); 
       statement.setString( 1, sælger.getSælgernavn() );
       statement.execute();
+      connection.commit();
     }
     finally
     {
@@ -92,12 +93,22 @@ public class SælgerAccess
       resultset = statement.executeQuery();
       sælger = new Sælger();
       sælger.setSælgerid( sælgerid );
+      while ( resultset.next() )
+      {
       sælger.setSælgernavn( resultset.getString( "sælgernavn" ) );
+      }
       return sælger;
     }
     finally
     {
-      
+      if ( resultset != null )
+      {
+        resultset.close();
+      }
+      if ( statement != null )
+      {
+        statement.close();
+      }
     }
   }
   
@@ -107,13 +118,13 @@ public class SælgerAccess
    * Update
    */
       
-  public void updateSælgernavn( Sælger sælger ) throws SQLException
+  public void updateSælger( Sælger sælger ) throws SQLException
   {
     Connection connection = null;
     try
     {
       connection = new DbConnection().getConnection();
-      updateSælgernavn( connection, sælger );
+      updateSælger( connection, sælger );
     }
     finally
     {
@@ -124,14 +135,16 @@ public class SælgerAccess
     }
   }
   
-  public void updateSælgernavn( Connection connection, Sælger sælger ) throws SQLException
+  public void updateSælger( Connection connection, Sælger sælger ) throws SQLException
   {
     PreparedStatement statement = null;
     try
     {
       statement = connection.prepareStatement( UPDATE );
       statement.setString( 1, sælger.getSælgernavn() );
+      statement.setInt( 2, sælger.getSælgerid() );
       statement.execute();
+      connection.commit();
       
     }
     finally
@@ -172,6 +185,7 @@ public class SælgerAccess
       statement = connection.prepareStatement( DELETE );
       statement.setInt( 1, sælgerid );
       statement.execute();
+      connection.commit();
     }
     finally
     {

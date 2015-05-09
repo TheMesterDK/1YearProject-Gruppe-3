@@ -79,14 +79,14 @@ public class SælgerLogik
   /*
    * Update
    */
-  public void updateSælger(Connection connection, Sælger sælger) throws SQLException
+  public void updateSælger(Sælger sælger) throws SQLException
   {
     DbConnection dbcon = null;
     try
     {
       dbcon = new DbConnection();
       SælgerAccess sælgeraccess = new SælgerAccess();
-      sælgeraccess.updateSælgernavn( sælger );
+      sælgeraccess.updateSælger( sælger );
     }
     catch ( Exception e )
     {

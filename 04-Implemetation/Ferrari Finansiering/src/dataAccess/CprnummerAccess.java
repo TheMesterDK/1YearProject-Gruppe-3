@@ -187,6 +187,7 @@ public class CprnummerAccess
       statement = connection.prepareStatement( DELETE );
       statement.setInt( 1, cprid );
       statement.execute();
+      connection.commit();
     }
     finally
     {
