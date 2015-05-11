@@ -27,6 +27,17 @@ public class EditDialog extends JDialog
   private JTextField kommentarField;
   private JTextField sælgeridField;
   private JTextField sælgernavnField;
+  private JTextField aftaleidField;
+  private JTextField lånebeløbField;
+  private JTextField udbetalingField;
+  private JTextField renteField;
+  private JTextField afviklingsperiodeField;
+  private JTextField oprettelsesdatoField;
+  private JTextField sælgerField;
+  private JTextField bilmodelField;
+  private JTextField bilchassisnummerField;
+  private JTextField kundenavnField;
+  private JTextField kundecpridField;
   
   
   
@@ -34,7 +45,7 @@ public class EditDialog extends JDialog
   {
     setBackground(Color.RED);
     setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-    setBounds( 100, 100, 450, 400 );
+    setBounds( 100, 100, 450, 500 );
     contentPanel.setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
     contentPanel.setBackground(Color.RED);
     setContentPane(contentPanel);
@@ -50,8 +61,11 @@ public class EditDialog extends JDialog
 //    JPanel kundepanel = KundePanel();
 //    contentPanel.add(kundepanel, BorderLayout.CENTER);
     
-    JPanel sælgerpanel = SælgerPanel();
-    contentPanel.add(sælgerpanel, BorderLayout.CENTER);
+//    JPanel sælgerpanel = SælgerPanel();
+//    contentPanel.add(sælgerpanel, BorderLayout.CENTER);
+    
+    JPanel aftalepanel = FinansieringsaftalePanel();
+    contentPanel.add(aftalepanel, BorderLayout.CENTER);
 
     JPanel buttonpanel = ButtonPanel();
     contentPanel.add(buttonpanel, BorderLayout.SOUTH);
@@ -401,7 +415,215 @@ public class EditDialog extends JDialog
   }
   
   
-  
+  private JPanel FinansieringsaftalePanel()
+  {
+    JPanel aftalepanel = new JPanel();
+    aftalepanel.setBackground(Color.RED);
+    GridBagLayout gbl_aftalepanel = new GridBagLayout();
+    gbl_aftalepanel.columnWidths = new int[]{0, 0, 0};
+    gbl_aftalepanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    gbl_aftalepanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+    gbl_aftalepanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    aftalepanel.setLayout(gbl_aftalepanel);
+    
+    JLabel lblFinansieringsaftale = new JLabel("Finansieringsaftale");
+    lblFinansieringsaftale.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    GridBagConstraints gbc_lblFinansieringsaftale = new GridBagConstraints();
+    gbc_lblFinansieringsaftale.insets = new Insets(0, 0, 5, 0);
+    gbc_lblFinansieringsaftale.gridx = 1;
+    gbc_lblFinansieringsaftale.gridy = 0;
+    aftalepanel.add(lblFinansieringsaftale, gbc_lblFinansieringsaftale);
+    
+    JLabel lblAftaleid = new JLabel("Aftale-ID:");
+    GridBagConstraints gbc_lblAftaleid = new GridBagConstraints();
+    gbc_lblAftaleid.anchor = GridBagConstraints.EAST;
+    gbc_lblAftaleid.insets = new Insets(0, 0, 5, 5);
+    gbc_lblAftaleid.gridx = 0;
+    gbc_lblAftaleid.gridy = 1;
+    aftalepanel.add(lblAftaleid, gbc_lblAftaleid);
+    
+    aftaleidField = new JTextField();
+    GridBagConstraints gbc_aftaleidField = new GridBagConstraints();
+    gbc_aftaleidField.insets = new Insets(0, 0, 5, 0);
+    gbc_aftaleidField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_aftaleidField.gridx = 1;
+    gbc_aftaleidField.gridy = 1;
+    aftalepanel.add(aftaleidField, gbc_aftaleidField);
+    aftaleidField.setColumns(10);
+    
+    JLabel lblLnebelb = new JLabel("L\u00E5nebel\u00F8b:");
+    GridBagConstraints gbc_lblLnebelb = new GridBagConstraints();
+    gbc_lblLnebelb.anchor = GridBagConstraints.EAST;
+    gbc_lblLnebelb.insets = new Insets(0, 0, 5, 5);
+    gbc_lblLnebelb.gridx = 0;
+    gbc_lblLnebelb.gridy = 2;
+    aftalepanel.add(lblLnebelb, gbc_lblLnebelb);
+    
+    lånebeløbField = new JTextField();
+    GridBagConstraints gbc_lånebeløbField = new GridBagConstraints();
+    gbc_lånebeløbField.insets = new Insets(0, 0, 5, 0);
+    gbc_lånebeløbField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_lånebeløbField.gridx = 1;
+    gbc_lånebeløbField.gridy = 2;
+    aftalepanel.add(lånebeløbField, gbc_lånebeløbField);
+    lånebeløbField.setColumns(10);
+    
+    JLabel lblUdbetaling = new JLabel("Udbetaling:");
+    GridBagConstraints gbc_lblUdbetaling = new GridBagConstraints();
+    gbc_lblUdbetaling.anchor = GridBagConstraints.EAST;
+    gbc_lblUdbetaling.insets = new Insets(0, 0, 5, 5);
+    gbc_lblUdbetaling.gridx = 0;
+    gbc_lblUdbetaling.gridy = 3;
+    aftalepanel.add(lblUdbetaling, gbc_lblUdbetaling);
+    
+    udbetalingField = new JTextField();
+    GridBagConstraints gbc_udbetalingField = new GridBagConstraints();
+    gbc_udbetalingField.insets = new Insets(0, 0, 5, 0);
+    gbc_udbetalingField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_udbetalingField.gridx = 1;
+    gbc_udbetalingField.gridy = 3;
+    aftalepanel.add(udbetalingField, gbc_udbetalingField);
+    udbetalingField.setColumns(10);
+    
+    JLabel lblRente = new JLabel("Rente:");
+    GridBagConstraints gbc_lblRente = new GridBagConstraints();
+    gbc_lblRente.anchor = GridBagConstraints.EAST;
+    gbc_lblRente.insets = new Insets(0, 0, 5, 5);
+    gbc_lblRente.gridx = 0;
+    gbc_lblRente.gridy = 4;
+    aftalepanel.add(lblRente, gbc_lblRente);
+    
+    renteField = new JTextField();
+    GridBagConstraints gbc_renteField = new GridBagConstraints();
+    gbc_renteField.insets = new Insets(0, 0, 5, 0);
+    gbc_renteField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_renteField.gridx = 1;
+    gbc_renteField.gridy = 4;
+    aftalepanel.add(renteField, gbc_renteField);
+    renteField.setColumns(10);
+    
+    JLabel lblAfviklingsperiode = new JLabel("Afviklingsperiode:");
+    GridBagConstraints gbc_lblAfviklingsperiode = new GridBagConstraints();
+    gbc_lblAfviklingsperiode.anchor = GridBagConstraints.EAST;
+    gbc_lblAfviklingsperiode.insets = new Insets(0, 0, 5, 5);
+    gbc_lblAfviklingsperiode.gridx = 0;
+    gbc_lblAfviklingsperiode.gridy = 5;
+    aftalepanel.add(lblAfviklingsperiode, gbc_lblAfviklingsperiode);
+    
+    afviklingsperiodeField = new JTextField();
+    GridBagConstraints gbc_afviklingsperiodeField = new GridBagConstraints();
+    gbc_afviklingsperiodeField.insets = new Insets(0, 0, 5, 0);
+    gbc_afviklingsperiodeField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_afviklingsperiodeField.gridx = 1;
+    gbc_afviklingsperiodeField.gridy = 5;
+    aftalepanel.add(afviklingsperiodeField, gbc_afviklingsperiodeField);
+    afviklingsperiodeField.setColumns(10);
+    
+    JLabel lblOprettelsesdato = new JLabel("Oprettelsesdato:");
+    GridBagConstraints gbc_lblOprettelsesdato = new GridBagConstraints();
+    gbc_lblOprettelsesdato.anchor = GridBagConstraints.EAST;
+    gbc_lblOprettelsesdato.insets = new Insets(0, 0, 5, 5);
+    gbc_lblOprettelsesdato.gridx = 0;
+    gbc_lblOprettelsesdato.gridy = 6;
+    aftalepanel.add(lblOprettelsesdato, gbc_lblOprettelsesdato);
+    
+    oprettelsesdatoField = new JTextField();
+    GridBagConstraints gbc_oprettelsesdatoField = new GridBagConstraints();
+    gbc_oprettelsesdatoField.insets = new Insets(0, 0, 5, 0);
+    gbc_oprettelsesdatoField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_oprettelsesdatoField.gridx = 1;
+    gbc_oprettelsesdatoField.gridy = 6;
+    aftalepanel.add(oprettelsesdatoField, gbc_oprettelsesdatoField);
+    oprettelsesdatoField.setColumns(10);
+    
+    JLabel lblSlger = new JLabel("S\u00E6lger:");
+    GridBagConstraints gbc_lblSlger = new GridBagConstraints();
+    gbc_lblSlger.anchor = GridBagConstraints.EAST;
+    gbc_lblSlger.insets = new Insets(0, 0, 5, 5);
+    gbc_lblSlger.gridx = 0;
+    gbc_lblSlger.gridy = 7;
+    aftalepanel.add(lblSlger, gbc_lblSlger);
+    
+    sælgerField = new JTextField();
+    GridBagConstraints gbc_sælgerField = new GridBagConstraints();
+    gbc_sælgerField.insets = new Insets(0, 0, 5, 0);
+    gbc_sælgerField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_sælgerField.gridx = 1;
+    gbc_sælgerField.gridy = 7;
+    aftalepanel.add(sælgerField, gbc_sælgerField);
+    sælgerField.setColumns(10);
+    
+    JLabel lblBilmodel = new JLabel("Bilmodel:");
+    GridBagConstraints gbc_lblBilmodel = new GridBagConstraints();
+    gbc_lblBilmodel.anchor = GridBagConstraints.EAST;
+    gbc_lblBilmodel.insets = new Insets(0, 0, 5, 5);
+    gbc_lblBilmodel.gridx = 0;
+    gbc_lblBilmodel.gridy = 8;
+    aftalepanel.add(lblBilmodel, gbc_lblBilmodel);
+    
+    bilmodelField = new JTextField();
+    GridBagConstraints gbc_bilmodelField = new GridBagConstraints();
+    gbc_bilmodelField.insets = new Insets(0, 0, 5, 0);
+    gbc_bilmodelField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_bilmodelField.gridx = 1;
+    gbc_bilmodelField.gridy = 8;
+    aftalepanel.add(bilmodelField, gbc_bilmodelField);
+    bilmodelField.setColumns(10);
+    
+    JLabel lblBilChassisnummer = new JLabel("Bil Chassisnummer:");
+    GridBagConstraints gbc_lblBilChassisnummer = new GridBagConstraints();
+    gbc_lblBilChassisnummer.anchor = GridBagConstraints.EAST;
+    gbc_lblBilChassisnummer.insets = new Insets(0, 0, 5, 5);
+    gbc_lblBilChassisnummer.gridx = 0;
+    gbc_lblBilChassisnummer.gridy = 9;
+    aftalepanel.add(lblBilChassisnummer, gbc_lblBilChassisnummer);
+    
+    bilchassisnummerField = new JTextField();
+    bilchassisnummerField.setColumns(10);
+    GridBagConstraints gbc_bilchassisnummerField = new GridBagConstraints();
+    gbc_bilchassisnummerField.insets = new Insets(0, 0, 5, 0);
+    gbc_bilchassisnummerField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_bilchassisnummerField.gridx = 1;
+    gbc_bilchassisnummerField.gridy = 9;
+    aftalepanel.add(bilchassisnummerField, gbc_bilchassisnummerField);
+    
+    JLabel lblKundeNavn = new JLabel("Kunde Navn:");
+    GridBagConstraints gbc_lblKundeNavn = new GridBagConstraints();
+    gbc_lblKundeNavn.anchor = GridBagConstraints.EAST;
+    gbc_lblKundeNavn.insets = new Insets(0, 0, 5, 5);
+    gbc_lblKundeNavn.gridx = 0;
+    gbc_lblKundeNavn.gridy = 10;
+    aftalepanel.add(lblKundeNavn, gbc_lblKundeNavn);
+    
+    kundenavnField = new JTextField();
+    GridBagConstraints gbc_kundenavnField = new GridBagConstraints();
+    gbc_kundenavnField.insets = new Insets(0, 0, 5, 0);
+    gbc_kundenavnField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_kundenavnField.gridx = 1;
+    gbc_kundenavnField.gridy = 10;
+    aftalepanel.add(kundenavnField, gbc_kundenavnField);
+    kundenavnField.setColumns(10);
+    
+    JLabel lblKundeCprid = new JLabel("Kunde Cpr-ID:");
+    GridBagConstraints gbc_lblKundeCprid = new GridBagConstraints();
+    gbc_lblKundeCprid.anchor = GridBagConstraints.EAST;
+    gbc_lblKundeCprid.insets = new Insets(0, 0, 0, 5);
+    gbc_lblKundeCprid.gridx = 0;
+    gbc_lblKundeCprid.gridy = 11;
+    aftalepanel.add(lblKundeCprid, gbc_lblKundeCprid);
+    
+    kundecpridField = new JTextField();
+    GridBagConstraints gbc_kundecpridField = new GridBagConstraints();
+    gbc_kundecpridField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_kundecpridField.gridx = 1;
+    gbc_kundecpridField.gridy = 11;
+    aftalepanel.add(kundecpridField, gbc_kundecpridField);
+    kundecpridField.setColumns(10);
+    
+    
+    
+    return aftalepanel;
+  }
   
   
   
