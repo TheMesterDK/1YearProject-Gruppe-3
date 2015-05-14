@@ -13,7 +13,11 @@ public class MainWindow extends JFrame
 {
   
   private JPanel contentPane;
+  private JTextField searchField;
   private String comboString[];
+  private String combochoise;
+  private JComboBox comboBox;
+//  private JComboBox<String> comboBox = new JComboBox<String>();
   
   public MainWindow()
   {
@@ -144,6 +148,7 @@ public class MainWindow extends JFrame
 //      contentPane.repaint();
     } );
     
+    this.setTitle( "Ferrari Finance Solutions" );
     this.setSize( 350, 340 );
     return sælgerpanel;
   }
@@ -168,6 +173,7 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findkundepanel.add( buttonpanel, BorderLayout.SOUTH );
     
+    this.setTitle( "Kunde" );
     this.setSize( 800, 340 );
     return findkundepanel;
   }
@@ -192,6 +198,7 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findbilpanel.add( buttonpanel, BorderLayout.SOUTH );
     
+    this.setTitle( "Bil" );
     this.setSize( 800, 340 );
     return findbilpanel;
   }
@@ -216,6 +223,8 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findaftalepanel.add( buttonpanel, BorderLayout.SOUTH );
     
+    this.setTitle( "LåneAftale" );
+    this.setSize( 800, 340 );
     return findaftalepanel;
   }
   
@@ -224,19 +233,19 @@ public class MainWindow extends JFrame
   {
     JPanel searchpanel = new JPanel();
     searchpanel.setBackground( Color.BLACK );
-    JComboBox comboBox = new JComboBox();
+    comboBox = new JComboBox();
     comboBox.setModel( new DefaultComboBoxModel( comboString ) );
     searchpanel.add( comboBox );
-    // comboBox.actionPerformed( );
+//    comboBox.addActionListener(event ->
+//      {
+//        
+//      });
     JTextField searchField = new JTextField();
     searchpanel.add( searchField );
     searchField.setColumns( 10 );
     JButton searchButton = new JButton( "Søg" );
     searchpanel.add( searchButton );
-    searchButton.addActionListener( event ->
-    {
-      
-    });
+    searchButton.addActionListener( event -> searchButtonPressed());
     
     return searchpanel;
   }
@@ -249,6 +258,79 @@ public class MainWindow extends JFrame
     
     return resultpanel;
   }
+  
+  
+  
+  public void searchButtonPressed()
+  {
+    logic.KundeLogik kl = new KundeLogik();
+    logic.BilLogik bl = new BilLogik();
+    logic.FinansieringsaftaleLogik fal = new FinansieringsaftaleLogik();
+    if(this.getTitle() == "Kunde")
+    {
+      if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
+      {
+        searchlist = ( searchField.getText() );
+      }
+      else if(comboBox.getSelectedItem().toString() == "Navn")
+      {
+        
+      }
+      else if(comboBox.getSelectedItem().toString() == "Tlf-nr")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Bil-chassisnummer")
+      {
+        
+      }
+    }
+    else if(this.getTitle() == "Bil")
+    {
+      if(comboBox.getSelectedItem().toString() == "Chassis-nummer")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Reg. nummer")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Model")
+      {
+        
+      }
+    }
+    if(this.getTitle() == "LåneAftale")
+    {
+      if(comboBox.getSelectedItem().toString() == "Aftale-ID")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Cpr-ID")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Chassis-nummer")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Reg.-nummer")
+      {
+        
+      }
+      if(comboBox.getSelectedItem().toString() == "Sælger-ID")
+      {
+        
+      }
+    }
+    
+    
+  }
+  
   
   
   private JPanel ButtonPanel()
