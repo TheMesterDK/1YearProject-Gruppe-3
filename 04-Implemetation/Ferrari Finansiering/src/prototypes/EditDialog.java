@@ -43,32 +43,26 @@ public class EditDialog extends JDialog
   
   public EditDialog()
   {
-    setBackground(Color.RED);
+    setBackground(Color.BLACK);
     setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-    setBounds( 100, 100, 450, 500 );
+    setBounds( 100, 100, 600, 336 );
     contentPanel.setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
-    contentPanel.setBackground(Color.RED);
+    contentPanel.setBackground(Color.BLACK);
     setContentPane(contentPanel);
     contentPanel.setLayout(new BorderLayout(0, 0));
     
     
-    JPanel toppanel = LogoPanel();
-    contentPanel.add(toppanel, BorderLayout.NORTH);
+//    JPanel toppanel = LogoPanel();
+//    contentPanel.add(toppanel, BorderLayout.NORTH);
+    
+    JPanel toppanel2 = LogoPanel2();
+    contentPanel.add(toppanel2, BorderLayout.EAST);
     
 //    JPanel bilpanel = BilPanel();
 //    contentPanel.add(bilpanel, BorderLayout.CENTER);
     
-//    JPanel kundepanel = KundePanel();
-//    contentPanel.add(kundepanel, BorderLayout.CENTER);
-    
-//    JPanel sælgerpanel = SælgerPanel();
-//    contentPanel.add(sælgerpanel, BorderLayout.CENTER);
-    
-    JPanel aftalepanel = FinansieringsaftalePanel();
-    contentPanel.add(aftalepanel, BorderLayout.CENTER);
-
-    JPanel buttonpanel = ButtonPanel();
-    contentPanel.add(buttonpanel, BorderLayout.SOUTH);
+    JPanel kundepanel = KundePanel();
+    contentPanel.add(kundepanel, BorderLayout.CENTER);
     
   }
   
@@ -91,6 +85,31 @@ public class EditDialog extends JDialog
     
     return logopanel;
   }
+  
+  
+  private JPanel LogoPanel2()
+  {
+    JPanel logopanel2 = new JPanel();
+    
+    FlowLayout flowLayout = (FlowLayout) logopanel2.getLayout();
+    flowLayout.setAlignment( FlowLayout.LEFT );
+    logopanel2.setBackground( Color.BLACK );
+    JLabel label2 = new JLabel( new ImageIcon( "C:\\Users\\Dennis\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Capture.png" ) );
+    label2.setLabelFor( label2 );
+    label2.setSize( new Dimension( 300, 100 ) );
+    label2.setBackground( new Color( 200, 50, 50 ) );
+    label2.setIconTextGap( 0 );
+    label2.setMinimumSize( new Dimension(50, 300) );
+    label2.setMaximumSize( new Dimension( 1000, 500 ) );
+    logopanel2.add( label2 );
+    
+    // JLabel lblNewLabel = new JLabel("New label");
+    // contentPane.add(lblNewLabel, BorderLayout.EAST);
+    
+    return logopanel2;
+  }
+  
+  
     
   
   private JPanel BilPanel()
@@ -221,15 +240,17 @@ public class EditDialog extends JDialog
   private JPanel KundePanel()
   {
     JPanel kundepanel = new JPanel();
-    kundepanel.setBackground(Color.RED);
+    kundepanel.setForeground(new Color(153, 0, 0));
+    kundepanel.setBackground(Color.BLACK);
     GridBagLayout gbl_kundepanel = new GridBagLayout();
     gbl_kundepanel.columnWidths = new int[]{0, 0, 0};
-    gbl_kundepanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+    gbl_kundepanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     gbl_kundepanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-    gbl_kundepanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+    gbl_kundepanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
     kundepanel.setLayout(gbl_kundepanel);
     
     JLabel lblKunde = new JLabel("Kunde:");
+    lblKunde.setForeground(Color.RED);
     lblKunde.setFont(new Font("Tahoma", Font.PLAIN, 18));
     GridBagConstraints gbc_lblKunde = new GridBagConstraints();
     gbc_lblKunde.insets = new Insets(0, 0, 5, 0);
@@ -238,6 +259,7 @@ public class EditDialog extends JDialog
     kundepanel.add(lblKunde, gbc_lblKunde);
     
     JLabel label_6 = new JLabel("Cpr-ID:");
+    label_6.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label_6 = new GridBagConstraints();
     gbc_label_6.anchor = GridBagConstraints.EAST;
     gbc_label_6.insets = new Insets(0, 0, 5, 5);
@@ -245,16 +267,18 @@ public class EditDialog extends JDialog
     gbc_label_6.gridy = 1;
     kundepanel.add(label_6, gbc_label_6);
     
-    cpridField = new JTextField();
+    cpridField = new JTextField(5);
+    cpridField.setBackground(new Color(192, 192, 192));
     GridBagConstraints gbc_cpridField = new GridBagConstraints();
     gbc_cpridField.insets = new Insets(0, 0, 5, 0);
     gbc_cpridField.fill = GridBagConstraints.HORIZONTAL;
     gbc_cpridField.gridx = 1;
     gbc_cpridField.gridy = 1;
     kundepanel.add(cpridField, gbc_cpridField);
-    cpridField.setColumns(10);
+    cpridField.setColumns(5);
     
     JLabel label_5 = new JLabel("Navn:");
+    label_5.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label_5 = new GridBagConstraints();
     gbc_label_5.anchor = GridBagConstraints.EAST;
     gbc_label_5.insets = new Insets(0, 0, 5, 5);
@@ -272,6 +296,7 @@ public class EditDialog extends JDialog
     navnField.setColumns(10);
     
     JLabel label_4 = new JLabel("Adresse:");
+    label_4.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label_4 = new GridBagConstraints();
     gbc_label_4.anchor = GridBagConstraints.EAST;
     gbc_label_4.insets = new Insets(0, 0, 5, 5);
@@ -289,6 +314,7 @@ public class EditDialog extends JDialog
     adresseField.setColumns(10);
     
     JLabel label_3 = new JLabel("Telefon-nr:");
+    label_3.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label_3 = new GridBagConstraints();
     gbc_label_3.anchor = GridBagConstraints.EAST;
     gbc_label_3.insets = new Insets(0, 0, 5, 5);
@@ -306,6 +332,7 @@ public class EditDialog extends JDialog
     telefonField.setColumns(10);
     
     JLabel label_2 = new JLabel("Post-nr:");
+    label_2.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label_2 = new GridBagConstraints();
     gbc_label_2.anchor = GridBagConstraints.EAST;
     gbc_label_2.insets = new Insets(0, 0, 5, 5);
@@ -323,6 +350,7 @@ public class EditDialog extends JDialog
     postnrField.setColumns(10);
     
     JLabel label_1 = new JLabel("Email:");
+    label_1.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label_1 = new GridBagConstraints();
     gbc_label_1.anchor = GridBagConstraints.EAST;
     gbc_label_1.insets = new Insets(0, 0, 5, 5);
@@ -340,20 +368,40 @@ public class EditDialog extends JDialog
     emailField.setColumns(10);
     
     JLabel label = new JLabel("Kommentar:");
+    label.setForeground(new Color(153, 0, 0));
     GridBagConstraints gbc_label = new GridBagConstraints();
     gbc_label.anchor = GridBagConstraints.EAST;
-    gbc_label.insets = new Insets(0, 0, 0, 5);
+    gbc_label.insets = new Insets(0, 0, 5, 5);
     gbc_label.gridx = 0;
     gbc_label.gridy = 7;
     kundepanel.add(label, gbc_label);
     
     kommentarField = new JTextField();
     GridBagConstraints gbc_kommentarField = new GridBagConstraints();
+    gbc_kommentarField.insets = new Insets(0, 0, 5, 0);
     gbc_kommentarField.fill = GridBagConstraints.HORIZONTAL;
     gbc_kommentarField.gridx = 1;
     gbc_kommentarField.gridy = 7;
     kundepanel.add(kommentarField, gbc_kommentarField);
     kommentarField.setColumns(10);
+    
+    JPanel panel = new JPanel();
+    panel.setBackground(Color.BLACK);
+    GridBagConstraints gbc_panel = new GridBagConstraints();
+    gbc_panel.insets = new Insets(0, 0, 5, 0);
+    gbc_panel.fill = GridBagConstraints.BOTH;
+    gbc_panel.gridx = 1;
+    gbc_panel.gridy = 9;
+    kundepanel.add(panel, gbc_panel);
+    panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    
+    JButton button = new JButton("OK");
+    button.setActionCommand("OK");
+    panel.add(button);
+    
+    JButton button_1 = new JButton("Cancel");
+    button_1.setActionCommand("Cancel");
+    panel.add(button_1);
 
     return kundepanel;
   }
@@ -634,19 +682,6 @@ public class EditDialog extends JDialog
   
   private JPanel ButtonPanel()
   {
-    JPanel buttonpanel = new JPanel();
-    buttonpanel.setBackground(Color.RED);
-    buttonpanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-    
-    JButton button = new JButton("OK");
-    button.setActionCommand("OK");
-    buttonpanel.add(button);
-    
-    JButton button_1 = new JButton("Cancel");
-    button_1.setActionCommand("Cancel");
-    buttonpanel.add(button_1);
-
-    return buttonpanel;
   }
   
   
