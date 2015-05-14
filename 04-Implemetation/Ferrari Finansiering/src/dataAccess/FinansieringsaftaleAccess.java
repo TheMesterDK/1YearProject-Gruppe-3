@@ -1,7 +1,10 @@
 package dataAccess;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import domain.Bil;
 import domain.Finansieringsaftale;
 
 
@@ -126,7 +129,63 @@ public class FinansieringsaftaleAccess
       }
     }
     
-    
+  }
+  
+  
+  public List<Finansieringsaftale> listFinansieringsaftaler(String searchitem, String search) throws SQLException
+  {
+    Connection connection = null;
+    try
+    {
+      connection = new DbConnection().getConnection();
+      return listFinansieringsaftaler( connection, searchitem, search );
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+// NEDENSTÅENDE ER ENDNU IKKE TESTET!!!  
+  public List<Finansieringsaftale> listFinansieringsaftaler(Connection connection, String searchitem, String search) throws SQLException
+  {
+    PreparedStatement statement = null;
+    ResultSet resultset = null;
+    List<Finansieringsaftale> list = new ArrayList<>();
+    try
+    {
+      String SEARCH = "SELECT * FROM finansieringsaftale where " + searchitem + " LIKE ?";
+      statement = connection.prepareStatement( SEARCH );
+      statement.setString(1, "%" + search + "%");
+      resultset = statement.executeQuery();
+      while (resultset.next())
+      {
+        Finansieringsaftale aftale = new Finansieringsaftale();
+        aftale.setAftaleid( resultset.getInt( "aftaleid" ) );
+        aftale.setBeløb( resultset.getDouble( "beløb" ) );
+        aftale.setUdbetaling( resultset.getDouble( "udbetaling" ) );
+        aftale.setRente( resultset.getDouble( "rente" ) );
+        aftale.setAfviklingsperiode( resultset.getInt( "afviklingsperiode" ) );
+        aftale.setOprettelsesdato( resultset.getString( "oprettelsesdato" ) );
+        aftale.setSælgerid( resultset.getInt( "sælgerid" ) );
+        aftale.setChassisnummer( resultset.getString( "chassisnummer" ) );
+        aftale.setCprid( resultset.getInt( "cprid" ) );
+      }
+      return list;
+    }
+    finally
+    {
+      if ( resultset != null )
+      {
+        resultset.close();
+      }
+      if ( statement != null )
+      {
+        statement.close();
+      }
+    }
   }
   
   

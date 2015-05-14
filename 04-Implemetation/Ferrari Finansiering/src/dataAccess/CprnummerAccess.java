@@ -2,12 +2,11 @@ package dataAccess;
 
 import java.sql.*;
 
-
 import domain.Kunde;
 
 public class CprnummerAccess
 {
-  private static final String SELECT = "SELECT cprid, cprnummer FROM cprnummer WHERE cprid = ? OR cprnummer = ?";
+  private static final String SELECT = "SELECT cprnummer FROM cprnummer WHERE cprid = ?";
   // private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
   private static final String INSERT = "INSERT INTO cprnummer(cprnummer) VALUES(?)";
 //  private static final String UPDATE = "UPDATE cprnummer SET cprnummer = ? WHERE cprid = ?";
@@ -75,7 +74,7 @@ public class CprnummerAccess
   /*
    * Read
    */
-  public Kunde readCprnummer( int cprid ) throws SQLException
+  public String readCprnummer( int cprid ) throws SQLException
   {
     Connection connection = null;
     try
@@ -91,21 +90,24 @@ public class CprnummerAccess
       }
     }
   }
-  
-  public Kunde readCprnummer( Connection connection, int cprid ) throws SQLException
+//NEDENSTÅENDE ER IKKE TESTET EFTER ÆNDRING!!!  
+  public String readCprnummer( Connection connection, int cprid ) throws SQLException
   {
     PreparedStatement statement = null;
     ResultSet resultset = null;
-    Kunde kunde = null;
+//    Kunde kunde = null;
+    String cprnummer;
     try
     {
       statement = connection.prepareStatement( SELECT );
       statement.setInt( 1, cprid );
       resultset = statement.executeQuery();
-      kunde = new Kunde();
-      kunde.setCprid( cprid );
-      kunde.setCprnummer( resultset.getString( "cprnummer" ) );
-      return kunde;
+      cprnummer = resultset.getString( "cprnummer" );
+      return cprnummer;
+//      kunde = new Kunde();
+//      kunde.setCprid( cprid );
+//      kunde.setCprnummer( resultset.getString( "cprnummer" ) );
+//      return kunde;
     }
     finally
     {

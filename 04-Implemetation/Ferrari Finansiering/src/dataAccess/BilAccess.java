@@ -1,6 +1,8 @@
 package dataAccess;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import domain.Bil;
 
@@ -126,7 +128,61 @@ public class BilAccess
       }
     }
     
-    
+  }
+  
+  
+  public List<Bil> listBiler(String searchitem, String search) throws SQLException
+  {
+    Connection connection = null;
+    try
+    {
+      connection = new DbConnection().getConnection();
+      return listBiler( connection, searchitem, search );
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+// NEDENSTÅENDE ER ENDNU IKKE TESTET!!!  
+  public List<Bil> listBiler(Connection connection, String searchitem, String search) throws SQLException
+  {
+    PreparedStatement statement = null;
+    ResultSet resultset = null;
+    List<Bil> list = new ArrayList<>();
+    try
+    {
+      String SEARCH = "SELECT * FROM bil where " + searchitem + " LIKE ?";
+      statement = connection.prepareStatement( SEARCH );
+      statement.setString(1, "%" + search + "%");
+      resultset = statement.executeQuery();
+      while (resultset.next())
+      {
+        Bil bil = new Bil();
+        bil.setChassisnummer( resultset.getString( "Chassisnummer" ) );
+        bil.setRegistreringsnummer( resultset.getString( "registreringsnummer" ) );
+        bil.setPris( resultset.getDouble( "pris" ) );
+        bil.setModel( resultset.getString( "model" ) );
+        bil.setÅrgang( resultset.getString( "årgang" ) );
+        bil.setBemærkninger( resultset.getString( "bemærkninger" ) );
+        list.add(bil);
+      }
+      return list;
+    }
+    finally
+    {
+      if ( resultset != null )
+      {
+        resultset.close();
+      }
+      if ( statement != null )
+      {
+        statement.close();
+      }
+    }
   }
   
   
