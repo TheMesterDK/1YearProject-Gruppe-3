@@ -81,7 +81,6 @@ public class BilLogik
       dbcon = new DbConnection();
       BilAccess bilaccess = new BilAccess();
       List<Bil> list = bilaccess.listBiler( searchitem, search );
-//      dataaccess.commit();
       return list;
     }
     catch ( Exception e )

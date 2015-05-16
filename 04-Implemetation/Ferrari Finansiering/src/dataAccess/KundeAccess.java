@@ -12,10 +12,8 @@ import domain.Kunde;
 public class KundeAccess
 {
   private static final String SELECT = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar FROM kunde WHERE cprid = ?";
-  //  private static final String SELECT_MANY = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar FROM kunde WHERE cprid = ? OR navn = ? OR adresse = ? OR telefonnummer = ? OR email = ?";
-  private static final String INSERT = "INSERT INTO kunde(cprid, navn, adresse, telefonnummer, postnummer, email, kommentar) VALUES (?, ?, ?, ?, ?, ?, ?)"; //Skal cprid, medsendes her.?
+  private static final String INSERT = "INSERT INTO kunde(cprid, navn, adresse, telefonnummer, postnummer, email, kommentar) VALUES (?, ?, ?, ?, ?, ?, ?)";
   private static final String UPDATE = "UPDATE kunde SET navn = ?, adresse = ?, telefonnummer = ?, postnummer = ?, email = ?, kommentar = ? WHERE cprid = ?";
-//  private static final String DELETE = "DELETE FROM kunde WHERE cprid = ?";
   
   
   public KundeAccess()
@@ -47,9 +45,6 @@ public class KundeAccess
   public void createKunde(Connection connection, Kunde kunde) throws SQLException
   {
     PreparedStatement statement = null;
-    ResultSet resultset = null;
-    //    CprnummerAccess cpraccess = new CprnummerAccess();
-    //    int cprid =0;
     try
     {
       statement = connection.prepareStatement( INSERT );
@@ -65,15 +60,9 @@ public class KundeAccess
     }
     finally
     {
-//      if ( resultset != null )
-//      {
-//        resultset.close();
-//        System.out.println("Kunde, resultset close");
-//      }
       if ( statement != null )
       {
         statement.close();
-//        System.out.println("Kunde, statement close");
       }
     }
     
@@ -145,7 +134,6 @@ public class KundeAccess
     try
     {
       connection = new DbConnection().getConnection();
-      System.out.println( "1" );
       return listKunder( connection, searchitem, search );
     }
     finally
@@ -156,10 +144,9 @@ public class KundeAccess
       }
     }
   }
-// NEDENSTÅENDE ER ENDNU IKKE TESTET!!!  
+ 
   public List<Kunde> listKunder(Connection connection, String searchitem, String search) throws SQLException
   {
-    System.out.println( "2" );
     PreparedStatement statement = null;
     ResultSet resultset = null;
     List<Kunde> list = new ArrayList<>();
@@ -170,12 +157,11 @@ public class KundeAccess
       statement = connection.prepareStatement( SEARCH );
       statement.setString(1, "%" + search + "%");
       resultset = statement.executeQuery();
-      System.out.println( "3" );
       while (resultset.next())
       {
         Kunde kunde = new Kunde();
         kunde.setCprid( resultset.getInt( "cprid" ) );
-//        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
+        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
         kunde.setNavn( resultset.getString( "navn" ) );
         kunde.setAdresse( resultset.getString( "adresse" ) );
         kunde.setPostnummer( resultset.getString( "postnummer" ) );
@@ -184,8 +170,6 @@ public class KundeAccess
         kunde.setKommentar( resultset.getString( "kommentar" ) );
         list.add(kunde);
       }
-      connection.commit();
-      System.out.println( "4" );
       return list;
     }
     finally
@@ -250,28 +234,12 @@ public class KundeAccess
   }
   
   
-  //  /*
-  //   * Delete
-  //   */  
-  //              DeleteKunde er ikke nødvendig idet at et delete på cprid i CprnummerAccess
-  //              vil cascade og delete tilhørende kunde.
-  //  
-  //  public void deleteKunde(Kunde kunde) throws SQLException
-  //  {
-  //    Connection connection = null;
-  //    try
-  //    {
-  //      connection = new DbConnection().getConnection();
-  //      createKunde( connection, kunde );
-  //    }
-  //    finally
-  //    {
-  //      if ( connection != null )
-  //      {
-  //        connection.close();
-  //      }
-  //    }
-  //  }
+    /*
+     * Delete
+     */  
+//
+//   DeleteKunde er ikke nødvendig idet at et delete på cprid i CprnummerAccess
+//   vil cascade og delete tilhørende kunde.
 
 
 }

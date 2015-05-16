@@ -67,18 +67,15 @@ public class KundeAccessTest
     
     
     /*
-     * Test af ListKunder
+     * Test af ListKunder     PASSED
      */
+//    KundeLogik kl = new KundeLogik();
+//    List<Kunde> searchlist = kl.listKunder( "navn", "" );
+//    for(int i= 0; i<searchlist.size(); i++)
+//    {
+//      System.out.println(i+ " " + searchlist.get( i ).toString());
+//    }
     
-    KundeLogik kl = new KundeLogik();
-    List<Kunde> searchlist = kl.listKunder( "cprid", "22" );
-    for(int i= 0; i>searchlist.size(); i++)
-    {
-      System.out.println(i+ " " + searchlist.get( i ).toString());
-    }
-    
-//    System.out.println(kl.readKunde( 19 ).toString());
-//        public List<Kunde> listKunder(String Adresse, String gade)
 
     
     /*

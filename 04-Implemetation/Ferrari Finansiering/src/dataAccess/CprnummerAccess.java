@@ -7,7 +7,6 @@ import domain.Kunde;
 public class CprnummerAccess
 {
   private static final String SELECT = "SELECT cprnummer FROM cprnummer WHERE cprid = ?";
-  // private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
   private static final String INSERT = "INSERT INTO cprnummer(cprnummer) VALUES(?)";
 //  private static final String UPDATE = "UPDATE cprnummer SET cprnummer = ? WHERE cprid = ?";
   private static final String DELETE = "DELETE FROM cprnummer WHERE cprid = ?";
@@ -33,7 +32,6 @@ public class CprnummerAccess
       if ( connection != null )
       {
         connection.close();
-//        System.out.println("Cpr, connection close");
       }
     }
   }
@@ -61,12 +59,10 @@ public class CprnummerAccess
       if ( resultset != null )
       {
         resultset.close();
-//        System.out.println("Cpr, resultset close");
       }
       if ( statement != null )
       {
         statement.close();
-//        System.out.println("Cpr, statement close");
       }
     }
   }
@@ -90,24 +86,22 @@ public class CprnummerAccess
       }
     }
   }
-//NEDENSTÅENDE ER IKKE TESTET EFTER ÆNDRING!!!  
+ 
   public String readCprnummer( Connection connection, int cprid ) throws SQLException
   {
     PreparedStatement statement = null;
-    ResultSet resultset = null;
-//    Kunde kunde = null;
-    String cprnummer;
+    ResultSet resultset = null;    
     try
     {
       statement = connection.prepareStatement( SELECT );
       statement.setInt( 1, cprid );
       resultset = statement.executeQuery();
+      String cprnummer = new String();
+      while ( resultset.next() )
+      {
       cprnummer = resultset.getString( "cprnummer" );
+      }
       return cprnummer;
-//      kunde = new Kunde();
-//      kunde.setCprid( cprid );
-//      kunde.setCprnummer( resultset.getString( "cprnummer" ) );
-//      return kunde;
     }
     finally
     {

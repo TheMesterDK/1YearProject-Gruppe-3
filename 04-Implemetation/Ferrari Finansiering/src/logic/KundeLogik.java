@@ -77,14 +77,12 @@ public class KundeLogik
   
   public List<Kunde> listKunder(String searchitem, String search) throws SQLException
   {
-    System.out.println( "5" );
     DbConnection dbcon = null;
     try
     {
       dbcon = new DbConnection();
       KundeAccess kundeaccess = new KundeAccess();
       List<Kunde> list = kundeaccess.listKunder( searchitem, search );
-      System.out.println( "6" );
       return list;
     }
     catch ( Exception e )
