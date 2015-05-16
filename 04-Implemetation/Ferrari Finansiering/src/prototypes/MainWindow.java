@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
 
 import logic.*;
 
@@ -17,6 +20,7 @@ public class MainWindow extends JFrame
   private String comboString[];
   private String combochoise;
   private JComboBox comboBox;
+  private String[] columnNames;
 //  private JComboBox<String> comboBox = new JComboBox<String>();
   
   public MainWindow()
@@ -256,6 +260,8 @@ public class MainWindow extends JFrame
     JPanel resultpanel = new JPanel();
     resultpanel.setBackground( Color.BLACK );
     
+    
+    
     return resultpanel;
   }
   
@@ -268,9 +274,10 @@ public class MainWindow extends JFrame
     logic.FinansieringsaftaleLogik fal = new FinansieringsaftaleLogik();
     if(this.getTitle() == "Kunde")
     {
+      columnNames = new String[] { "Cpr-ID", "Navn", "Adresse", "Postnummer", "Telefon", "Email", "Kommentar"};
       if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
       {
-        searchlist = ( searchField.getText() );
+//        searchlist = ( searchField.getText() );
       }
       else if(comboBox.getSelectedItem().toString() == "Navn")
       {
@@ -285,8 +292,10 @@ public class MainWindow extends JFrame
         
       }
     }
+    
     else if(this.getTitle() == "Bil")
     {
+      columnNames = new String[] { "Chassisnummer", "Reg-nummer", "Pris", "Model", "Årgang", "Bemærkninger"};
       if(comboBox.getSelectedItem().toString() == "Chassis-nummer")
       {
         
@@ -300,8 +309,10 @@ public class MainWindow extends JFrame
         
       }
     }
-    if(this.getTitle() == "LåneAftale")
+    
+    else if(this.getTitle() == "LåneAftale")
     {
+      columnNames = new String[] { "Aftale-ID", "Oprettelsesdato", "Navn", "Beløb", "Udbetaling", "Rente", "Afviklingsperiode", "Bil", "Sælger"};
       if(comboBox.getSelectedItem().toString() == "Aftale-ID")
       {
         
@@ -328,6 +339,66 @@ public class MainWindow extends JFrame
       }
     }
     
+    TableModel TabelModel = new AbstractTableModel()
+    {
+      // String[] columnNames = { "Album titel", "Bandnavn", "Genre", "#", "Sangtitel", "år"};
+      
+      public String getColumnName( int col )
+      {
+        return columnNames[col].toString();
+      }
+      
+      public int getColumnCount()
+      {
+        return columnNames.length;
+      }
+      
+      public int getRowCount()
+      {
+        return searchlist.size();
+      }
+      
+      public Object getValueAt( int row, int col )
+      {
+//        if ( col == 0 )
+//        {
+//          return searchlist.get( row ).getAlbumtitel();
+//        }
+//        else if ( col == 1 )
+//        {
+//          return searchlist.get( row ).getBandnavn();
+//        }
+//        else if ( col == 2 )
+//        {
+//          return searchlist.get( row ).getGenretype();
+//        }
+//        else if ( col == 3 )
+//        {
+//          return searchlist.get( row ).getSangnummer();
+//        }
+//        else if ( col == 4 )
+//        {
+//          return searchlist.get( row ).getSangtitel();
+//        }
+//        else
+//        {
+//          return searchlist.get( row ).getUdgivelse();
+//        }
+      }
+    };
+//    liste.setModel( TabelModel );
+//    liste.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+//    liste.getColumnModel().getColumn( 3 ).setPreferredWidth( 1 );
+//    liste.getColumnModel().getColumn( 5 ).setPreferredWidth( 4 );
+//    DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+//    rightRenderer.setHorizontalAlignment( SwingConstants.RIGHT );
+//    liste.getColumnModel().getColumn( 0 ).setCellRenderer( rightRenderer );
+//    liste.getColumnModel().getColumn( 1 ).setCellRenderer( rightRenderer );
+//    liste.getColumnModel().getColumn( 2 ).setCellRenderer( rightRenderer );
+//    liste.getColumnModel().getColumn( 3 ).setCellRenderer( rightRenderer );
+//    liste.getColumnModel().getColumn( 4 ).setCellRenderer( rightRenderer );
+//    liste.getColumnModel().getColumn( 5 ).setCellRenderer( rightRenderer );
+//    scrollListe.setViewportView( liste );
     
   }
   

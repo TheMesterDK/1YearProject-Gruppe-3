@@ -1,6 +1,7 @@
 package logic;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dataAccess.FinansieringsaftaleAccess;
 import dataAccess.DbConnection;
@@ -69,6 +70,35 @@ public class FinansieringsaftaleLogik
       }
     }
     
+  }
+  
+  public List<Finansieringsaftale> listFinansieringsAftaler(String searchitem, String search) throws SQLException
+  {
+    DbConnection dbcon = null;
+    try
+    {
+      dbcon = new DbConnection();
+      FinansieringsaftaleAccess aftaleaccess = new FinansieringsaftaleAccess();
+      List<Finansieringsaftale> list = aftaleaccess.listFinansieringsaftaler( searchitem, search );
+//      dataaccess.commit();
+      return list;
+    }
+    catch ( Exception e )
+    {
+      if ( dbcon != null )
+      {
+        dbcon.rollback();
+      }
+      throw e;
+    }
+    finally
+    {
+      if ( dbcon != null )
+      {
+        dbcon.close();
+      }
+
+    }
     
   }
   

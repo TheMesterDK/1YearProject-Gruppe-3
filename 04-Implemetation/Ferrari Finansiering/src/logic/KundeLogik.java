@@ -2,6 +2,7 @@ package logic;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import dataAccess.DbConnection;
 import dataAccess.KundeAccess;
@@ -72,7 +73,36 @@ public class KundeLogik
         dbcon.close();
       }
     }
-    
+  }
+  
+  public List<Kunde> listKunder(String searchitem, String search) throws SQLException
+  {
+    System.out.println( "5" );
+    DbConnection dbcon = null;
+    try
+    {
+      dbcon = new DbConnection();
+      KundeAccess kundeaccess = new KundeAccess();
+      List<Kunde> list = kundeaccess.listKunder( searchitem, search );
+      System.out.println( "6" );
+      return list;
+    }
+    catch ( Exception e )
+    {
+      if ( dbcon != null )
+      {
+        dbcon.rollback();
+      }
+      throw e;
+    }
+    finally
+    {
+      if ( dbcon != null )
+      {
+        dbcon.close();
+      }
+
+    }
     
   }
   

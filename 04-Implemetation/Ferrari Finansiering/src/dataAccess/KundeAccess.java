@@ -145,6 +145,7 @@ public class KundeAccess
     try
     {
       connection = new DbConnection().getConnection();
+      System.out.println( "1" );
       return listKunder( connection, searchitem, search );
     }
     finally
@@ -158,21 +159,23 @@ public class KundeAccess
 // NEDENSTÅENDE ER ENDNU IKKE TESTET!!!  
   public List<Kunde> listKunder(Connection connection, String searchitem, String search) throws SQLException
   {
+    System.out.println( "2" );
     PreparedStatement statement = null;
     ResultSet resultset = null;
     List<Kunde> list = new ArrayList<>();
     CprnummerAccess cpraccess = new CprnummerAccess();
     try
     {
-      String SEARCH = "SELECT * FROM kunde where " + searchitem + " LIKE ?";
+      String SEARCH = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar, cprid FROM kunde where " + searchitem + " LIKE ?";
       statement = connection.prepareStatement( SEARCH );
       statement.setString(1, "%" + search + "%");
       resultset = statement.executeQuery();
+      System.out.println( "3" );
       while (resultset.next())
       {
         Kunde kunde = new Kunde();
         kunde.setCprid( resultset.getInt( "cprid" ) );
-        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
+//        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
         kunde.setNavn( resultset.getString( "navn" ) );
         kunde.setAdresse( resultset.getString( "adresse" ) );
         kunde.setPostnummer( resultset.getString( "postnummer" ) );
@@ -181,6 +184,8 @@ public class KundeAccess
         kunde.setKommentar( resultset.getString( "kommentar" ) );
         list.add(kunde);
       }
+      connection.commit();
+      System.out.println( "4" );
       return list;
     }
     finally

@@ -1,6 +1,7 @@
 package logic;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dataAccess.DbConnection;
 import dataAccess.BilAccess;
@@ -70,6 +71,35 @@ public class BilLogik
       }
     }
     
+  }
+  
+  public List<Bil> listBiler(String searchitem, String search) throws SQLException
+  {
+    DbConnection dbcon = null;
+    try
+    {
+      dbcon = new DbConnection();
+      BilAccess bilaccess = new BilAccess();
+      List<Bil> list = bilaccess.listBiler( searchitem, search );
+//      dataaccess.commit();
+      return list;
+    }
+    catch ( Exception e )
+    {
+      if ( dbcon != null )
+      {
+        dbcon.rollback();
+      }
+      throw e;
+    }
+    finally
+    {
+      if ( dbcon != null )
+      {
+        dbcon.close();
+      }
+
+    }
     
   }
   
