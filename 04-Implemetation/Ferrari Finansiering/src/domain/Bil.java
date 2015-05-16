@@ -8,19 +8,7 @@ public class Bil
   private String model;
   private String årgang;
   private String bemærkninger;
-  private int cprid;
   
-  
-  public int getCprid()
-  {
-    return cprid;
-  }
-
-  public void setCprid( int cprid )
-  {
-    this.cprid = cprid;
-  }
-
   
   public String getChassisnummer()
   {
@@ -91,7 +79,7 @@ public class Bil
   @Override
   public String toString()
   {
-    return "Bil [cprid=" + cprid + "chassisnummer=" + chassisnummer + ", registreringsnummer=" + registreringsnummer + ", pris=" + pris + ", model=" + model + ", årgang=" + årgang + ", bemærkninger=" + bemærkninger + "]";
+    return "Bil [" + "chassisnummer=" + chassisnummer + ", registreringsnummer=" + registreringsnummer + ", pris=" + pris + ", model=" + model + ", årgang=" + årgang + ", bemærkninger=" + bemærkninger + "]";
   }
   
   

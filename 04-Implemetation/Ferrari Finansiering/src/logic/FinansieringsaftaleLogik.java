@@ -72,7 +72,7 @@ public class FinansieringsaftaleLogik
     
   }
   
-  public List<Finansieringsaftale> listFinansieringsAftaler(String searchitem, String search) throws SQLException
+  public List<Finansieringsaftale> listFinansieringsaftaler(String searchitem, String search) throws SQLException
   {
     DbConnection dbcon = null;
     try
@@ -80,7 +80,6 @@ public class FinansieringsaftaleLogik
       dbcon = new DbConnection();
       FinansieringsaftaleAccess aftaleaccess = new FinansieringsaftaleAccess();
       List<Finansieringsaftale> list = aftaleaccess.listFinansieringsaftaler( searchitem, search );
-//      dataaccess.commit();
       return list;
     }
     catch ( Exception e )

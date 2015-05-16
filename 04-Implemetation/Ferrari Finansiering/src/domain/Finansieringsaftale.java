@@ -1,7 +1,5 @@
 package domain;
 
-import java.sql.Timestamp;
-
 public class Finansieringsaftale
 {
   private int aftaleid;

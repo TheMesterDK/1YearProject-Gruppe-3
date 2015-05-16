@@ -148,7 +148,7 @@ public class FinansieringsaftaleAccess
       }
     }
   }
-// NEDENSTÅENDE ER ENDNU IKKE TESTET!!!  
+
   public List<Finansieringsaftale> listFinansieringsaftaler(Connection connection, String searchitem, String search) throws SQLException
   {
     PreparedStatement statement = null;
@@ -172,6 +172,7 @@ public class FinansieringsaftaleAccess
         aftale.setSælgerid( resultset.getInt( "sælgerid" ) );
         aftale.setChassisnummer( resultset.getString( "chassisnummer" ) );
         aftale.setCprid( resultset.getInt( "cprid" ) );
+        list.add(aftale);
       }
       return list;
     }

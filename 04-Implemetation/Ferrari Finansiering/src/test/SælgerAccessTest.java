@@ -12,10 +12,10 @@ public class SælgerAccessTest
     /*
      * Test af createSælger     PASSED
      */
-    Sælger sælger = new Sælger();
-    sælger.setSælgernavn( "Ane Akselsen" );
-    SælgerLogik sl = new SælgerLogik();
-    sl.createSælger( sælger );
+//    Sælger sælger = new Sælger();
+//    sælger.setSælgernavn( "Ane Akselsen" );
+//    SælgerLogik sl = new SælgerLogik();
+//    sl.createSælger( sælger );
     
     
     /*

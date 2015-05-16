@@ -147,7 +147,7 @@ public class BilAccess
       }
     }
   }
-// NEDENSTÅENDE ER ENDNU IKKE TESTET!!!  
+  
   public List<Bil> listBiler(Connection connection, String searchitem, String search) throws SQLException
   {
     PreparedStatement statement = null;
