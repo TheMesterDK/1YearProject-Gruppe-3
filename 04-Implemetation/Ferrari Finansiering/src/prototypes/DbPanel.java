@@ -1,23 +1,22 @@
 package prototypes;
 
-
-import java.awt.*;
-import java.awt.event.ItemListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableRowSorter;
 
-import domain.*;
 import logic.*;
+import domain.*;
 
-public class MainWindow extends JFrame
+public class DbPanel extends JPanel
 {
+  
   private CustomTableModel model;
   private CustomTableRenderer table;
   private JPanel contentPane;
@@ -26,62 +25,24 @@ public class MainWindow extends JFrame
   private String combochoise;
   private JComboBox comboBox;
   private String[] columnNames;
-//  private List searchlist;
   private JButton redigerButton = new JButton( "Rediger" );
-//  private JComboBox<String> comboBox = new JComboBox<String>();
-
   
-  public MainWindow()
+  
+  public DbPanel()
   {
     setBackground( Color.BLACK );
-    setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     setBounds( 100, 100, 815, 329 );
     contentPane = new JPanel();
     contentPane.setBorder( new EmptyBorder( 10, 10, 10, 10 ) );
-    setContentPane( contentPane );
     contentPane.setLayout( new BorderLayout( 0, 0 ) );
     contentPane.setBackground( Color.BLACK );
-    
-//    JPanel logopanel = LogoPanel();
-//    contentPane.add( logopanel, BorderLayout.NORTH );
     
     JPanel logopanel2 = LogoPanel2();
     contentPane.add( logopanel2, BorderLayout.EAST );
     
-//    JPanel sælgermainpanel = SælgerMainPanel();
-//    contentPane.add( sælgermainpanel, BorderLayout.CENTER );
-    
-//     JPanel findkundepanel = FindKundePanel();
-//     contentPane.add(findkundepanel, BorderLayout.CENTER);
-    
-    // JPanel findbilpanel = FindBilPanel();
-    // contentPane.add(findbilpanel, BorderLayout.CENTER);
-    
-    // JPanel findaftalepanel = FindLåneaftalePanel();
-    // contentPane.add(findaftalepanel, BorderLayout.CENTER);
-    
     this.setVisible( true );
-    
   }
   
-//  private JPanel LogoPanel()
-//  {
-//    JPanel logopanel = new JPanel();
-//    FlowLayout flowLayout = (FlowLayout) logopanel.getLayout();
-//    flowLayout.setAlignment( FlowLayout.LEFT );
-//    logopanel.setBackground( Color.RED );
-//    JLabel label = new JLabel( new ImageIcon( "C:\\Users\\Dennis\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Yellow logo on red background.png" ) );
-//    label.setLabelFor( label );
-//    label.setSize( new Dimension( 300, 100 ) );
-//    label.setBackground( new Color( 200, 50, 50 ) );
-//    label.setIconTextGap( 0 );
-//    label.setPreferredSize( new Dimension( 300, 100 ) );
-//    label.setMinimumSize( new Dimension( 100, 50 ) );
-//    label.setMaximumSize( new Dimension( 1000, 500 ) );
-//    logopanel.add( label );
-//    
-//    return logopanel;
-//  }
   
   private JPanel LogoPanel2()
   {
@@ -103,67 +64,8 @@ public class MainWindow extends JFrame
   }
   
   
-  public JPanel SælgerMainPanel()
-  {
-    JPanel sælgerpanel = new JPanel();
-    sælgerpanel.setBackground( Color.BLACK );
-    sælgerpanel.setBorder( new EmptyBorder( 10, 10, 10, 10 ) );
-    sælgerpanel.setLayout( new BoxLayout( sælgerpanel, BoxLayout.Y_AXIS ) );
-    contentPane.add( sælgerpanel, BorderLayout.CENTER );
-    this.setTitle( "Ferrari Finance Solutions" );
-    JLabel label0 = new JLabel();
-    label0.setText( " " );
-    sælgerpanel.add( label0 );
-    JButton btnOpretLåneanmodning = new JButton( "Opret låneanmodning" );
-    btnOpretLåneanmodning.setForeground(Color.BLACK);
-    btnOpretLåneanmodning.setBackground(new Color(153, 0, 0));
-    sælgerpanel.add( btnOpretLåneanmodning );
-    btnOpretLåneanmodning.addActionListener( event ->
-    {
-      
-    } );
-    JLabel label1 = new JLabel();
-    label1.setText( " " );
-    sælgerpanel.add( label1 );
-    JButton btnFindKunde = new JButton( "Find kunde" );
-    btnFindKunde.setBackground(new Color(153, 0, 0));
-    sælgerpanel.add( btnFindKunde );
-    btnFindKunde.addActionListener( event ->
-    {
-      
-      sælgerpanel.setVisible( false );
-      contentPane.add( FindKundePanel(), BorderLayout.CENTER );
-//      contentPane.repaint();
-      
-    } );
-    JLabel label2 = new JLabel();
-    label2.setText( " " );
-    sælgerpanel.add( label2 );
-    JButton btnFindBil = new JButton( "Find bil" );
-    btnFindBil.setBackground(new Color(153, 0, 0));
-    sælgerpanel.add( btnFindBil );
-    btnFindBil.addActionListener( event ->
-    {
-      sælgerpanel.setVisible( false );
-      contentPane.add( FindBilPanel(), BorderLayout.CENTER );
-//      contentPane.repaint();
-    } );
-    JLabel label3 = new JLabel();
-    label3.setText( " " );
-    sælgerpanel.add( label3 );
-    JButton btnFindLåneaftale = new JButton( "Find låneaftale" );
-    btnFindLåneaftale.setBackground(new Color(153, 0, 0));
-    sælgerpanel.add( btnFindLåneaftale );
-    btnFindLåneaftale.addActionListener( event ->
-    {
-      sælgerpanel.setVisible( false );
-      contentPane.add( FindLåneaftalePanel(), BorderLayout.CENTER );
-//      contentPane.repaint();
-    } );
-    
-    this.setSize( 350, 340 );
-    return sælgerpanel;
-  }
+  
+  
   
   
   private JPanel FindKundePanel()
@@ -172,9 +74,8 @@ public class MainWindow extends JFrame
     findkundepanel.setBackground( Color.RED );
     findkundepanel.setLayout( new BorderLayout( 0, 0 ) );
     contentPane.add( findkundepanel, BorderLayout.CENTER );
-    this.setTitle( "Kunde" );
     
-    comboString = new String[] { "Cprnummer", "Navn", "Telefonnummer.", "Chassisnummer" };
+    comboString = new String[] { "Cpr-nummer", "Navn", "Tlf-nr.", "Bil-chassisnummer" };
     
     JPanel searchpanel = SearchPanel();
     findkundepanel.add( searchpanel, BorderLayout.NORTH );
@@ -185,7 +86,8 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findkundepanel.add( buttonpanel, BorderLayout.SOUTH );
     
-    this.setSize( 800, 350 );
+//    this.setTitle( "Kunde" );
+    this.setSize( 800, 340 );
     return findkundepanel;
   }
   
@@ -196,9 +98,8 @@ public class MainWindow extends JFrame
     findbilpanel.setBackground( Color.RED );
     findbilpanel.setLayout( new BorderLayout( 0, 0 ) );
     contentPane.add( findbilpanel, BorderLayout.CENTER );
-    this.setTitle( "Bil" );
     
-    comboString = new String[] { "Chassisnummer", "Registreringsnummer", "Model" };
+    comboString = new String[] { "Chassis-nummer", "Reg. nummer", "Model" };
     
     JPanel searchpanel = SearchPanel();
     findbilpanel.add( searchpanel, BorderLayout.NORTH );
@@ -209,7 +110,8 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findbilpanel.add( buttonpanel, BorderLayout.SOUTH );
     
-    this.setSize( 800, 550 );
+//    this.setTitle( "Bil" );
+    this.setSize( 800, 340 );
     return findbilpanel;
   }
   
@@ -220,9 +122,8 @@ public class MainWindow extends JFrame
     findaftalepanel.setBackground( Color.RED );
     findaftalepanel.setLayout( new BorderLayout( 0, 0 ) );
     contentPane.add( findaftalepanel, BorderLayout.CENTER );
-    this.setTitle( "LåneAftale" );
     
-    comboString = new String[] { "AftaleID", "CprID", "Cprnummer", "Chassisnummer", "Registreringsnummer", "SælgerID" };
+    comboString = new String[] { "Aftale-ID", "Cpr-ID", "Cpr-nummer", "Chassis-nummer", "Reg.-nummer", "Sælger-ID" };
 
     
     JPanel searchpanel = SearchPanel();
@@ -234,7 +135,8 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findaftalepanel.add( buttonpanel, BorderLayout.SOUTH );
     
-    this.setSize( 800, 550 );
+//    this.setTitle( "LåneAftale" );
+    this.setSize( 800, 340 );
     return findaftalepanel;
   }
   
@@ -246,8 +148,11 @@ public class MainWindow extends JFrame
     comboBox = new JComboBox();
     comboBox.setModel( new DefaultComboBoxModel( comboString ) );
     searchpanel.add( comboBox );
-
-    searchField = new JTextField();
+//    comboBox.addActionListener(event ->
+//      {
+//        
+//      });
+    JTextField searchField = new JTextField();
     searchpanel.add( searchField );
     searchField.setColumns( 10 );
     JButton searchButton = new JButton( "Søg" );
@@ -258,7 +163,7 @@ public class MainWindow extends JFrame
     return searchpanel;
   }
   
- 
+  
   private JPanel ResultPanel()
   {
     JPanel resultpanel = new JPanel();
@@ -267,15 +172,12 @@ public class MainWindow extends JFrame
     
     model = new CustomTableModel();
     table = new CustomTableRenderer(model);
-    table.setGridColor(Color.GRAY);
-    table.setForeground(Color.RED);
-    table.setBackground(Color.BLACK);
     table.getTableHeader().setReorderingAllowed(false);
     table.setRowSorter(new TableRowSorter<>(model));
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     model.setColumnIdentifiers(columnNames);
     int width = 0;
-    int frameHeight = 550;
+    int frameHeight = 400;
     for (int i = 0; i < table.getColumnCount() ; i++) 
     {
         width += table.getColumnModel().getColumn(i).getWidth();
@@ -286,41 +188,30 @@ public class MainWindow extends JFrame
         ListSelectionModel lsm = (ListSelectionModel)e.getSource();
         redigerButton.setEnabled(!lsm.isSelectionEmpty());
     });
-    this.setPreferredSize(new Dimension(width, frameHeight));
-    JScrollPane scrollPane = new JScrollPane(table);
-    scrollPane.setOpaque(true);
-    scrollPane.setMinimumSize(new Dimension(200, 25));
-    scrollPane.setPreferredSize(new Dimension(600, 200));
-    scrollPane.setBackground(Color.BLACK);
-    resultpanel.add(scrollPane, BorderLayout.CENTER);
+//    this.setPreferredSize(new Dimension(width, frameHeight));
+    contentPane.add(new JScrollPane(table), BorderLayout.CENTER);
 //    this.pack();
-    resultpanel.setVisible(true);
+    this.setVisible(true);
     
     return resultpanel;
   }
   
- /*
-  * STADIG IKKE FÆRDIG!!!
-  * 
-  *  Kundepanelet kan vise kundeoplysninger i tabellen, hvis man vælger "Kunde" i combobox.
-  */
+  
+ 
   public void searchButtonPressed()
   {
-    try
-    {
-System.out.println( "1" );
-    KundeLogik kl = new KundeLogik();
-    BilLogik bl = new BilLogik();
-    FinansieringsaftaleLogik fl = new FinansieringsaftaleLogik();
+    logic.KundeLogik kl = new KundeLogik();
+    logic.BilLogik bl = new BilLogik();
+    logic.FinansieringsaftaleLogik fl = new FinansieringsaftaleLogik();
     List<Kunde> kundesearchlist = null;
     List<Bil> bilsearchlist = null;
     List<Finansieringsaftale> aftalesearchlist = null;
 //    List searchlist;
     if(this.getTitle() == "Kunde")
     {
-System.out.println( "2" );
       columnNames = new String[] { "Cpr-ID", "Navn", "Adresse", "Postnummer", "Telefon", "Email", "Kommentar"};
       model.setRowCount(0);
+//      List<Kunde> searchlist = kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() );
 //      if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
 //      {
 //        try
@@ -335,20 +226,15 @@ System.out.println( "2" );
 //      }
 //      else
 //      {
-System.out.println( "3" );
-System.out.println( comboBox.getSelectedItem().toString() );
-System.out.println( searchField.getText() );
-          kundesearchlist = kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() );
-//          System.out.println(kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() ) );
-          
-
-        for(int i= 0; i<kundesearchlist.size(); i++)
+        try
         {
-          System.out.println(i+ " " + kundesearchlist.get( i ).toString());
+          kundesearchlist = kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() );
         }
-          
-System.out.println( "3,1" );
-
+        catch ( SQLException e )
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
 //      }
 //      searchlist = kundesearchlist;
       if(kundesearchlist.isEmpty()) 
@@ -357,7 +243,6 @@ System.out.println( "3,1" );
       }
       else
       {
-        System.out.println( "4" );
         model.setColumnIdentifiers(columnNames);
         for (Kunde k : kundesearchlist) 
         {
@@ -371,7 +256,6 @@ System.out.println( "3,1" );
           o[5] = k.getEmail();
           o[6] = k.getKommentar();
           model.addRow(o);
-          System.out.println( "5" );
         }
       }
     }
@@ -457,13 +341,7 @@ System.out.println( "3,1" );
           model.addRow(o);
         }
       }
-    } 
     }
-    catch (SQLException e) 
-    {
-      JOptionPane.showMessageDialog(this, "[-] SQL Error\nNo connection to database." ,"Error!", JOptionPane.ERROR_MESSAGE);
-    }
-
     
     
 //    TableModel TabelModel = new AbstractTableModel()
@@ -526,10 +404,8 @@ System.out.println( "3,1" );
 //    liste.getColumnModel().getColumn( 4 ).setCellRenderer( rightRenderer );
 //    liste.getColumnModel().getColumn( 5 ).setCellRenderer( rightRenderer );
 //    scrollListe.setViewportView( liste );
-    System.out.println( "6" );
-    this.setVisible( true );
+    
   }
-
   
   
   private JPanel ButtonPanel()
@@ -554,7 +430,4 @@ System.out.println( "3,1" );
     
     return buttonpanel;
   }
-  
-  
-  
 }

@@ -1,6 +1,5 @@
 package logic;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -74,6 +73,35 @@ public class KundeLogik
       }
     }
   }
+// NEDENSTÅENDE ER ENDNU IKKE FÆRDIG!!!  
+  public Kunde readKunde(String cprnummer) throws SQLException
+  {
+    DbConnection dbcon = null;
+    try
+    {
+      dbcon = new DbConnection();
+//    KundeAccess kundeaccess = new KundeAccess();
+      CprnummerAccess cpraccess = new CprnummerAccess();
+    Kunde kunde = cpraccess.readCprnummer( cprnummer );
+    
+    return kunde;
+    }
+    catch ( Exception e )
+    {
+      if ( dbcon != null )
+      {
+        dbcon.rollback();
+      }
+      throw e;
+    }
+    finally
+    {
+      if ( dbcon != null )
+      {
+        dbcon.close();
+      }
+    }
+  }
   
   public List<Kunde> listKunder(String searchitem, String search) throws SQLException
   {
@@ -82,6 +110,10 @@ public class KundeLogik
     {
       dbcon = new DbConnection();
       KundeAccess kundeaccess = new KundeAccess();
+      if(searchitem == "cprnummer")
+      {
+        List<Kunde> list = kundeaccess.listKunder( searchitem, search );
+      }
       List<Kunde> list = kundeaccess.listKunder( searchitem, search );
       return list;
     }

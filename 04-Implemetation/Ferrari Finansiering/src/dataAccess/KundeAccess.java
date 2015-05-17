@@ -153,7 +153,7 @@ public class KundeAccess
     CprnummerAccess cpraccess = new CprnummerAccess();
     try
     {
-      String SEARCH = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar, cprid FROM kunde where " + searchitem + " LIKE ?";
+      String SEARCH = "SELECT cprid ,navn, adresse, postnummer, telefonnummer, email, kommentar FROM kunde where " + searchitem + " LIKE ?";
       statement = connection.prepareStatement( SEARCH );
       statement.setString(1, "%" + search + "%");
       resultset = statement.executeQuery();
@@ -161,7 +161,7 @@ public class KundeAccess
       {
         Kunde kunde = new Kunde();
         kunde.setCprid( resultset.getInt( "cprid" ) );
-        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
+//        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
         kunde.setNavn( resultset.getString( "navn" ) );
         kunde.setAdresse( resultset.getString( "adresse" ) );
         kunde.setPostnummer( resultset.getString( "postnummer" ) );

@@ -6,7 +6,7 @@ import domain.Kunde;
 
 public class CprnummerAccess
 {
-  private static final String SELECT = "SELECT cprnummer FROM cprnummer WHERE cprid = ?";
+  private static final String SELECT = "SELECT cprnummer, cprid FROM cprnummer WHERE cprid = ? OR cprnummer = ?";
   private static final String INSERT = "INSERT INTO cprnummer(cprnummer) VALUES(?)";
 //  private static final String UPDATE = "UPDATE cprnummer SET cprnummer = ? WHERE cprid = ?";
   private static final String DELETE = "DELETE FROM cprnummer WHERE cprid = ?";
@@ -105,10 +105,57 @@ public class CprnummerAccess
     }
     finally
     {
-      
+      if ( connection != null )
+      {
+        connection.close();
+      }
     }
   }
-  
+
+  public Kunde readCprnummer( String cprnummer ) throws SQLException
+  {
+    Connection connection = null;
+    try
+    {
+      connection = new DbConnection().getConnection();
+      return readCprnummer( connection, cprnummer );
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+//NEDENSTÅENDE ER IKKE FÆRDIG!!!  
+  public Kunde readCprnummer( Connection connection, String cprnummer ) throws SQLException
+  {
+    PreparedStatement statement = null;
+    ResultSet resultset = null;  
+    Kunde kunde = null;
+//    KundeAccess ka = new KundeAccess();
+    try
+    {
+      statement = connection.prepareStatement( SELECT );
+      statement.setString( 1, cprnummer );
+      resultset = statement.executeQuery();
+      kunde = new Kunde();
+      kunde.setCprnummer( cprnummer );
+      while ( resultset.next() )
+      {
+      kunde.setCprid( resultset.getInt( "cprid" ));
+      }
+      return kunde;
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
   
 
   // /*
