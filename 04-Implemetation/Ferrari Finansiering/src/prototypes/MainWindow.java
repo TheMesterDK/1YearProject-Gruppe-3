@@ -18,15 +18,13 @@ import logic.*;
 
 public class MainWindow extends JFrame
 {
+  private JPanel contentPane;
   private CustomTableModel model;
   private CustomTableRenderer table;
-  private JPanel contentPane;
   private JTextField searchField;
-  private String comboString[];
-  private String combochoise;
   private JComboBox comboBox;
+  private String comboString[];
   private String[] columnNames;
-//  private List searchlist;
   private JButton redigerButton = new JButton( "Rediger" );
 //  private JComboBox<String> comboBox = new JComboBox<String>();
 
@@ -86,23 +84,30 @@ public class MainWindow extends JFrame
   private JPanel LogoPanel2()
   {
     JPanel logopanel2 = new JPanel();
+    logopanel2.setPreferredSize(new Dimension(100, 300));
     
     FlowLayout flowLayout = (FlowLayout) logopanel2.getLayout();
-    flowLayout.setAlignment( FlowLayout.LEFT );
+    flowLayout.setAlignment( FlowLayout.CENTER );
     logopanel2.setBackground( Color.BLACK );
     JLabel label2 = new JLabel( new ImageIcon( "C:\\Users\\Dennis\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Capture.png" ) );
+    label2.setPreferredSize(new Dimension(100, 280));
     label2.setLabelFor( label2 );
-    label2.setSize( new Dimension( 300, 100 ) );
+    label2.setSize( new Dimension(100, 280) );
     label2.setBackground( new Color( 200, 50, 50 ) );
     label2.setIconTextGap( 0 );
-    label2.setMinimumSize( new Dimension(50, 300) );
-    label2.setMaximumSize( new Dimension( 1000, 500 ) );
+    label2.setMinimumSize( new Dimension(100, 250) );
+    label2.setMaximumSize( new Dimension(100, 350) );
     logopanel2.add( label2 );
     
     return logopanel2;
   }
   
   
+  /*
+   * IKKE HELT FÆRDIG!
+   * 
+   * Mangler ActionListener på "Opret Låneanmodning".
+   */
   public JPanel SælgerMainPanel()
   {
     JPanel sælgerpanel = new JPanel();
@@ -174,7 +179,7 @@ public class MainWindow extends JFrame
     contentPane.add( findkundepanel, BorderLayout.CENTER );
     this.setTitle( "Kunde" );
     
-    comboString = new String[] { "Cprnummer", "Navn", "Telefonnummer.", "Chassisnummer" };
+    comboString = new String[] { "CprID", "Navn", "Telefonnummer", "Adresse", "Email" };
     
     JPanel searchpanel = SearchPanel();
     findkundepanel.add( searchpanel, BorderLayout.NORTH );
@@ -209,7 +214,7 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findbilpanel.add( buttonpanel, BorderLayout.SOUTH );
     
-    this.setSize( 800, 550 );
+    this.setSize( 800, 350 );
     return findbilpanel;
   }
   
@@ -234,7 +239,7 @@ public class MainWindow extends JFrame
     JPanel buttonpanel = ButtonPanel();
     findaftalepanel.add( buttonpanel, BorderLayout.SOUTH );
     
-    this.setSize( 800, 550 );
+    this.setSize( 800, 350 );
     return findaftalepanel;
   }
   
@@ -267,7 +272,8 @@ public class MainWindow extends JFrame
     
     model = new CustomTableModel();
     table = new CustomTableRenderer(model);
-    table.setGridColor(Color.GRAY);
+    table.setOpaque(true);
+    table.setGridColor(Color.WHITE);
     table.setForeground(Color.RED);
     table.setBackground(Color.BLACK);
     table.getTableHeader().setReorderingAllowed(false);
@@ -286,12 +292,18 @@ public class MainWindow extends JFrame
         ListSelectionModel lsm = (ListSelectionModel)e.getSource();
         redigerButton.setEnabled(!lsm.isSelectionEmpty());
     });
+    
     this.setPreferredSize(new Dimension(width, frameHeight));
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setOpaque(true);
+
+    scrollPane.setForeground(Color.RED);
     scrollPane.setMinimumSize(new Dimension(200, 25));
     scrollPane.setPreferredSize(new Dimension(600, 200));
     scrollPane.setBackground(Color.BLACK);
+    scrollPane.getViewport().setBackground(Color.BLACK);
+    table.getTableHeader().setBackground( Color.BLACK );
+    table.getTableHeader().setForeground( Color.RED );
     resultpanel.add(scrollPane, BorderLayout.CENTER);
 //    this.pack();
     resultpanel.setVisible(true);
@@ -299,239 +311,135 @@ public class MainWindow extends JFrame
     return resultpanel;
   }
   
+  
  /*
   * STADIG IKKE FÆRDIG!!!
   * 
-  *  Kundepanelet kan vise kundeoplysninger i tabellen, hvis man vælger "Kunde" i combobox.
+  *  LåneaftalePanel mangler stadig at blive sat op.
+  *  
+  *  Umiddelbart virker KundePanel og BilPanel som de skal.
+  *  
   */
   public void searchButtonPressed()
   {
     try
     {
-System.out.println( "1" );
-    KundeLogik kl = new KundeLogik();
-    BilLogik bl = new BilLogik();
-    FinansieringsaftaleLogik fl = new FinansieringsaftaleLogik();
-    List<Kunde> kundesearchlist = null;
-    List<Bil> bilsearchlist = null;
-    List<Finansieringsaftale> aftalesearchlist = null;
-//    List searchlist;
-    if(this.getTitle() == "Kunde")
-    {
-System.out.println( "2" );
-      columnNames = new String[] { "Cpr-ID", "Navn", "Adresse", "Postnummer", "Telefon", "Email", "Kommentar"};
+      KundeLogik kl = new KundeLogik();
+      BilLogik bl = new BilLogik();
+      FinansieringsaftaleLogik fl = new FinansieringsaftaleLogik();
+      List<Kunde> kundesearchlist = null;
+      List<Bil> bilsearchlist = null;
+      List<Finansieringsaftale> aftalesearchlist = null;
       model.setRowCount(0);
-//      if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
-//      {
-//        try
-//        {
-//          kundesearchlist = kl.listKunder( "Cprnummer", searchField.getText() );
-//        }
-//        catch ( SQLException e )
-//        {
-//          // TODO Auto-generated catch block
-//          e.printStackTrace();
-//        }
-//      }
-//      else
-//      {
-System.out.println( "3" );
-System.out.println( comboBox.getSelectedItem().toString() );
-System.out.println( searchField.getText() );
-          kundesearchlist = kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() );
-//          System.out.println(kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() ) );
-          
-
-        for(int i= 0; i<kundesearchlist.size(); i++)
+      if(this.getTitle() == "Kunde")
+      {
+        columnNames = new String[] { "Cpr-ID", "Navn", "Adresse", "Postnummer", "Telefon", "Email", "Kommentar"};
+        kundesearchlist = kl.listKunder( comboBox.getSelectedItem().toString(), searchField.getText() );
+        
+        if(kundesearchlist.isEmpty()) 
         {
-          System.out.println(i+ " " + kundesearchlist.get( i ).toString());
+          JOptionPane.showMessageDialog(this, "Søgningen gav intet resultat");
         }
-          
-System.out.println( "3,1" );
-
-//      }
-//      searchlist = kundesearchlist;
-      if(kundesearchlist.isEmpty()) 
-      {
-        JOptionPane.showMessageDialog(this, "Søgningen gav intet resultat");
-      }
-      else
-      {
-        System.out.println( "4" );
-        model.setColumnIdentifiers(columnNames);
-        for (Kunde k : kundesearchlist) 
+        else
         {
-          Object[] o = new Object[7];
-          o[0] = k.getCprid();
-//          o[1] = k.getCprnummer();
-          o[1] = k.getNavn();
-          o[2] = k.getAdresse();
-          o[3] = k.getPostnummer();
-          o[4] = k.getTelefonnummer();
-          o[5] = k.getEmail();
-          o[6] = k.getKommentar();
-          model.addRow(o);
-          System.out.println( "5" );
+          model.setColumnIdentifiers(columnNames);
+          for (Kunde k : kundesearchlist) 
+          {
+            Object[] o = new Object[7];
+            o[0] = k.getCprid();
+            //          o[1] = k.getCprnummer();
+            o[1] = k.getNavn();
+            o[2] = k.getAdresse();
+            o[3] = k.getPostnummer();
+            o[4] = k.getTelefonnummer();
+            o[5] = k.getEmail();
+            o[6] = k.getKommentar();
+            model.addRow(o);
+          }
         }
       }
-    }
-    
-    else if(this.getTitle() == "Bil")
-    {
-      columnNames = new String[] { "Chassisnummer", "Reg-nummer", "Pris", "Model", "Årgang", "Bemærkninger"};
-      try
+      
+      else if(this.getTitle() == "Bil")
       {
+        columnNames = new String[] { "Chassisnummer", "Reg-nummer", "Pris", "Model", "Årgang", "Bemærkninger"};
         bilsearchlist = bl.listBiler( comboBox.getSelectedItem().toString(), searchField.getText() );
-      }
-      catch ( SQLException e )
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-//      searchlist = bilsearchlist;
-      if(bilsearchlist.isEmpty()) 
-      {
-        JOptionPane.showMessageDialog(this, "Søgningen gav intet resultat");
-      }
-      else
-      {
-        model.setColumnIdentifiers(columnNames);
-        for (Bil b : bilsearchlist) 
+  
+        
+        if(bilsearchlist.isEmpty()) 
         {
-          Object[] o = new Object[6];
-          o[0] = b.getChassisnummer();
-          o[1] = b.getRegistreringsnummer();
-          o[2] = b.getPris();
-          o[3] = b.getModel();
-          o[4] = b.getÅrgang();
-          o[5] = b.getBemærkninger();
-          model.addRow(o);
+          JOptionPane.showMessageDialog(this, "Søgningen gav intet resultat");
+        }
+        else
+        {
+          model.setColumnIdentifiers(columnNames);
+          for (Bil b : bilsearchlist) 
+          {
+            Object[] o = new Object[6];
+            o[0] = b.getChassisnummer();
+            o[1] = b.getRegistreringsnummer();
+            o[2] = b.getPris();
+            o[3] = b.getModel();
+            o[4] = b.getÅrgang();
+            o[5] = b.getBemærkninger();
+            model.addRow(o);
+          }
         }
       }
-    }
-    
-    else if(this.getTitle() == "LåneAftale")
-    {
-      columnNames = new String[] { "Aftale-ID", "Oprettelsesdato", "Cpr-ID", "Beløb", "Udbetaling", "Rente", "Afviklingsperiode", "Bil-Chassisnummer", "SælgerID"};
+      
+      else if(this.getTitle() == "LåneAftale")
+      {
+        columnNames = new String[] { "Aftale-ID", "Oprettelsesdato", "Cpr-ID", "Beløb", "Udbetaling", "Rente", "Afviklingsperiode", "Bil-Chassisnummer", "SælgerID"};
+        
+        if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
+        {
+          
+        }
+        else if(comboBox.getSelectedItem().toString() == "Reg.nummer")
+        {
+          
+        }
+        else
+        {
 
-      if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
-      {
+            aftalesearchlist = fl.listFinansieringsaftaler( comboBox.getSelectedItem().toString(), searchField.getText() );
+            
+        }
         
-      }
-      else if(comboBox.getSelectedItem().toString() == "Reg.-nummer")
-      {
-        
-      }
-      else
-      {
-        try
+        if(aftalesearchlist.isEmpty()) 
         {
-          aftalesearchlist = fl.listFinansieringsaftaler( comboBox.getSelectedItem().toString(), searchField.getText() );
+          JOptionPane.showMessageDialog(this, "Søgningen gav intet resultat");
         }
-        catch ( SQLException e )
+        else
         {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+          model.setColumnIdentifiers(columnNames);
+          for (Finansieringsaftale fa : aftalesearchlist) 
+          {
+            Object[] o = new Object[9];
+            o[0] = fa.getAftaleid();
+            o[1] = fa.getOprettelsesdato();
+            o[2] = fa.getCprid();
+            o[3] = fa.getBeløb();
+            o[4] = fa.getUdbetaling();
+            o[5] = fa.getRente();
+            o[6] = fa.getAfviklingsperiode();
+            o[7] = fa.getChassisnummer();
+            o[8] = fa.getSælgerid();
+            model.addRow(o);
+          }
         }
-      }
-//      searchlist = aftalesearchlist;
-      if(aftalesearchlist.isEmpty()) 
-      {
-        JOptionPane.showMessageDialog(this, "Søgningen gav intet resultat");
-      }
-      else
-      {
-        model.setColumnIdentifiers(columnNames);
-        for (Finansieringsaftale fa : aftalesearchlist) 
-        {
-          Object[] o = new Object[9];
-          o[0] = fa.getAftaleid();
-          o[1] = fa.getOprettelsesdato();
-          o[2] = fa.getCprid();
-          o[3] = fa.getBeløb();
-          o[4] = fa.getUdbetaling();
-          o[5] = fa.getRente();
-          o[6] = fa.getAfviklingsperiode();
-          o[7] = fa.getChassisnummer();
-          o[8] = fa.getSælgerid();
-          model.addRow(o);
-        }
-      }
-    } 
+      } 
     }
     catch (SQLException e) 
     {
       JOptionPane.showMessageDialog(this, "[-] SQL Error\nNo connection to database." ,"Error!", JOptionPane.ERROR_MESSAGE);
     }
-
-    
-    
-//    TableModel TabelModel = new AbstractTableModel()
-//    {
-//      // String[] columnNames = { "Album titel", "Bandnavn", "Genre", "#", "Sangtitel", "år"};
-//      
-//      public String getColumnName( int col )
-//      {
-//        return columnNames[col].toString();
-//      }
-//      
-//      public int getColumnCount()
-//      {
-//        return columnNames.length;
-//      }
-//      
-//      public int getRowCount()
-//      {
-//        return searchlist.size();
-//      }
-//      
-//      public Object getValueAt( int row, int col )
-//      {
-//        if ( col == 0 )
-//        {
-//          return searchlist.get( row ).getAlbumtitel();
-//        }
-//        else if ( col == 1 )
-//        {
-//          return searchlist.get( row ).getBandnavn();
-//        }
-//        else if ( col == 2 )
-//        {
-//          return searchlist.get( row ).getGenretype();
-//        }
-//        else if ( col == 3 )
-//        {
-//          return searchlist.get( row ).getSangnummer();
-//        }
-//        else if ( col == 4 )
-//        {
-//          return searchlist.get( row ).getSangtitel();
-//        }
-//        else
-//        {
-//          return searchlist.get( row ).getUdgivelse();
-//        }
-//      }
-//    };
-//    liste.setModel( TabelModel );
-//    liste.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-//    liste.getColumnModel().getColumn( 3 ).setPreferredWidth( 1 );
-//    liste.getColumnModel().getColumn( 5 ).setPreferredWidth( 4 );
-//    DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-//    rightRenderer.setHorizontalAlignment( SwingConstants.RIGHT );
-//    liste.getColumnModel().getColumn( 0 ).setCellRenderer( rightRenderer );
-//    liste.getColumnModel().getColumn( 1 ).setCellRenderer( rightRenderer );
-//    liste.getColumnModel().getColumn( 2 ).setCellRenderer( rightRenderer );
-//    liste.getColumnModel().getColumn( 3 ).setCellRenderer( rightRenderer );
-//    liste.getColumnModel().getColumn( 4 ).setCellRenderer( rightRenderer );
-//    liste.getColumnModel().getColumn( 5 ).setCellRenderer( rightRenderer );
-//    scrollListe.setViewportView( liste );
-    System.out.println( "6" );
     this.setVisible( true );
   }
 
   
-  
+  /*
+   * Mangler ActionListener til redigerButton
+   */
   private JPanel ButtonPanel()
   {
     JPanel buttonpanel = new JPanel();
@@ -542,19 +450,59 @@ System.out.println( "3,1" );
     buttonpanel.add( tilbageButton );
     tilbageButton.addActionListener( event ->
     {
-      
+      contentPane.removeAll();
+      this.repaint();
+      contentPane.add( SælgerMainPanel(), BorderLayout.CENTER );
     });
-    redigerButton = new JButton();
+    buttonpanel.add( redigerButton );    
     redigerButton.setEnabled( false );
-    buttonpanel.add( redigerButton );
     redigerButton.addActionListener( event ->
     {
-      
+System.out.println( "1" );
+      if(this.getTitle() == "Kunde")
+      {
+System.out.println( "2" );
+        
+        Kunde kunde = new Kunde();
+        kunde.setCprid(Integer.parseInt( table.getValueAt( table.getSelectedRow(), 0 ).toString() ) );
+        kunde.setNavn( table.getValueAt( table.getSelectedRow(), 1 ).toString() );
+        kunde.setAdresse( table.getValueAt( table.getSelectedRow(), 2 ).toString() );
+        kunde.setPostnummer( table.getValueAt( table.getSelectedRow(), 3 ).toString() );
+        kunde.setTelefonnummer( table.getValueAt( table.getSelectedRow(), 4 ).toString() );
+        kunde.setEmail( table.getValueAt( table.getSelectedRow(), 5 ).toString() );
+        kunde.setKommentar( table.getValueAt( table.getSelectedRow(), 6 ).toString() );
+        new EditDialog(kunde);
+      }
+      else if(this.getTitle() == "Bil")
+      {
+        Bil bil = new Bil();
+        bil.setChassisnummer( table.getValueAt( table.getSelectedRow(), 0 ).toString() );
+        bil.setRegistreringsnummer( table.getValueAt( table.getSelectedRow(), 1 ).toString() );
+        bil.setPris(Double.parseDouble( table.getValueAt( table.getSelectedRow(), 2 ).toString() ) );
+        bil.setModel( table.getValueAt( table.getSelectedRow(), 3 ).toString() );
+        bil.setÅrgang( table.getValueAt( table.getSelectedRow(), 4 ).toString() );
+        bil.setBemærkninger( table.getValueAt( table.getSelectedRow(), 5 ).toString() );
+        new EditDialog(bil);
+      }
+      else if(this.getTitle() == "LåneAftale")
+      {
+        Finansieringsaftale aftale = new Finansieringsaftale();
+        aftale.setAftaleid(Integer.parseInt( table.getValueAt( table.getSelectedRow(), 0 ).toString() ) );
+        aftale.setOprettelsesdato( table.getValueAt( table.getSelectedRow(), 1 ).toString() );
+        aftale.setCprid(Integer.parseInt( table.getValueAt( table.getSelectedRow(), 2 ).toString() ) );
+        aftale.setBeløb(Double.parseDouble( table.getValueAt( table.getSelectedRow(), 3 ).toString() ) );
+        aftale.setUdbetaling(Double.parseDouble( table.getValueAt( table.getSelectedRow(), 4 ).toString() ) );
+        aftale.setRente(Double.parseDouble( table.getValueAt( table.getSelectedRow(), 5 ).toString() ) );
+        aftale.setAfviklingsperiode(Integer.parseInt( table.getValueAt( table.getSelectedRow(), 6 ).toString() ) );
+        aftale.setChassisnummer( table.getValueAt( table.getSelectedRow(), 7 ).toString() );
+        aftale.setSælgerid(Integer.parseInt( table.getValueAt( table.getSelectedRow(), 8 ).toString() ) );
+        new EditDialog(aftale);
+      }
     });
     
     return buttonpanel;
   }
-  
+
   
   
 }

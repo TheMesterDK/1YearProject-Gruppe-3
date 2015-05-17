@@ -5,19 +5,26 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import logic.*;
+import domain.*;
+
 
 
 
 public class EditDialog extends JDialog
 {
+
+  private static final long serialVersionUID = 1L;
+
+  private final JPanel contentPanel;
   
-  private final JPanel contentPanel = new JPanel();
   private JTextField chassisnummerField;
   private JTextField regnummerField;
   private JTextField prisField;
   private JTextField modelField;
   private JTextField årgangField;
   private JTextField bemærkningField;
+  
   private JTextField cpridField;
   private JTextField navnField;
   private JTextField adresseField;
@@ -25,24 +32,27 @@ public class EditDialog extends JDialog
   private JTextField postnrField;
   private JTextField emailField;
   private JTextField kommentarField;
+  
   private JTextField sælgeridField;
   private JTextField sælgernavnField;
+  
   private JTextField aftaleidField;
   private JTextField lånebeløbField;
   private JTextField udbetalingField;
   private JTextField renteField;
   private JTextField afviklingsperiodeField;
   private JTextField oprettelsesdatoField;
-  private JTextField sælgerField;
-  private JTextField bilmodelField;
-  private JTextField bilchassisnummerField;
-  private JTextField kundenavnField;
-  private JTextField kundecpridField;
+  
+  private JButton deleteButton;
   
   
   
   public EditDialog()
   {
+    this.setLocation( 400, 200 );
+    this.setSize( 450, 200 );
+    
+    contentPanel = new JPanel();
     setBackground(Color.BLACK);
     setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
     setBounds( 100, 100, 600, 336 );
@@ -61,9 +71,62 @@ public class EditDialog extends JDialog
 //    JPanel bilpanel = BilPanel();
 //    contentPanel.add(bilpanel, BorderLayout.CENTER);
     
-    JPanel kundepanel = KundePanel();
-    contentPanel.add(kundepanel, BorderLayout.CENTER);
+//    JPanel kundepanel = KundePanel();
+//    contentPanel.add(kundepanel, BorderLayout.CENTER);
+//    this.getContentPane().add( contentPanel, BorderLayout.CENTER );
+    this.setVisible( true );
+  }
+  
+  public EditDialog(Kunde kunde)
+  {
+    this();
     
+    JPanel kundepanel = KundePanel();
+    this.contentPanel.add(kundepanel, BorderLayout.CENTER);
+    
+    cpridField.setText( "" + kunde.getCprid() );
+    navnField.setText( kunde.getNavn() );
+    adresseField.setText( kunde.getAdresse() );
+    telefonField.setText( kunde.getTelefonnummer() );
+    postnrField.setText( kunde.getPostnummer() );
+    emailField.setText( kunde.getEmail() );
+    kommentarField.setText( kunde.getKommentar() );
+    
+  }
+  
+  public EditDialog(Bil bil)
+  {
+    this();
+    
+    JPanel bilpanel = BilPanel();
+    this.contentPanel.add(bilpanel, BorderLayout.CENTER);
+    
+    chassisnummerField.setText( bil.getChassisnummer() );
+    regnummerField.setText( bil.getRegistreringsnummer() );
+    prisField.setText( "" + bil.getPris() );
+    modelField.setText( bil.getModel() );
+    årgangField.setText( bil.getÅrgang() );
+    bemærkningField.setText( bil.getBemærkninger() );
+    
+  }
+  
+  public EditDialog(Finansieringsaftale aftale)
+  {
+    this();
+    
+    JPanel aftalepanel = FinansieringsaftalePanel();
+    this.contentPanel.add(aftalepanel, BorderLayout.CENTER);
+    
+    aftaleidField.setText( "" + aftale.getAftaleid() );
+    lånebeløbField.setText( "" + aftale.getBeløb() );
+    udbetalingField.setText( "" + aftale.getUdbetaling() );
+    renteField.setText( "" + aftale.getRente() );
+    afviklingsperiodeField.setText( "" + aftale.getAfviklingsperiode() );
+    oprettelsesdatoField.setText( aftale.getOprettelsesdato() );
+    sælgeridField.setText( "" + aftale.getSælgerid() );
+    chassisnummerField.setText( aftale.getChassisnummer() );
+//    kundenavnField.setText(  );
+    cpridField.setText( "" + aftale.getCprid() );
   }
   
   
@@ -237,8 +300,8 @@ public class EditDialog extends JDialog
   }
   
   
-  private JPanel KundePanel()
-  {
+  public JPanel KundePanel()
+  {   
     JPanel kundepanel = new JPanel();
     kundepanel.setForeground(new Color(153, 0, 0));
     kundepanel.setBackground(Color.BLACK);
@@ -395,19 +458,36 @@ public class EditDialog extends JDialog
     kundepanel.add(panel, gbc_panel);
     panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     
-    JButton button = new JButton("OK");
-    button.setActionCommand("OK");
-    panel.add(button);
-    
     JButton button_1 = new JButton("Cancel");
     button_1.setActionCommand("Cancel");
     panel.add(button_1);
+    
+    JButton button = new JButton("OK");
+    button.setActionCommand("OK");
+    panel.add(button);
+
+    deleteButton = new JButton("Slet kunde");
+    deleteButton.setVisible( false );
+    deleteButton.addActionListener( event -> 
+    {
+      KundeLogik kl = new  KundeLogik();
+      try
+      {
+        kl.deleteKunde( Integer.parseInt( cpridField.getText() ) );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
 
     return kundepanel;
   }
   
   
-  private JPanel SælgerPanel()
+  public JPanel SælgerPanel()
   {
     JPanel sælgerpanel = new JPanel();
     sælgerpanel.setBackground(Color.RED);
@@ -463,7 +543,7 @@ public class EditDialog extends JDialog
   }
   
   
-  private JPanel FinansieringsaftalePanel()
+  public JPanel FinansieringsaftalePanel()
   {
     JPanel aftalepanel = new JPanel();
     aftalepanel.setBackground(Color.RED);
@@ -592,14 +672,14 @@ public class EditDialog extends JDialog
     gbc_lblSlger.gridy = 7;
     aftalepanel.add(lblSlger, gbc_lblSlger);
     
-    sælgerField = new JTextField();
+    sælgeridField = new JTextField();
     GridBagConstraints gbc_sælgerField = new GridBagConstraints();
     gbc_sælgerField.insets = new Insets(0, 0, 5, 0);
     gbc_sælgerField.fill = GridBagConstraints.HORIZONTAL;
     gbc_sælgerField.gridx = 1;
     gbc_sælgerField.gridy = 7;
-    aftalepanel.add(sælgerField, gbc_sælgerField);
-    sælgerField.setColumns(10);
+    aftalepanel.add(sælgeridField, gbc_sælgerField);
+    sælgeridField.setColumns(10);
     
     JLabel lblBilmodel = new JLabel("Bilmodel:");
     GridBagConstraints gbc_lblBilmodel = new GridBagConstraints();
@@ -609,14 +689,14 @@ public class EditDialog extends JDialog
     gbc_lblBilmodel.gridy = 8;
     aftalepanel.add(lblBilmodel, gbc_lblBilmodel);
     
-    bilmodelField = new JTextField();
+    modelField = new JTextField();
     GridBagConstraints gbc_bilmodelField = new GridBagConstraints();
     gbc_bilmodelField.insets = new Insets(0, 0, 5, 0);
     gbc_bilmodelField.fill = GridBagConstraints.HORIZONTAL;
     gbc_bilmodelField.gridx = 1;
     gbc_bilmodelField.gridy = 8;
-    aftalepanel.add(bilmodelField, gbc_bilmodelField);
-    bilmodelField.setColumns(10);
+    aftalepanel.add(modelField, gbc_bilmodelField);
+    modelField.setColumns(10);
     
     JLabel lblBilChassisnummer = new JLabel("Bil Chassisnummer:");
     GridBagConstraints gbc_lblBilChassisnummer = new GridBagConstraints();
@@ -626,14 +706,14 @@ public class EditDialog extends JDialog
     gbc_lblBilChassisnummer.gridy = 9;
     aftalepanel.add(lblBilChassisnummer, gbc_lblBilChassisnummer);
     
-    bilchassisnummerField = new JTextField();
-    bilchassisnummerField.setColumns(10);
+    chassisnummerField = new JTextField();
+    chassisnummerField.setColumns(10);
     GridBagConstraints gbc_bilchassisnummerField = new GridBagConstraints();
     gbc_bilchassisnummerField.insets = new Insets(0, 0, 5, 0);
     gbc_bilchassisnummerField.fill = GridBagConstraints.HORIZONTAL;
     gbc_bilchassisnummerField.gridx = 1;
     gbc_bilchassisnummerField.gridy = 9;
-    aftalepanel.add(bilchassisnummerField, gbc_bilchassisnummerField);
+    aftalepanel.add(chassisnummerField, gbc_bilchassisnummerField);
     
     JLabel lblKundeNavn = new JLabel("Kunde Navn:");
     GridBagConstraints gbc_lblKundeNavn = new GridBagConstraints();
@@ -643,14 +723,14 @@ public class EditDialog extends JDialog
     gbc_lblKundeNavn.gridy = 10;
     aftalepanel.add(lblKundeNavn, gbc_lblKundeNavn);
     
-    kundenavnField = new JTextField();
+    navnField = new JTextField();
     GridBagConstraints gbc_kundenavnField = new GridBagConstraints();
     gbc_kundenavnField.insets = new Insets(0, 0, 5, 0);
     gbc_kundenavnField.fill = GridBagConstraints.HORIZONTAL;
     gbc_kundenavnField.gridx = 1;
     gbc_kundenavnField.gridy = 10;
-    aftalepanel.add(kundenavnField, gbc_kundenavnField);
-    kundenavnField.setColumns(10);
+    aftalepanel.add(navnField, gbc_kundenavnField);
+    navnField.setColumns(10);
     
     JLabel lblKundeCprid = new JLabel("Kunde Cpr-ID:");
     GridBagConstraints gbc_lblKundeCprid = new GridBagConstraints();
@@ -660,13 +740,13 @@ public class EditDialog extends JDialog
     gbc_lblKundeCprid.gridy = 11;
     aftalepanel.add(lblKundeCprid, gbc_lblKundeCprid);
     
-    kundecpridField = new JTextField();
+    cpridField = new JTextField();
     GridBagConstraints gbc_kundecpridField = new GridBagConstraints();
     gbc_kundecpridField.fill = GridBagConstraints.HORIZONTAL;
     gbc_kundecpridField.gridx = 1;
     gbc_kundecpridField.gridy = 11;
-    aftalepanel.add(kundecpridField, gbc_kundecpridField);
-    kundecpridField.setColumns(10);
+    aftalepanel.add(cpridField, gbc_kundecpridField);
+    cpridField.setColumns(10);
     
     
     
@@ -674,15 +754,56 @@ public class EditDialog extends JDialog
   }
   
   
+//  public void editKunde(Kunde kunde)
+//  {
+//    
+//    contentPanel.add( KundePanel() );
+//    
+//    cpridField.setText( "" + kunde.getCprid() );
+//    navnField.setText( kunde.getNavn() );
+//    adresseField.setText( kunde.getAdresse() );
+//    telefonField.setText( kunde.getTelefonnummer() );
+//    postnrField.setText( kunde.getPostnummer() );
+//    emailField.setText( kunde.getEmail() );
+//    kommentarField.setText( kunde.getKommentar() );
+//  }
+  
+  
+//  public void editBil(Bil bil)
+//  {
+//    contentPanel.add( BilPanel() );
+//    
+//    chassisnummerField.setText( bil.getChassisnummer() );
+//    regnummerField.setText( bil.getRegistreringsnummer() );
+//    prisField.setText( "" + bil.getPris() );
+//    modelField.setText( bil.getModel() );
+//    årgangField.setText( bil.getÅrgang() );
+//    bemærkningField.setText( bil.getBemærkninger() );
+//  }
+  
+  
+//  public void editAftale(Finansieringsaftale aftale)
+//  {
+//    contentPanel.add( FinansieringsaftalePanel() );
+//    
+//    aftaleidField.setText( "" + aftale.getAftaleid() );
+//    lånebeløbField.setText( "" + aftale.getBeløb() );
+//    udbetalingField.setText( "" + aftale.getUdbetaling() );
+//    renteField.setText( "" + aftale.getRente() );
+//    afviklingsperiodeField.setText( "" + aftale.getAfviklingsperiode() );
+//    oprettelsesdatoField.setText( aftale.getOprettelsesdato() );
+//    sælgeridField.setText( "" + aftale.getSælgerid() );
+//    chassisnummerField.setText( aftale.getChassisnummer() );
+////    kundenavnField.setText(  );
+//    cpridField.setText( "" + aftale.getCprid() );
+//  }
   
   
   
   
-  
-  
-  private JPanel ButtonPanel()
-  {
-  }
+//  private JPanel ButtonPanel()
+//  {
+//  }
   
   
   
