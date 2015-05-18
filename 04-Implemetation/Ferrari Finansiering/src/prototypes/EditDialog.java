@@ -459,6 +459,25 @@ public class EditDialog extends JDialog
     kundepanel.add(panel, gbc_panel);
     panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     
+
+    deleteButton = new JButton("Slet kunde");
+    deleteButton.setVisible( true );
+    panel.add( deleteButton );
+    deleteButton.addActionListener( event -> 
+    {
+      KundeLogik kl = new  KundeLogik();
+      try
+      {
+        kl.deleteKunde( Integer.parseInt( cpridField.getText() ) );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
+    
     JButton button_1 = new JButton("Cancel");
     panel.add(button_1);
     button_1.addActionListener( event -> this.dispose() );
@@ -479,24 +498,6 @@ public class EditDialog extends JDialog
       try
       {
         kl.updateKunde( kunde );
-      }
-      catch ( Exception e )
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      this.dispose();
-    });
-
-    deleteButton = new JButton("Slet kunde");
-    deleteButton.setVisible( false );
-    panel.add( deleteButton );
-    deleteButton.addActionListener( event -> 
-    {
-      KundeLogik kl = new  KundeLogik();
-      try
-      {
-        kl.deleteKunde( Integer.parseInt( cpridField.getText() ) );
       }
       catch ( Exception e )
       {
