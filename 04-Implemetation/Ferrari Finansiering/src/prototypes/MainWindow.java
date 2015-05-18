@@ -25,7 +25,9 @@ public class MainWindow extends JFrame
   private JComboBox comboBox;
   private String comboString[];
   private String[] columnNames;
-  private JButton redigerButton = new JButton( "Rediger" );
+  private JButton redigerButton;
+  private JButton tilbageButton;
+  
 //  private JComboBox<String> comboBox = new JComboBox<String>();
 
   
@@ -62,24 +64,6 @@ public class MainWindow extends JFrame
     
   }
   
-//  private JPanel LogoPanel()
-//  {
-//    JPanel logopanel = new JPanel();
-//    FlowLayout flowLayout = (FlowLayout) logopanel.getLayout();
-//    flowLayout.setAlignment( FlowLayout.LEFT );
-//    logopanel.setBackground( Color.RED );
-//    JLabel label = new JLabel( new ImageIcon( "C:\\Users\\Dennis\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Yellow logo on red background.png" ) );
-//    label.setLabelFor( label );
-//    label.setSize( new Dimension( 300, 100 ) );
-//    label.setBackground( new Color( 200, 50, 50 ) );
-//    label.setIconTextGap( 0 );
-//    label.setPreferredSize( new Dimension( 300, 100 ) );
-//    label.setMinimumSize( new Dimension( 100, 50 ) );
-//    label.setMaximumSize( new Dimension( 1000, 500 ) );
-//    logopanel.add( label );
-//    
-//    return logopanel;
-//  }
   
   private JPanel LogoPanel2()
   {
@@ -136,9 +120,10 @@ public class MainWindow extends JFrame
     btnFindKunde.addActionListener( event ->
     {
       
-      sælgerpanel.setVisible( false );
+//      sælgerpanel.setVisible( false );
+      contentPane.remove( sælgerpanel );
       contentPane.add( FindKundePanel(), BorderLayout.CENTER );
-//      contentPane.repaint();
+      contentPane.repaint();
       
     } );
     JLabel label2 = new JLabel();
@@ -149,9 +134,10 @@ public class MainWindow extends JFrame
     sælgerpanel.add( btnFindBil );
     btnFindBil.addActionListener( event ->
     {
-      sælgerpanel.setVisible( false );
+//      sælgerpanel.setVisible( false );
+      contentPane.remove( sælgerpanel );
       contentPane.add( FindBilPanel(), BorderLayout.CENTER );
-//      contentPane.repaint();
+      contentPane.repaint();
     } );
     JLabel label3 = new JLabel();
     label3.setText( " " );
@@ -161,9 +147,10 @@ public class MainWindow extends JFrame
     sælgerpanel.add( btnFindLåneaftale );
     btnFindLåneaftale.addActionListener( event ->
     {
-      sælgerpanel.setVisible( false );
+//      sælgerpanel.setVisible( false );
+      contentPane.remove( sælgerpanel );
       contentPane.add( FindLåneaftalePanel(), BorderLayout.CENTER );
-//      contentPane.repaint();
+      contentPane.repaint();
     } );
     
     this.setSize( 350, 340 );
@@ -189,6 +176,12 @@ public class MainWindow extends JFrame
     
     JPanel buttonpanel = ButtonPanel();
     findkundepanel.add( buttonpanel, BorderLayout.SOUTH );
+    tilbageButton.addActionListener( event ->
+    {
+      contentPane.remove( findkundepanel );
+      contentPane.add( SælgerMainPanel(), BorderLayout.CENTER );
+      contentPane.repaint();
+    });
     
     this.setSize( 800, 350 );
     return findkundepanel;
@@ -213,6 +206,12 @@ public class MainWindow extends JFrame
     
     JPanel buttonpanel = ButtonPanel();
     findbilpanel.add( buttonpanel, BorderLayout.SOUTH );
+    tilbageButton.addActionListener( event ->
+    {
+      contentPane.remove( findbilpanel );
+      contentPane.add( SælgerMainPanel(), BorderLayout.CENTER );
+      contentPane.repaint();
+    });
     
     this.setSize( 800, 350 );
     return findbilpanel;
@@ -238,6 +237,12 @@ public class MainWindow extends JFrame
     
     JPanel buttonpanel = ButtonPanel();
     findaftalepanel.add( buttonpanel, BorderLayout.SOUTH );
+    tilbageButton.addActionListener( event ->
+    {
+      contentPane.remove( findaftalepanel );
+      contentPane.add( SælgerMainPanel(), BorderLayout.CENTER );
+      contentPane.repaint();
+    });
     
     this.setSize( 800, 350 );
     return findaftalepanel;
@@ -446,22 +451,16 @@ public class MainWindow extends JFrame
     FlowLayout flowLayout = (FlowLayout) buttonpanel.getLayout();
     flowLayout.setAlignment( FlowLayout.RIGHT );
     buttonpanel.setBackground( Color.BLACK );
-    JButton tilbageButton = new JButton( "Tilbage" );
+    tilbageButton = new JButton( "Tilbage" );
     buttonpanel.add( tilbageButton );
-    tilbageButton.addActionListener( event ->
-    {
-      contentPane.removeAll();
-      this.repaint();
-      contentPane.add( SælgerMainPanel(), BorderLayout.CENTER );
-    });
+
+    redigerButton = new JButton( "Rediger" );
     buttonpanel.add( redigerButton );    
     redigerButton.setEnabled( false );
     redigerButton.addActionListener( event ->
     {
-System.out.println( "1" );
       if(this.getTitle() == "Kunde")
       {
-System.out.println( "2" );
         
         Kunde kunde = new Kunde();
         kunde.setCprid(Integer.parseInt( table.getValueAt( table.getSelectedRow(), 0 ).toString() ) );

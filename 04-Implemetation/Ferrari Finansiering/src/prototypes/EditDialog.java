@@ -44,6 +44,7 @@ public class EditDialog extends JDialog
   private JTextField oprettelsesdatoField;
   
   private JButton deleteButton;
+  private JButton editButton;
   
   
   
@@ -459,15 +460,37 @@ public class EditDialog extends JDialog
     panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
     
     JButton button_1 = new JButton("Cancel");
-    button_1.setActionCommand("Cancel");
     panel.add(button_1);
+    button_1.addActionListener( event -> this.dispose() );
     
     JButton button = new JButton("OK");
-    button.setActionCommand("OK");
     panel.add(button);
+    button.addActionListener( event -> 
+    {
+      Kunde kunde = new Kunde();
+      KundeLogik kl = new KundeLogik();
+      kunde.setCprid( Integer.parseInt( cpridField.getText() ) );
+      kunde.setNavn( navnField.getText() );
+      kunde.setAdresse( adresseField.getText() );
+      kunde.setPostnummer( postnrField.getText() );
+      kunde.setTelefonnummer( telefonField.getText() );
+      kunde.setEmail( emailField.getText() );
+      kunde.setKommentar( kommentarField.getText() );
+      try
+      {
+        kl.updateKunde( kunde );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
 
     deleteButton = new JButton("Slet kunde");
     deleteButton.setVisible( false );
+    panel.add( deleteButton );
     deleteButton.addActionListener( event -> 
     {
       KundeLogik kl = new  KundeLogik();
@@ -752,51 +775,6 @@ public class EditDialog extends JDialog
     
     return aftalepanel;
   }
-  
-  
-//  public void editKunde(Kunde kunde)
-//  {
-//    
-//    contentPanel.add( KundePanel() );
-//    
-//    cpridField.setText( "" + kunde.getCprid() );
-//    navnField.setText( kunde.getNavn() );
-//    adresseField.setText( kunde.getAdresse() );
-//    telefonField.setText( kunde.getTelefonnummer() );
-//    postnrField.setText( kunde.getPostnummer() );
-//    emailField.setText( kunde.getEmail() );
-//    kommentarField.setText( kunde.getKommentar() );
-//  }
-  
-  
-//  public void editBil(Bil bil)
-//  {
-//    contentPanel.add( BilPanel() );
-//    
-//    chassisnummerField.setText( bil.getChassisnummer() );
-//    regnummerField.setText( bil.getRegistreringsnummer() );
-//    prisField.setText( "" + bil.getPris() );
-//    modelField.setText( bil.getModel() );
-//    årgangField.setText( bil.getÅrgang() );
-//    bemærkningField.setText( bil.getBemærkninger() );
-//  }
-  
-  
-//  public void editAftale(Finansieringsaftale aftale)
-//  {
-//    contentPanel.add( FinansieringsaftalePanel() );
-//    
-//    aftaleidField.setText( "" + aftale.getAftaleid() );
-//    lånebeløbField.setText( "" + aftale.getBeløb() );
-//    udbetalingField.setText( "" + aftale.getUdbetaling() );
-//    renteField.setText( "" + aftale.getRente() );
-//    afviklingsperiodeField.setText( "" + aftale.getAfviklingsperiode() );
-//    oprettelsesdatoField.setText( aftale.getOprettelsesdato() );
-//    sælgeridField.setText( "" + aftale.getSælgerid() );
-//    chassisnummerField.setText( aftale.getChassisnummer() );
-////    kundenavnField.setText(  );
-//    cpridField.setText( "" + aftale.getCprid() );
-//  }
   
   
   
