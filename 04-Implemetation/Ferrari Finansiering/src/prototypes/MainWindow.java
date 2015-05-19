@@ -54,11 +54,11 @@ public class MainWindow extends JFrame
 //     JPanel findkundepanel = FindKundePanel();
 //     contentPane.add(findkundepanel, BorderLayout.CENTER);
     
-    // JPanel findbilpanel = FindBilPanel();
-    // contentPane.add(findbilpanel, BorderLayout.CENTER);
+//     JPanel findbilpanel = FindBilPanel();
+//     contentPane.add(findbilpanel, BorderLayout.CENTER);
     
-    // JPanel findaftalepanel = FindLåneaftalePanel();
-    // contentPane.add(findaftalepanel, BorderLayout.CENTER);
+//     JPanel findaftalepanel = FindLåneaftalePanel();
+//     contentPane.add(findaftalepanel, BorderLayout.CENTER);
     
     this.setVisible( true );
     
@@ -105,7 +105,7 @@ public class MainWindow extends JFrame
     sælgerpanel.add( label0 );
     JButton btnOpretLåneanmodning = new JButton( "Opret låneanmodning" );
     btnOpretLåneanmodning.setForeground(Color.BLACK);
-    btnOpretLåneanmodning.setBackground(new Color(153, 0, 0));
+    btnOpretLåneanmodning.setBackground(new Color(150, 0, 0));
     sælgerpanel.add( btnOpretLåneanmodning );
     btnOpretLåneanmodning.addActionListener( event ->
     {
@@ -115,7 +115,8 @@ public class MainWindow extends JFrame
     label1.setText( " " );
     sælgerpanel.add( label1 );
     JButton btnFindKunde = new JButton( "Find kunde" );
-    btnFindKunde.setBackground(new Color(153, 0, 0));
+    btnFindKunde.setForeground(Color.BLACK);
+    btnFindKunde.setBackground(new Color(150, 0, 0));
     sælgerpanel.add( btnFindKunde );
     btnFindKunde.addActionListener( event ->
     {
@@ -130,7 +131,8 @@ public class MainWindow extends JFrame
     label2.setText( " " );
     sælgerpanel.add( label2 );
     JButton btnFindBil = new JButton( "Find bil" );
-    btnFindBil.setBackground(new Color(153, 0, 0));
+    btnFindBil.setForeground(Color.BLACK);
+    btnFindBil.setBackground(new Color(150, 0, 0));
     sælgerpanel.add( btnFindBil );
     btnFindBil.addActionListener( event ->
     {
@@ -143,7 +145,8 @@ public class MainWindow extends JFrame
     label3.setText( " " );
     sælgerpanel.add( label3 );
     JButton btnFindLåneaftale = new JButton( "Find låneaftale" );
-    btnFindLåneaftale.setBackground(new Color(153, 0, 0));
+    btnFindLåneaftale.setForeground(Color.BLACK);
+    btnFindLåneaftale.setBackground(new Color(150, 0, 0));
     sælgerpanel.add( btnFindLåneaftale );
     btnFindLåneaftale.addActionListener( event ->
     {
@@ -264,7 +267,7 @@ public class MainWindow extends JFrame
     searchpanel.add( searchButton );
     searchButton.addActionListener( event -> searchButtonPressed());
     
-    this.getRootPane().setDefaultButton(searchButton);
+    searchpanel.getRootPane().setDefaultButton(searchButton);
     return searchpanel;
   }
   
@@ -298,9 +301,9 @@ public class MainWindow extends JFrame
         redigerButton.setEnabled(!lsm.isSelectionEmpty());
     });
     
-    this.setPreferredSize(new Dimension(width, frameHeight));
+//    this.setPreferredSize(new Dimension(width, frameHeight));
     JScrollPane scrollPane = new JScrollPane(table);
-    scrollPane.setOpaque(true);
+//    scrollPane.setOpaque(true);
 
     scrollPane.setForeground(Color.RED);
     scrollPane.setMinimumSize(new Dimension(200, 25));
