@@ -109,7 +109,7 @@ public class MainWindow extends JFrame
     sælgerpanel.add( btnOpretLåneanmodning );
     btnOpretLåneanmodning.addActionListener( event ->
     {
-      
+      new EditDialog().CprPanel();
     } );
     JLabel label1 = new JLabel();
     label1.setText( " " );
@@ -121,7 +121,6 @@ public class MainWindow extends JFrame
     btnFindKunde.addActionListener( event ->
     {
       
-//      sælgerpanel.setVisible( false );
       contentPane.remove( sælgerpanel );
       contentPane.add( FindKundePanel(), BorderLayout.CENTER );
       contentPane.repaint();
@@ -136,7 +135,6 @@ public class MainWindow extends JFrame
     sælgerpanel.add( btnFindBil );
     btnFindBil.addActionListener( event ->
     {
-//      sælgerpanel.setVisible( false );
       contentPane.remove( sælgerpanel );
       contentPane.add( FindBilPanel(), BorderLayout.CENTER );
       contentPane.repaint();
@@ -150,7 +148,6 @@ public class MainWindow extends JFrame
     sælgerpanel.add( btnFindLåneaftale );
     btnFindLåneaftale.addActionListener( event ->
     {
-//      sælgerpanel.setVisible( false );
       contentPane.remove( sælgerpanel );
       contentPane.add( FindLåneaftalePanel(), BorderLayout.CENTER );
       contentPane.repaint();
@@ -445,9 +442,6 @@ public class MainWindow extends JFrame
   }
 
   
-  /*
-   * Mangler ActionListener til redigerButton
-   */
   private JPanel ButtonPanel()
   {
     JPanel buttonpanel = new JPanel();

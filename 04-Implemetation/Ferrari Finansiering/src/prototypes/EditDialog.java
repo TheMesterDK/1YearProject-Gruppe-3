@@ -19,6 +19,11 @@ public class EditDialog extends JDialog
 
   private final JPanel contentPanel;
   
+  private JPanel editbuttonpanel;
+  private JPanel newbuttonpanel;
+  
+  private JTextField returnField;
+  
   private JTextField chassisnummerField;
   private JTextField regnummerField;
   private JTextField prisField;
@@ -47,8 +52,13 @@ public class EditDialog extends JDialog
   
   private JButton deleteButton;
   private JButton editButton;
+  private JButton NyKundeButton;
+  private JButton okButton;
+  private JButton backButton;
+  private JButton forwardButton;
   
-  Kunde kunde = null;
+  private Kunde kunde = null;
+  private String kreditværdighed;
   
   
   
@@ -76,8 +86,8 @@ public class EditDialog extends JDialog
 //  JPanel cprpanel = CprPanel();
 //  contentPanel.add(cprpanel, BorderLayout.CENTER);
   
-    JPanel lbpanel = LånebetingelserPanel();
-    contentPanel.add(lbpanel, BorderLayout.CENTER);
+//    JPanel lbpanel = LånebetingelserPanel();
+//    contentPanel.add(lbpanel, BorderLayout.CENTER);
     
 //    JPanel bilpanel = BilPanel();
 //    contentPanel.add(bilpanel, BorderLayout.CENTER);
@@ -257,7 +267,13 @@ public class EditDialog extends JDialog
       {
         kunde = new Kunde();
         kunde.setCprnummer( cprnummerField.getText() );
-        
+        LåneberegningsLogik lblogic = new LåneberegningsLogik();
+        kreditværdighed = lblogic.getKreditVærdighed( kunde.getCprnummer() );
+        returnField.setText(kreditværdighed);
+        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
+        {
+          NyKundeButton.setVisible( true );
+        }
         
       });
       cprpanel.add(button, gbc_button);
@@ -279,9 +295,8 @@ public class EditDialog extends JDialog
       gbc_label_1.gridx = 1;
       gbc_label_1.gridy = 7;
       cprpanel.add(label_1, gbc_label_1);
-
-//Skal textfeltet være en lokal variabel (som nu), eller skal den ændres.?      
-      JTextField returnField = new JTextField();
+      
+      returnField = new JTextField();
       returnField.setEditable(false);
       returnField.setColumns(10);
       GridBagConstraints gbc_textField_1 = new GridBagConstraints();
@@ -291,18 +306,21 @@ public class EditDialog extends JDialog
       gbc_textField_1.gridy = 7;
       cprpanel.add(returnField, gbc_textField_1);
       
-      JButton btnNewButton = new JButton("Opret Kunde");
+      NyKundeButton = new JButton("Opret Kunde");
       GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
       gbc_btnNewButton.anchor = GridBagConstraints.EAST;
       gbc_btnNewButton.gridx = 2;
       gbc_btnNewButton.gridy = 10;
-      btnNewButton.addActionListener( event -> 
+      NyKundeButton.addActionListener( event -> 
       {
-        Kunde kunde = new Kunde();
         
+        contentPanel.remove( cprpanel );
+        contentPanel.add( KundePanel(), BorderLayout.CENTER );
+        contentPanel.repaint();
         
       });
-      cprpanel.add(btnNewButton, gbc_btnNewButton);
+      NyKundeButton.setEnabled( false );
+      cprpanel.add(NyKundeButton, gbc_btnNewButton);
 
       
     return cprpanel;
@@ -652,7 +670,8 @@ public class EditDialog extends JDialog
     kundepanel.add(kommentarField, gbc_kommentarField);
     kommentarField.setColumns(10);
     
-    JPanel panel = new JPanel();
+    
+    JPanel panel = EditButtonPanel();
     panel.setBackground(Color.BLACK);
     GridBagConstraints gbc_panel = new GridBagConstraints();
     gbc_panel.insets = new Insets(0, 0, 5, 0);
@@ -660,12 +679,7 @@ public class EditDialog extends JDialog
     gbc_panel.gridx = 1;
     gbc_panel.gridy = 9;
     kundepanel.add(panel, gbc_panel);
-    panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-    
 
-    deleteButton = new JButton("Slet kunde");
-    deleteButton.setVisible( true );
-    panel.add( deleteButton );
     deleteButton.addActionListener( event -> 
     {
       KundeLogik kl = new  KundeLogik();
@@ -680,14 +694,8 @@ public class EditDialog extends JDialog
       }
       this.dispose();
     });
-    
-    JButton button_1 = new JButton("Cancel");
-    panel.add(button_1);
-    button_1.addActionListener( event -> this.dispose() );
-    
-    JButton button = new JButton("OK");
-    panel.add(button);
-    button.addActionListener( event -> 
+
+    okButton.addActionListener( event -> 
     {
       Kunde kunde = new Kunde();
       KundeLogik kl = new KundeLogik();
@@ -708,6 +716,50 @@ public class EditDialog extends JDialog
         e.printStackTrace();
       }
       this.dispose();
+    });
+    
+    
+    JPanel newpanel = NewButtonPanel();
+    GridBagConstraints gbc_newpanel = new GridBagConstraints();
+    gbc_newpanel.insets = new Insets(0, 0, 5, 0);
+    gbc_newpanel.fill = GridBagConstraints.BOTH;
+    gbc_newpanel.gridx = 1;
+    gbc_newpanel.gridy = 9;
+    kundepanel.add(newpanel, gbc_newpanel);
+    
+    backButton.addActionListener( event ->
+    {
+      contentPanel.remove( kundepanel );
+      contentPanel.add(CprPanel(), BorderLayout.CENTER );
+      cprnummerField.setText( kunde.getCprnummer() );
+      contentPanel.repaint();
+      
+    });
+    
+    forwardButton.addActionListener( event ->
+    {
+      kunde.setNavn( navnField.getText() );
+      kunde.setAdresse( adresseField.getText() );
+      kunde.setPostnummer( postnrField.getText() );
+      kunde.setTelefonnummer( telefonField.getText() );
+      kunde.setEmail( emailField.getText() );
+      kunde.setKommentar( kommentarField.getText() );
+      
+      KundeLogik kl = new KundeLogik();
+      try
+      {
+        kl.createKunde( kunde );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      
+      contentPanel.remove( kundepanel );
+      contentPanel.add( LånebetingelserPanel(), BorderLayout.CENTER );
+      contentPanel.repaint();
+      
     });
 
     return kundepanel;
@@ -906,7 +958,6 @@ public class EditDialog extends JDialog
 
     return bilpanel;
   }
-  
   
   
   public JPanel FinansieringsaftalePanel()
@@ -1136,9 +1187,47 @@ public class EditDialog extends JDialog
   
   
   
-//  private JPanel ButtonPanel()
-//  {
-//  }
+  private JPanel NewButtonPanel()
+  {
+    newbuttonpanel = new JPanel();
+    newbuttonpanel.setBackground(Color.BLACK);
+    newbuttonpanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    
+    backButton = new JButton("Tilbage");
+    newbuttonpanel.add(backButton);
+    
+    forwardButton = new JButton("Indtast lånebetingelser");
+    newbuttonpanel.add( forwardButton );
+    
+    newbuttonpanel.setVisible( false );
+    newbuttonpanel.setEnabled( false );
+    
+    return newbuttonpanel;
+  }
+  
+  
+  private JPanel EditButtonPanel()
+  {
+    editbuttonpanel = new JPanel();
+    
+    editbuttonpanel.setBackground(Color.BLACK);
+    editbuttonpanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    
+    deleteButton = new JButton("Slet");
+    editbuttonpanel.add( deleteButton );
+    
+    JButton button_1 = new JButton("Cancel");
+    editbuttonpanel.add(button_1);
+    button_1.addActionListener( event -> this.dispose() );
+    
+    okButton = new JButton("OK");
+    editbuttonpanel.add(okButton);
+
+    editbuttonpanel.setVisible( false );
+    editbuttonpanel.setEnabled( false );
+      
+    return editbuttonpanel;
+  }
   
   
   
