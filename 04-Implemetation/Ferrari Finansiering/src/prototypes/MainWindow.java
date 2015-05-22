@@ -90,7 +90,7 @@ public class MainWindow extends JFrame
   /*
    * IKKE HELT FÆRDIG!
    * 
-   * ActionListener på "Opret Låneanmodning" fungerer ikke helt som den skal.
+   * ActionListener på "Opret Låneanmodning" er endnu ikke testet.
    */
   public JPanel SælgerMainPanel()
   {
@@ -107,14 +107,8 @@ public class MainWindow extends JFrame
     btnOpretLåneanmodning.setForeground(Color.BLACK);
     btnOpretLåneanmodning.setBackground(new Color(150, 0, 0));
     sælgerpanel.add( btnOpretLåneanmodning );
-    btnOpretLåneanmodning.addActionListener( event ->
-    {
-//      JPanel cp = new EditDialog().CprPanel();
-//      new EditDialog().add( cp, BorderLayout.CENTER );
-//      new EditDialog().add( CprPanel(),  );
-      new CreateDialog();
-      
-    } );
+    btnOpretLåneanmodning.addActionListener( event -> new KreditværdighedDialog() );
+    
     JLabel label1 = new JLabel();
     label1.setText( " " );
     sælgerpanel.add( label1 );
@@ -130,6 +124,7 @@ public class MainWindow extends JFrame
       contentPane.repaint();
       
     } );
+    
     JLabel label2 = new JLabel();
     label2.setText( " " );
     sælgerpanel.add( label2 );
@@ -143,6 +138,7 @@ public class MainWindow extends JFrame
       contentPane.add( FindBilPanel(), BorderLayout.CENTER );
       contentPane.repaint();
     } );
+    
     JLabel label3 = new JLabel();
     label3.setText( " " );
     sælgerpanel.add( label3 );
@@ -268,7 +264,6 @@ public class MainWindow extends JFrame
     searchpanel.add( searchButton );
     searchButton.addActionListener( event -> searchButtonPressed());
     
-    searchpanel.getRootPane().setDefaultButton(searchButton);
     return searchpanel;
   }
   

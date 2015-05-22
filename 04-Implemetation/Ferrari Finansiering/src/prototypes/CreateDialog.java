@@ -5,14 +5,14 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import logic.KundeLogik;
-import logic.LåneberegningsLogik;
-import domain.Kunde;
+import logic.*;
+import domain.*;
 
 public class CreateDialog extends JDialog
 {
   
-  private final JPanel contentPanel = new JPanel();
+  private JPanel contentPanel;
+  private JPanel mainpanel;
   
   private JTextField returnField;
   
@@ -32,17 +32,29 @@ public class CreateDialog extends JDialog
   private JTextField årgangField;
   private JTextField bemærkningField;
   
+  private JTextField sælgerField;
+  private JTextField datoField;
+  private JTextField førsteudbetalingField;
+  private JTextField udbetalingField;
+  private JTextField beløbField;
+  private JTextField renteField;
+  private JTextField kundeField;
+  
   private JButton NyKundeButton;
   private JButton backButton;
   private JButton forwardButton;
   
-  
   private Kunde kunde = null;
+  private Bil bil = null;
+  private Finansieringsaftale aftale = null;
   
   private String kreditværdighed;
+  private String buttonString;
 
+  
   public CreateDialog()
   {
+    contentPanel = new JPanel();
     setLocation( 400, 200 );
     setBackground(Color.BLACK);
     setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
@@ -55,16 +67,18 @@ public class CreateDialog extends JDialog
     JPanel logopanel = LogoPanel();
     contentPanel.add(logopanel, BorderLayout.EAST);
     
-//    JPanel cprpanel = CprPanel();
-//    contentPanel.add(cprpanel, BorderLayout.CENTER);
+//    mainpanel = CprPanel();
+//    contentPanel.add(mainpanel, BorderLayout.CENTER);
     
-    JPanel lånepanel = LånebetingelserPanel();
-    contentPanel.add(lånepanel, BorderLayout.CENTER);
+//    JPanel lånepanel = LånebetingelserPanel();
+//    contentPanel.add(lånepanel, BorderLayout.CENTER);
+    
+//    JPanel kundepanel = KundePanel();
+//    contentPanel.add( kundepanel, BorderLayout.CENTER );
     
     
     this.setVisible( true );
   }
-  
   
   
   private JPanel LogoPanel()
@@ -101,6 +115,8 @@ public class CreateDialog extends JDialog
     gbl_cprpanel.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
     gbl_cprpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     cprpanel.setLayout(gbl_cprpanel);
+    contentPanel.add( cprpanel, BorderLayout.CENTER );
+    this.setTitle( "Kontroller kreditværdighed" );
  
       JLabel lblIndtastKundensCprnummer = new JLabel("Indtast Cpr-Nummer");
       lblIndtastKundensCprnummer.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -155,17 +171,14 @@ public class CreateDialog extends JDialog
 // Nedenstående actionlistener fungerer ikke korrekt(Kreditværdigheden hentes ikke)!     
       button.addActionListener( event -> 
       {
-        kunde = new Kunde();
-        kunde.setCprnummer( cprnummerField.getText() );
         LåneberegningsLogik lblogic = new LåneberegningsLogik();
-        kreditværdighed = lblogic.getKreditVærdighed( kunde.getCprnummer() );
+        kreditværdighed = lblogic.getKreditVærdighed( cprnummerField.getText() );
         returnField.setText(kreditværdighed);
 //        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
 //        {
           NyKundeButton.setEnabled( true );
 //        }
         cprpanel.repaint();
-        
       });
       cprpanel.add(button, gbc_button);
       
@@ -204,10 +217,13 @@ public class CreateDialog extends JDialog
       gbc_btnNewButton.gridy = 10;
       NyKundeButton.addActionListener( event -> 
       {
+        kunde = new Kunde();
+        kunde.setCprnummer( cprnummerField.getText() );
         
         contentPanel.remove( cprpanel );
         contentPanel.add( KundePanel(), BorderLayout.CENTER );
         contentPanel.repaint();
+        
         
       });
       NyKundeButton.setEnabled( false );
@@ -217,8 +233,9 @@ public class CreateDialog extends JDialog
     return cprpanel;
   }
   
+
   
-  public JPanel KundePanel()
+  private JPanel KundePanel()
   {   
     JPanel kundepanel = new JPanel();
     kundepanel.setForeground(new Color(150, 0, 0));
@@ -229,7 +246,8 @@ public class CreateDialog extends JDialog
     gbl_kundepanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
     gbl_kundepanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
     kundepanel.setLayout(gbl_kundepanel);
-    this.setSize( 600, 340 );
+    contentPanel.add( kundepanel, BorderLayout.CENTER );
+    this.setTitle( "Indtast Kundeoplysninger" );
     
     JLabel lblKunde = new JLabel("Kunde:");
     lblKunde.setForeground(new Color(150, 0, 0));
@@ -367,6 +385,7 @@ public class CreateDialog extends JDialog
     kundepanel.add(kommentarField, gbc_kommentarField);
     kommentarField.setColumns(10);
 
+    buttonString = "Indtast Bil";
     
     JPanel buttonpanel = ButtonPanel();
     GridBagConstraints gbc_newpanel = new GridBagConstraints();
@@ -406,11 +425,13 @@ public class CreateDialog extends JDialog
       }
       
       contentPanel.remove( kundepanel );
-      contentPanel.add( LånebetingelserPanel(), BorderLayout.CENTER );
+      contentPanel.add( BilPanel(), BorderLayout.CENTER );
       contentPanel.repaint();
       
     });
-
+    
+    this.setSize( 600, 333 );
+    kundepanel.setVisible( true );
     return kundepanel;
   }
   
@@ -420,14 +441,14 @@ public class CreateDialog extends JDialog
     JPanel bilpanel = new JPanel();
     bilpanel.setForeground(Color.RED);
     bilpanel.setBackground(Color.BLACK);
-    this.setSize( 600, 333 );
-    
     GridBagLayout gbl_bilpanel = new GridBagLayout();
     gbl_bilpanel.columnWidths = new int[]{0, 0, 0};
     gbl_bilpanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
     gbl_bilpanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
     gbl_bilpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     bilpanel.setLayout(gbl_bilpanel);
+    contentPanel.add( bilpanel, BorderLayout.CENTER );
+    this.setTitle( "Indtast biloplysninger" );
     
     JLabel lblOverskrift = new JLabel("Bil");
     lblOverskrift.setForeground(Color.RED);
@@ -544,7 +565,60 @@ public class CreateDialog extends JDialog
     gbc_bemærkningField.gridy = 6;
     bilpanel.add(bemærkningField, gbc_bemærkningField);
     bemærkningField.setColumns(10);
-
+    
+    buttonString = "Indtast betingelser";
+    
+    JPanel buttonpanel = ButtonPanel();
+    GridBagConstraints gbc_newpanel = new GridBagConstraints();
+    gbc_newpanel.insets = new Insets(0, 0, 5, 0);
+    gbc_newpanel.fill = GridBagConstraints.BOTH;
+    gbc_newpanel.gridx = 1;
+    gbc_newpanel.gridy = 9;
+    bilpanel.add(buttonpanel, gbc_newpanel);
+    
+    backButton.addActionListener( event ->
+    {
+      contentPanel.remove( bilpanel );
+      contentPanel.add(KundePanel(), BorderLayout.CENTER );
+      
+      cpridField.setText( "" + kunde.getCprid() );
+      navnField.setText( kunde.getNavn() );
+      adresseField.setText( kunde.getAdresse() );
+      telefonField.setText( kunde.getTelefonnummer() );
+      postnrField.setText( kunde.getPostnummer() );
+      emailField.setText( kunde.getEmail() );
+      kommentarField.setText( kunde.getKommentar() );
+      
+      contentPanel.repaint();
+      
+    });
+    
+    forwardButton.addActionListener( event ->
+    {
+      bil.setChassisnummer( chassisnummerField.getText() );
+      bil.setRegistreringsnummer( regnummerField.getText() );
+      bil.setPris( Double.parseDouble( prisField.getText() ) );
+      bil.setModel( modelField.getText() );
+      bil.setÅrgang( årgangField.getText() );
+      bil.setBemærkninger( bemærkningField.getText() );
+      
+      BilLogik bl = new BilLogik();
+      try
+      {
+        bl.createBil( bil );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      contentPanel.remove( bilpanel );
+      contentPanel.add( LånebetingelserPanel(), BorderLayout.CENTER );
+      contentPanel.repaint();
+    });
+    
+    this.setSize( 600, 333 );
+    bilpanel.setVisible( true );
     return bilpanel;
   }
   
@@ -562,6 +636,7 @@ public class CreateDialog extends JDialog
     gbl_lbpanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
     gbl_lbpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     lbpanel.setLayout(gbl_lbpanel);
+    contentPanel.add( lbpanel, BorderLayout.CENTER );
 
       JLabel lblIndtastLnebetingelser = new JLabel("Indtast lånebetingelser");
       lblIndtastLnebetingelser.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -581,7 +656,7 @@ public class CreateDialog extends JDialog
       gbc_kundelabel.gridy = 2;
       lbpanel.add(kundelabel, gbc_kundelabel);
 
-      JTextField kundeField = new JTextField();
+      kundeField = new JTextField();
       kundeField.setMinimumSize(new Dimension(100, 20));
       kundeField.setEditable(false);
       GridBagConstraints gbc_textField_2 = new GridBagConstraints();
@@ -601,7 +676,7 @@ public class CreateDialog extends JDialog
       gbc_rentelabel.gridy = 3;
       lbpanel.add(rentelabel, gbc_rentelabel);
 
-      JTextField renteField = new JTextField();
+      renteField = new JTextField();
       renteField.setMinimumSize(new Dimension(100, 20));
       renteField.setEditable(false);
       GridBagConstraints gbc_textField_3 = new GridBagConstraints();
@@ -621,7 +696,7 @@ public class CreateDialog extends JDialog
       gbc_beløblabel.gridy = 4;
       lbpanel.add(beløblabel, gbc_beløblabel);
 
-      JTextField beløbField = new JTextField();
+      beløbField = new JTextField();
       beløbField.setMinimumSize(new Dimension(100, 20));
       beløbField.setEditable(false);
       GridBagConstraints gbc_textField_4 = new GridBagConstraints();
@@ -641,7 +716,7 @@ public class CreateDialog extends JDialog
       gbc_udbetalinglabel.gridy = 5;
       lbpanel.add(udbetalinglabel, gbc_udbetalinglabel);
 
-      JTextField udbetalingField = new JTextField();
+      udbetalingField = new JTextField();
       udbetalingField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_5 = new GridBagConstraints();
       gbc_textField_5.anchor = GridBagConstraints.WEST;
@@ -661,6 +736,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(afviklingsperiodelabel, gbc_afviklingsperiodelabel);
 
       JComboBox comboBox = new JComboBox();
+      comboBox.setModel( new DefaultComboBoxModel( new String[] { "6", "12", "18", "24", "30", "36" } ) );
       
       GridBagConstraints gbc_comboBox = new GridBagConstraints();
       gbc_comboBox.anchor = GridBagConstraints.WEST;
@@ -678,7 +754,7 @@ public class CreateDialog extends JDialog
       gbc_førsteudbetalinglabel.gridy = 7;
       lbpanel.add(førsteudbetalinglabel, gbc_førsteudbetalinglabel);
 
-      JTextField førsteudbetalingField = new JTextField();
+      førsteudbetalingField = new JTextField();
       førsteudbetalingField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_7 = new GridBagConstraints();
       gbc_textField_7.anchor = GridBagConstraints.WEST;
@@ -697,7 +773,7 @@ public class CreateDialog extends JDialog
       gbc_chassisnummerlabel.gridy = 8;
       lbpanel.add(chassisnummerlabel, gbc_chassisnummerlabel);
 
-      JTextField chassisnummerField = new JTextField();
+      chassisnummerField = new JTextField();
       chassisnummerField.setMinimumSize(new Dimension(100, 20));
       chassisnummerField.setEditable(false);
       GridBagConstraints gbc_textField_8 = new GridBagConstraints();
@@ -717,7 +793,7 @@ public class CreateDialog extends JDialog
       gbc_sælgerlabel.gridy = 9;
       lbpanel.add(sælgerlabel, gbc_sælgerlabel);
 
-      JTextField sælgerField = new JTextField();
+      sælgerField = new JTextField();
       sælgerField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_9 = new GridBagConstraints();
       gbc_textField_9.anchor = GridBagConstraints.WEST;
@@ -736,7 +812,7 @@ public class CreateDialog extends JDialog
       gbc_datolabel.gridy = 10;
       lbpanel.add(datolabel, gbc_datolabel);
 
-      JTextField datoField = new JTextField();
+      datoField = new JTextField();
       datoField.setMinimumSize(new Dimension(50, 20));
       datoField.setPreferredSize(new Dimension(50, 20));
       GridBagConstraints gbc_textField_10 = new GridBagConstraints();
@@ -746,6 +822,8 @@ public class CreateDialog extends JDialog
       lbpanel.add(datoField, gbc_textField_10);
       datoField.setColumns(10);
       
+      buttonString = "Opret Lånetilbud";
+      
       JPanel buttonpanel = ButtonPanel();
       GridBagConstraints gbc_buttonpanel = new GridBagConstraints();
       gbc_buttonpanel.anchor = GridBagConstraints.WEST;
@@ -753,7 +831,52 @@ public class CreateDialog extends JDialog
       gbc_buttonpanel.gridy = 10;
       lbpanel.add(buttonpanel, gbc_buttonpanel);
       
-
+      
+      
+      backButton.addActionListener( event ->
+      {
+        contentPanel.remove( lbpanel );
+        contentPanel.add(BilPanel(), BorderLayout.CENTER );
+        
+        chassisnummerField.setText( bil.getChassisnummer() );
+        regnummerField.setText( bil.getRegistreringsnummer() );
+        prisField.setText( "" + bil.getPris() );
+        modelField.setText( bil.getModel() );
+        årgangField.setText( bil.getÅrgang() );
+        bemærkningField.setText( bil.getBemærkninger() );
+        
+        contentPanel.repaint();
+        
+      });
+      
+      forwardButton.addActionListener( event ->
+      {
+        SælgerLogik sl = new SælgerLogik();
+        
+        aftale.setBeløb( Double.parseDouble( beløbField.getText() ) );
+        aftale.setUdbetaling( Double.parseDouble( udbetalingField.getText() ) );
+        aftale.setRente( Double.parseDouble( renteField.getText() ) );
+        aftale.setAfviklingsperiode( Integer.parseInt( (String) comboBox.getSelectedItem() ) );
+        aftale.setOprettelsesdato( datoField.getText() );
+        aftale.setSælgerid( Integer.parseInt( sælgerField.getText() ) );
+        aftale.setChassisnummer( bil.getChassisnummer() );
+        aftale.setCprid( Integer.parseInt( cpridField.getText() ) );
+        
+        FinansieringsaftaleLogik fal = new FinansieringsaftaleLogik();
+        try
+        {
+          fal.createFinansieringsaftale( aftale );
+        }
+        catch ( Exception e )
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog( this, "" );
+        
+      });      
+      
+    this.setSize( 600, 333 );
     return lbpanel;
   }
   
@@ -767,7 +890,7 @@ public class CreateDialog extends JDialog
     backButton = new JButton("Tilbage");
     buttonpanel.add(backButton);
     
-    forwardButton = new JButton("Indtast lånebetingelser");
+    forwardButton = new JButton(buttonString);
     buttonpanel.add( forwardButton );
     
     return buttonpanel;

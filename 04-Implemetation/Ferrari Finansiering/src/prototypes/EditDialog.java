@@ -1,7 +1,6 @@
 package prototypes;
 
 import java.awt.*;
-import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -20,9 +19,6 @@ public class EditDialog extends JDialog
   private final JPanel contentPanel;
   
   private JPanel editbuttonpanel;
-//  private JPanel newbuttonpanel;
-//  
-//  private JTextField returnField;
   
   private JTextField chassisnummerField;
   private JTextField regnummerField;
@@ -32,7 +28,6 @@ public class EditDialog extends JDialog
   private JTextField bemærkningField;
   
   private JTextField cpridField;
-//  private JTextField cprnummerField;
   private JTextField navnField;
   private JTextField adresseField;
   private JTextField telefonField;
@@ -51,21 +46,13 @@ public class EditDialog extends JDialog
   private JTextField oprettelsesdatoField;
   
   private JButton deleteButton;
-//  private JButton editButton;
-//  private JButton NyKundeButton;
   private JButton okButton;
-//  private JButton backButton;
-//  private JButton forwardButton;
-//  
-//  private Kunde kunde = null;
-//  private String kreditværdighed;
   
   
   
   public EditDialog()
   {
     this.setLocation( 400, 200 );
-//    this.setSize( 600, 445 );
     
     contentPanel = new JPanel();
     setBackground(Color.BLACK);
@@ -76,18 +63,8 @@ public class EditDialog extends JDialog
     setContentPane(contentPanel);
     contentPanel.setLayout(new BorderLayout(0, 0));
     
-    
-//    JPanel toppanel = LogoPanel();
-//    contentPanel.add(toppanel, BorderLayout.NORTH);
-    
     JPanel toppanel2 = LogoPanel2();
     contentPanel.add(toppanel2, BorderLayout.EAST);
-    
-//  JPanel cprpanel = CprPanel();
-//  contentPanel.add(cprpanel, BorderLayout.CENTER);
-  
-//    JPanel lbpanel = LånebetingelserPanel();
-//    contentPanel.add(lbpanel, BorderLayout.CENTER);
     
 //    JPanel bilpanel = BilPanel();
 //    contentPanel.add(bilpanel, BorderLayout.CENTER);
@@ -173,334 +150,8 @@ public class EditDialog extends JDialog
     label2.setMaximumSize( new Dimension( 1000, 500 ) );
     logopanel2.add( label2 );
     
-    // JLabel lblNewLabel = new JLabel("New label");
-    // contentPane.add(lblNewLabel, BorderLayout.EAST);
-    
     return logopanel2;
   }
-  
-  
-//  /*
-//   * Mangler actionListeners, og måske lidt layout
-//   */
-//  public JPanel CprPanel()
-//  {
-//    JPanel cprpanel = new JPanel();
-//    cprpanel.setForeground(new Color(150, 0, 0));
-//    cprpanel.setBackground(Color.BLACK);
-//    GridBagLayout gbl_cprpanel = new GridBagLayout();
-//    gbl_cprpanel.columnWidths = new int[]{0, 0, 0, 0};
-//    gbl_cprpanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//    gbl_cprpanel.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
-//    gbl_cprpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-//    cprpanel.setLayout(gbl_cprpanel);
-// 
-//      JLabel lblIndtastKundensCprnummer = new JLabel("Indtast Cpr-Nummer");
-//      lblIndtastKundensCprnummer.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//      lblIndtastKundensCprnummer.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_lblIndtastKundensCprnummer = new GridBagConstraints();
-//      gbc_lblIndtastKundensCprnummer.insets = new Insets(0, 0, 5, 5);
-//      gbc_lblIndtastKundensCprnummer.gridx = 1;
-//      gbc_lblIndtastKundensCprnummer.gridy = 0;
-//      cprpanel.add(lblIndtastKundensCprnummer, gbc_lblIndtastKundensCprnummer);
-//
-//      JLabel lblNewLabel = new JLabel("New label");
-//      lblNewLabel.setVisible(false);
-//      GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-//      gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_lblNewLabel.gridx = 0;
-//      gbc_lblNewLabel.gridy = 1;
-//      cprpanel.add(lblNewLabel, gbc_lblNewLabel);
-//
-//      JLabel lblNewLabel_1 = new JLabel("New label");
-//      lblNewLabel_1.setVisible(false);
-//      GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-//      gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-//      gbc_lblNewLabel_1.gridx = 0;
-//      gbc_lblNewLabel_1.gridy = 2;
-//      cprpanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-//
-//      JLabel lblCprnummer = new JLabel("Cpr-nummer:");
-//      lblCprnummer.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_lblCprnummer = new GridBagConstraints();
-//      gbc_lblCprnummer.anchor = GridBagConstraints.EAST;
-//      gbc_lblCprnummer.insets = new Insets(0, 0, 5, 5);
-//      gbc_lblCprnummer.gridx = 0;
-//      gbc_lblCprnummer.gridy = 3;
-//      cprpanel.add(lblCprnummer, gbc_lblCprnummer);
-//
-//      cprnummerField = new JTextField();
-//      GridBagConstraints gbc_textField = new GridBagConstraints();
-//      gbc_textField.insets = new Insets(0, 0, 5, 5);
-//      gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-//      gbc_textField.gridx = 1;
-//      gbc_textField.gridy = 3;
-//      cprpanel.add(cprnummerField, gbc_textField);
-//      cprnummerField.setColumns(10);
-//      
-//      JButton button = new JButton("Hent Kreditværdighed");
-//      GridBagConstraints gbc_button = new GridBagConstraints();
-//      gbc_button.anchor = GridBagConstraints.WEST;
-//      gbc_button.insets = new Insets(0, 0, 5, 0);
-//      gbc_button.gridx = 2;
-//      gbc_button.gridy = 3;
-//      button.addActionListener( event -> 
-//      {
-//        kunde = new Kunde();
-//        kunde.setCprnummer( cprnummerField.getText() );
-//        LåneberegningsLogik lblogic = new LåneberegningsLogik();
-//        kreditværdighed = lblogic.getKreditVærdighed( kunde.getCprnummer() );
-//        returnField.setText(kreditværdighed);
-//        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
-//        {
-//          NyKundeButton.setVisible( true );
-//        }
-//        cprpanel.repaint();
-//        
-//      });
-//      cprpanel.add(button, gbc_button);
-//      
-//      JLabel label = new JLabel("(10 cifre. Ingen tegn eller mellemrum)");
-//      label.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_label = new GridBagConstraints();
-//      gbc_label.insets = new Insets(0, 0, 5, 5);
-//      gbc_label.gridx = 1;
-//      gbc_label.gridy = 4;
-//      cprpanel.add(label, gbc_label);
-//      
-//      JLabel label_1 = new JLabel("Kundens kreditværdighed er:");
-//      label_1.setForeground(new Color(150, 0, 0));
-//      label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-//      GridBagConstraints gbc_label_1 = new GridBagConstraints();
-//      gbc_label_1.anchor = GridBagConstraints.EAST;
-//      gbc_label_1.insets = new Insets(0, 0, 5, 5);
-//      gbc_label_1.gridx = 1;
-//      gbc_label_1.gridy = 7;
-//      cprpanel.add(label_1, gbc_label_1);
-//      
-//      returnField = new JTextField();
-//      returnField.setEditable(false);
-//      returnField.setColumns(10);
-//      GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-//      gbc_textField_1.anchor = GridBagConstraints.WEST;
-//      gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_1.gridx = 2;
-//      gbc_textField_1.gridy = 7;
-//      cprpanel.add(returnField, gbc_textField_1);
-//      
-//      NyKundeButton = new JButton("Opret Kunde");
-//      GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-//      gbc_btnNewButton.anchor = GridBagConstraints.EAST;
-//      gbc_btnNewButton.gridx = 2;
-//      gbc_btnNewButton.gridy = 10;
-//      NyKundeButton.addActionListener( event -> 
-//      {
-//        
-//        contentPanel.remove( cprpanel );
-//        contentPanel.add( KundePanel(), BorderLayout.CENTER );
-//        contentPanel.repaint();
-//        
-//      });
-//      NyKundeButton.setEnabled( false );
-//      cprpanel.add(NyKundeButton, gbc_btnNewButton);
-//
-//      
-//    return cprpanel;
-//  }
-  
-  /*
-   * Er langt fra færdig!
-   */
-//  private JPanel LånebetingelserPanel()
-//  {
-//    JPanel lbpanel = new JPanel();
-//    lbpanel.setBackground(Color.BLACK);
-//    GridBagLayout gbl_lbpanel = new GridBagLayout();
-//    gbl_lbpanel.columnWidths = new int[]{0, 0, 0};
-//    gbl_lbpanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//    gbl_lbpanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-//    gbl_lbpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-//    lbpanel.setLayout(gbl_lbpanel);
-//
-//      JLabel lblIndtastLnebetingelser = new JLabel("Indtast lånebetingelser");
-//      lblIndtastLnebetingelser.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//      lblIndtastLnebetingelser.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_lblIndtastLnebetingelser = new GridBagConstraints();
-//      gbc_lblIndtastLnebetingelser.insets = new Insets(0, 0, 5, 0);
-//      gbc_lblIndtastLnebetingelser.gridx = 1;
-//      gbc_lblIndtastLnebetingelser.gridy = 0;
-//      lbpanel.add(lblIndtastLnebetingelser, gbc_lblIndtastLnebetingelser);
-//
-//      JLabel kundelabel = new JLabel("Kundens Navn:");
-//      kundelabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_kundelabel = new GridBagConstraints();
-//      gbc_kundelabel.anchor = GridBagConstraints.EAST;
-//      gbc_kundelabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_kundelabel.gridx = 0;
-//      gbc_kundelabel.gridy = 2;
-//      lbpanel.add(kundelabel, gbc_kundelabel);
-//
-//      JTextField kundeField = new JTextField();
-//      kundeField.setEditable(false);
-//      GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-//      gbc_textField_2.anchor = GridBagConstraints.WEST;
-//      gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_2.gridx = 1;
-//      gbc_textField_2.gridy = 2;
-//      lbpanel.add(kundeField, gbc_textField_2);
-//      kundeField.setColumns(10);
-//      
-//      JLabel rentelabel = new JLabel("Rente:");
-//      rentelabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_rentelabel = new GridBagConstraints();
-//      gbc_rentelabel.anchor = GridBagConstraints.EAST;
-//      gbc_rentelabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_rentelabel.gridx = 0;
-//      gbc_rentelabel.gridy = 3;
-//      lbpanel.add(rentelabel, gbc_rentelabel);
-//
-//      JTextField renteField = new JTextField();
-//      renteField.setEditable(false);
-//      GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-//      gbc_textField_3.anchor = GridBagConstraints.WEST;
-//      gbc_textField_3.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_3.gridx = 1;
-//      gbc_textField_3.gridy = 3;
-//      lbpanel.add(renteField, gbc_textField_3);
-//      renteField.setColumns(10);
-//
-//      JLabel beløblabel = new JLabel("Beløb:");
-//      beløblabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_beløblabel = new GridBagConstraints();
-//      gbc_beløblabel.anchor = GridBagConstraints.EAST;
-//      gbc_beløblabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_beløblabel.gridx = 0;
-//      gbc_beløblabel.gridy = 4;
-//      lbpanel.add(beløblabel, gbc_beløblabel);
-//
-//      JTextField beløbField = new JTextField();
-//      beløbField.setEditable(false);
-//      GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-//      gbc_textField_4.anchor = GridBagConstraints.WEST;
-//      gbc_textField_4.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_4.gridx = 1;
-//      gbc_textField_4.gridy = 4;
-//      lbpanel.add(beløbField, gbc_textField_4);
-//      beløbField.setColumns(10);
-//
-//      JLabel udbetalinglabel = new JLabel("Udbetaling:");
-//      udbetalinglabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_udbetalinglabel = new GridBagConstraints();
-//      gbc_udbetalinglabel.anchor = GridBagConstraints.EAST;
-//      gbc_udbetalinglabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_udbetalinglabel.gridx = 0;
-//      gbc_udbetalinglabel.gridy = 5;
-//      lbpanel.add(udbetalinglabel, gbc_udbetalinglabel);
-//
-//      JTextField udbetalingField = new JTextField();
-//      GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-//      gbc_textField_5.anchor = GridBagConstraints.WEST;
-//      gbc_textField_5.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_5.gridx = 1;
-//      gbc_textField_5.gridy = 5;
-//      lbpanel.add(udbetalingField, gbc_textField_5);
-//      udbetalingField.setColumns(10);
-//
-//      JLabel afviklingsperiodelabel = new JLabel("Afviklingsperiode:");
-//      afviklingsperiodelabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_afviklingsperiodelabel = new GridBagConstraints();
-//      gbc_afviklingsperiodelabel.anchor = GridBagConstraints.EAST;
-//      gbc_afviklingsperiodelabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_afviklingsperiodelabel.gridx = 0;
-//      gbc_afviklingsperiodelabel.gridy = 6;
-//      lbpanel.add(afviklingsperiodelabel, gbc_afviklingsperiodelabel);
-//
-//      JComboBox comboBox = new JComboBox();
-//      GridBagConstraints gbc_comboBox = new GridBagConstraints();
-//      gbc_comboBox.anchor = GridBagConstraints.WEST;
-//      gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-//      gbc_comboBox.gridx = 1;
-//      gbc_comboBox.gridy = 6;
-//      lbpanel.add(comboBox, gbc_comboBox);
-//
-//      JLabel førsteudbetalinglabel = new JLabel("Første Afbetaling:");
-//      førsteudbetalinglabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_førsteudbetalinglabel = new GridBagConstraints();
-//      gbc_førsteudbetalinglabel.anchor = GridBagConstraints.EAST;
-//      gbc_førsteudbetalinglabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_førsteudbetalinglabel.gridx = 0;
-//      gbc_førsteudbetalinglabel.gridy = 7;
-//      lbpanel.add(førsteudbetalinglabel, gbc_førsteudbetalinglabel);
-//
-//      JTextField førsteudbetalingField = new JTextField();
-//      GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-//      gbc_textField_7.anchor = GridBagConstraints.WEST;
-//      gbc_textField_7.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_7.gridx = 1;
-//      gbc_textField_7.gridy = 7;
-//      lbpanel.add(førsteudbetalingField, gbc_textField_7);
-//      førsteudbetalingField.setColumns(10);
-//
-//      JLabel chassisnummerlabel = new JLabel("Chassis-Nummer:");
-//      chassisnummerlabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_chassisnummerlabel = new GridBagConstraints();
-//      gbc_chassisnummerlabel.anchor = GridBagConstraints.EAST;
-//      gbc_chassisnummerlabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_chassisnummerlabel.gridx = 0;
-//      gbc_chassisnummerlabel.gridy = 8;
-//      lbpanel.add(chassisnummerlabel, gbc_chassisnummerlabel);
-//
-//      JTextField chassisnummerField = new JTextField();
-//      chassisnummerField.setEditable(false);
-//      GridBagConstraints gbc_textField_8 = new GridBagConstraints();
-//      gbc_textField_8.anchor = GridBagConstraints.WEST;
-//      gbc_textField_8.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_8.gridx = 1;
-//      gbc_textField_8.gridy = 8;
-//      lbpanel.add(chassisnummerField, gbc_textField_8);
-//      chassisnummerField.setColumns(10);
-//
-//      JLabel sælgerlabel = new JLabel("Sælger:");
-//      sælgerlabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_sælgerlabel = new GridBagConstraints();
-//      gbc_sælgerlabel.anchor = GridBagConstraints.EAST;
-//      gbc_sælgerlabel.insets = new Insets(0, 0, 5, 5);
-//      gbc_sælgerlabel.gridx = 0;
-//      gbc_sælgerlabel.gridy = 9;
-//      lbpanel.add(sælgerlabel, gbc_sælgerlabel);
-//
-//      JTextField sælgerField = new JTextField();
-//      GridBagConstraints gbc_textField_9 = new GridBagConstraints();
-//      gbc_textField_9.anchor = GridBagConstraints.WEST;
-//      gbc_textField_9.insets = new Insets(0, 0, 5, 0);
-//      gbc_textField_9.gridx = 1;
-//      gbc_textField_9.gridy = 9;
-//      lbpanel.add(sælgerField, gbc_textField_9);
-//      sælgerField.setColumns(10);
-//
-//      JLabel datolabel = new JLabel("Dato:");
-//      datolabel.setForeground(new Color(150, 0, 0));
-//      GridBagConstraints gbc_datolabel = new GridBagConstraints();
-//      gbc_datolabel.anchor = GridBagConstraints.EAST;
-//      gbc_datolabel.insets = new Insets(0, 0, 0, 5);
-//      gbc_datolabel.gridx = 0;
-//      gbc_datolabel.gridy = 10;
-//      lbpanel.add(datolabel, gbc_datolabel);
-//
-//      JTextField datoField = new JTextField();
-//      GridBagConstraints gbc_textField_10 = new GridBagConstraints();
-//      gbc_textField_10.anchor = GridBagConstraints.WEST;
-//      gbc_textField_10.gridx = 1;
-//      gbc_textField_10.gridy = 10;
-//      lbpanel.add(datoField, gbc_textField_10);
-//      datoField.setColumns(10);
-//
-//    
-//    
-//    
-//    
-//    return lbpanel;
-//  }
   
   
   public JPanel KundePanel()
@@ -700,50 +351,6 @@ public class EditDialog extends JDialog
       this.dispose();
     });
     
-    
-//    JPanel newpanel = NewButtonPanel();
-//    GridBagConstraints gbc_newpanel = new GridBagConstraints();
-//    gbc_newpanel.insets = new Insets(0, 0, 5, 0);
-//    gbc_newpanel.fill = GridBagConstraints.BOTH;
-//    gbc_newpanel.gridx = 1;
-//    gbc_newpanel.gridy = 9;
-//    kundepanel.add(newpanel, gbc_newpanel);
-//    
-//    backButton.addActionListener( event ->
-//    {
-//      contentPanel.remove( kundepanel );
-//      contentPanel.add(CprPanel(), BorderLayout.CENTER );
-//      cprnummerField.setText( kunde.getCprnummer() );
-//      contentPanel.repaint();
-//      
-//    });
-//    
-//    forwardButton.addActionListener( event ->
-//    {
-//      kunde.setNavn( navnField.getText() );
-//      kunde.setAdresse( adresseField.getText() );
-//      kunde.setPostnummer( postnrField.getText() );
-//      kunde.setTelefonnummer( telefonField.getText() );
-//      kunde.setEmail( emailField.getText() );
-//      kunde.setKommentar( kommentarField.getText() );
-//      
-//      KundeLogik kl = new KundeLogik();
-//      try
-//      {
-//        kl.createKunde( kunde );
-//      }
-//      catch ( Exception e )
-//      {
-//        // TODO Auto-generated catch block
-//        e.printStackTrace();
-//      }
-//      
-//      contentPanel.remove( kundepanel );
-//      contentPanel.add( LånebetingelserPanel(), BorderLayout.CENTER );
-//      contentPanel.repaint();
-//      
-//    });
-    
     return kundepanel;
   }
 
@@ -803,7 +410,51 @@ public class EditDialog extends JDialog
     gbc_sælgernavnField.gridy = 2;
     sælgerpanel.add(sælgernavnField, gbc_sælgernavnField);
     sælgernavnField.setColumns(10);
+    
+    
+    JPanel panel = EditButtonPanel();
+    panel.setBackground(Color.BLACK);
+    GridBagConstraints gbc_panel = new GridBagConstraints();
+    gbc_panel.insets = new Insets(0, 0, 5, 0);
+    gbc_panel.fill = GridBagConstraints.BOTH;
+    gbc_panel.gridx = 1;
+    gbc_panel.gridy = 3;
+    sælgerpanel.add(panel, gbc_panel);
+    
+    deleteButton.addActionListener( event -> 
+    {
+      SælgerLogik sl = new  SælgerLogik();
+      try
+      {
+        sl.deleteSælger( Integer.parseInt( sælgeridField.getText() ) );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
 
+    okButton.addActionListener( event -> 
+    {
+      Sælger sælger = new Sælger();
+      SælgerLogik sl = new SælgerLogik();
+      sælger.setSælgerid( Integer.parseInt( sælgeridField.getText() ) );
+      sælger.setSælgernavn( sælgernavnField.getText() );
+      try
+      {
+        sl.updateSælger( sælger );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
+    
+    
     return sælgerpanel;
   }
   
@@ -937,7 +588,54 @@ public class EditDialog extends JDialog
     gbc_bemærkningField.gridy = 6;
     bilpanel.add(bemærkningField, gbc_bemærkningField);
     bemærkningField.setColumns(10);
+    
+    
+    JPanel panel = EditButtonPanel();
+    panel.setBackground(Color.BLACK);
+    GridBagConstraints gbc_panel = new GridBagConstraints();
+    gbc_panel.insets = new Insets(0, 0, 5, 0);
+    gbc_panel.fill = GridBagConstraints.BOTH;
+    gbc_panel.gridx = 1;
+    gbc_panel.gridy = 7;
+    bilpanel.add(panel, gbc_panel);
 
+    deleteButton.addActionListener( event -> 
+    {
+      BilLogik bl = new  BilLogik();
+      try
+      {
+        bl.deleteBil( chassisnummerField.getText() );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
+
+    okButton.addActionListener( event -> 
+    {
+      Bil bil = new Bil();
+      BilLogik bl = new BilLogik();
+      bil.setChassisnummer( chassisnummerField.getText() );
+      bil.setRegistreringsnummer( regnummerField.getText() );
+      bil.setPris( Double.parseDouble( prisField.getText() ) );
+      bil.setModel( modelField.getText() );
+      bil.setÅrgang( årgangField.getText() );
+      bil.setBemærkninger( bemærkningField.getText() );
+      try
+      {
+        bl.updateBil( bil );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
+    
     return bilpanel;
   }
   
@@ -1162,30 +860,58 @@ public class EditDialog extends JDialog
     cpridField.setColumns(10);
     
     
+    JPanel panel = EditButtonPanel();
+    panel.setBackground(Color.BLACK);
+    GridBagConstraints gbc_panel = new GridBagConstraints();
+    gbc_panel.insets = new Insets(0, 0, 5, 0);
+    gbc_panel.fill = GridBagConstraints.BOTH;
+    gbc_panel.gridx = 1;
+    gbc_panel.gridy = 9;
+    aftalepanel.add(panel, gbc_panel);
+
+    deleteButton.addActionListener( event -> 
+    {
+      FinansieringsaftaleLogik fal = new  FinansieringsaftaleLogik();
+      try
+      {
+        fal.deleteFinansieringsaftale( Integer.parseInt( aftaleidField.getText() ) );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
+
+    okButton.addActionListener( event -> 
+    {
+      Finansieringsaftale aftale = new Finansieringsaftale();
+      FinansieringsaftaleLogik fal = new FinansieringsaftaleLogik();
+      aftale.setAftaleid( Integer.parseInt( aftaleidField.getText() ) );
+      aftale.setBeløb( Double.parseDouble( prisField.getText() ) );
+      aftale.setUdbetaling( Double.parseDouble( udbetalingField.getText() ) );
+      aftale.setRente( Double.parseDouble( renteField.getText() ) );
+      aftale.setAfviklingsperiode( Integer.parseInt( afviklingsperiodeField.getText() ) );
+      aftale.setOprettelsesdato( oprettelsesdatoField.getText() );
+      aftale.setSælgerid( Integer.parseInt( sælgeridField.getText() ) );
+      aftale.setChassisnummer( chassisnummerField.getText() );
+      aftale.setCprid( Integer.parseInt( cpridField.getText() ) );
+      try
+      {
+        fal.updateFinansieringsaftale( aftale );
+      }
+      catch ( Exception e )
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      this.dispose();
+    });
+    
     
     return aftalepanel;
   }
-  
-  
-  
-  
-//  private JPanel NewButtonPanel()
-//  {
-//    newbuttonpanel = new JPanel();
-//    newbuttonpanel.setBackground(Color.BLACK);
-//    newbuttonpanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-//    
-//    backButton = new JButton("Tilbage");
-//    newbuttonpanel.add(backButton);
-//    
-//    forwardButton = new JButton("Indtast lånebetingelser");
-//    newbuttonpanel.add( forwardButton );
-//    
-//    newbuttonpanel.setVisible( false );
-//    newbuttonpanel.setEnabled( false );
-//    
-//    return newbuttonpanel;
-//  }
   
   
   private JPanel EditButtonPanel()
