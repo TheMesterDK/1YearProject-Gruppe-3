@@ -4,6 +4,7 @@ import com.ferrari.finances.dk.bank.InterestRate;
 import com.ferrari.finances.dk.rki.CreditRator;
 
 
+
 public class APIConnection
 {
   

@@ -90,7 +90,7 @@ public class MainWindow extends JFrame
   /*
    * IKKE HELT FÆRDIG!
    * 
-   * Mangler ActionListener på "Opret Låneanmodning".
+   * ActionListener på "Opret Låneanmodning" fungerer ikke helt som den skal.
    */
   public JPanel SælgerMainPanel()
   {
@@ -109,7 +109,10 @@ public class MainWindow extends JFrame
     sælgerpanel.add( btnOpretLåneanmodning );
     btnOpretLåneanmodning.addActionListener( event ->
     {
-      new EditDialog().CprPanel();
+//      JPanel cp = new EditDialog().CprPanel();
+//      new EditDialog().add( cp, BorderLayout.CENTER );
+//      new EditDialog().add( CprPanel(),  );
+      
     } );
     JLabel label1 = new JLabel();
     label1.setText( " " );
