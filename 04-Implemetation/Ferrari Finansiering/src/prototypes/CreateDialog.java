@@ -46,7 +46,7 @@ public class CreateDialog extends JDialog
     setLocation( 400, 200 );
     setBackground(Color.BLACK);
     setDefaultCloseOperation( JDialog.DISPOSE_ON_CLOSE );
-    setBounds( 100, 100, 600, 336 );
+    setBounds( 100, 100, 600, 340 );
     contentPanel.setBorder( new EmptyBorder( 5, 5, 5, 5 ) );
     contentPanel.setBackground(Color.BLACK);
     setContentPane(contentPanel);
@@ -54,6 +54,13 @@ public class CreateDialog extends JDialog
     
     JPanel logopanel = LogoPanel();
     contentPanel.add(logopanel, BorderLayout.EAST);
+    
+//    JPanel cprpanel = CprPanel();
+//    contentPanel.add(cprpanel, BorderLayout.CENTER);
+    
+    JPanel lånepanel = LånebetingelserPanel();
+    contentPanel.add(lånepanel, BorderLayout.CENTER);
+    
     
     this.setVisible( true );
   }
@@ -144,6 +151,8 @@ public class CreateDialog extends JDialog
       gbc_button.insets = new Insets(0, 0, 5, 0);
       gbc_button.gridx = 2;
       gbc_button.gridy = 3;
+      
+// Nedenstående actionlistener fungerer ikke korrekt(Kreditværdigheden hentes ikke)!     
       button.addActionListener( event -> 
       {
         kunde = new Kunde();
@@ -151,10 +160,10 @@ public class CreateDialog extends JDialog
         LåneberegningsLogik lblogic = new LåneberegningsLogik();
         kreditværdighed = lblogic.getKreditVærdighed( kunde.getCprnummer() );
         returnField.setText(kreditværdighed);
-        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
-        {
-          NyKundeButton.setVisible( true );
-        }
+//        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
+//        {
+          NyKundeButton.setEnabled( true );
+//        }
         cprpanel.repaint();
         
       });
@@ -573,6 +582,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(kundelabel, gbc_kundelabel);
 
       JTextField kundeField = new JTextField();
+      kundeField.setMinimumSize(new Dimension(100, 20));
       kundeField.setEditable(false);
       GridBagConstraints gbc_textField_2 = new GridBagConstraints();
       gbc_textField_2.anchor = GridBagConstraints.WEST;
@@ -592,6 +602,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(rentelabel, gbc_rentelabel);
 
       JTextField renteField = new JTextField();
+      renteField.setMinimumSize(new Dimension(100, 20));
       renteField.setEditable(false);
       GridBagConstraints gbc_textField_3 = new GridBagConstraints();
       gbc_textField_3.anchor = GridBagConstraints.WEST;
@@ -611,6 +622,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(beløblabel, gbc_beløblabel);
 
       JTextField beløbField = new JTextField();
+      beløbField.setMinimumSize(new Dimension(100, 20));
       beløbField.setEditable(false);
       GridBagConstraints gbc_textField_4 = new GridBagConstraints();
       gbc_textField_4.anchor = GridBagConstraints.WEST;
@@ -630,6 +642,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(udbetalinglabel, gbc_udbetalinglabel);
 
       JTextField udbetalingField = new JTextField();
+      udbetalingField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_5 = new GridBagConstraints();
       gbc_textField_5.anchor = GridBagConstraints.WEST;
       gbc_textField_5.insets = new Insets(0, 0, 5, 0);
@@ -648,6 +661,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(afviklingsperiodelabel, gbc_afviklingsperiodelabel);
 
       JComboBox comboBox = new JComboBox();
+      
       GridBagConstraints gbc_comboBox = new GridBagConstraints();
       gbc_comboBox.anchor = GridBagConstraints.WEST;
       gbc_comboBox.insets = new Insets(0, 0, 5, 0);
@@ -665,6 +679,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(førsteudbetalinglabel, gbc_førsteudbetalinglabel);
 
       JTextField førsteudbetalingField = new JTextField();
+      førsteudbetalingField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_7 = new GridBagConstraints();
       gbc_textField_7.anchor = GridBagConstraints.WEST;
       gbc_textField_7.insets = new Insets(0, 0, 5, 0);
@@ -683,6 +698,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(chassisnummerlabel, gbc_chassisnummerlabel);
 
       JTextField chassisnummerField = new JTextField();
+      chassisnummerField.setMinimumSize(new Dimension(100, 20));
       chassisnummerField.setEditable(false);
       GridBagConstraints gbc_textField_8 = new GridBagConstraints();
       gbc_textField_8.anchor = GridBagConstraints.WEST;
@@ -702,6 +718,7 @@ public class CreateDialog extends JDialog
       lbpanel.add(sælgerlabel, gbc_sælgerlabel);
 
       JTextField sælgerField = new JTextField();
+      sælgerField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_9 = new GridBagConstraints();
       gbc_textField_9.anchor = GridBagConstraints.WEST;
       gbc_textField_9.insets = new Insets(0, 0, 5, 0);
@@ -720,17 +737,23 @@ public class CreateDialog extends JDialog
       lbpanel.add(datolabel, gbc_datolabel);
 
       JTextField datoField = new JTextField();
+      datoField.setMinimumSize(new Dimension(50, 20));
+      datoField.setPreferredSize(new Dimension(50, 20));
       GridBagConstraints gbc_textField_10 = new GridBagConstraints();
       gbc_textField_10.anchor = GridBagConstraints.WEST;
       gbc_textField_10.gridx = 1;
       gbc_textField_10.gridy = 10;
       lbpanel.add(datoField, gbc_textField_10);
       datoField.setColumns(10);
+      
+      JPanel buttonpanel = ButtonPanel();
+      GridBagConstraints gbc_buttonpanel = new GridBagConstraints();
+      gbc_buttonpanel.anchor = GridBagConstraints.WEST;
+      gbc_buttonpanel.gridx = 2;
+      gbc_buttonpanel.gridy = 10;
+      lbpanel.add(buttonpanel, gbc_buttonpanel);
+      
 
-    
-    
-    
-    
     return lbpanel;
   }
   
@@ -746,9 +769,6 @@ public class CreateDialog extends JDialog
     
     forwardButton = new JButton("Indtast lånebetingelser");
     buttonpanel.add( forwardButton );
-    
-    buttonpanel.setVisible( false );
-    buttonpanel.setEnabled( false );
     
     return buttonpanel;
   }

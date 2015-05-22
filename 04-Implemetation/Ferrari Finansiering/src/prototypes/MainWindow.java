@@ -112,6 +112,7 @@ public class MainWindow extends JFrame
 //      JPanel cp = new EditDialog().CprPanel();
 //      new EditDialog().add( cp, BorderLayout.CENTER );
 //      new EditDialog().add( CprPanel(),  );
+      new CreateDialog();
       
     } );
     JLabel label1 = new JLabel();
