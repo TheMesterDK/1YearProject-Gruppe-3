@@ -186,8 +186,11 @@ public class KreditværdighedDialog extends JDialog
       gbc_btnNewButton.gridy = 10;
       NyKundeButton.addActionListener( event -> 
       {
-        kunde = new Kunde();
-        kunde.setCprnummer( cprnummerField.getText() );
+//        kunde = new Kunde();
+//        kunde.setCprnummer( cprnummerField.getText() );
+        
+        this.dispose();
+        new OpretkundeDialog(cprnummerField.getText());
         
         
         

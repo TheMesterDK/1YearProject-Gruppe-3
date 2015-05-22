@@ -40,8 +40,9 @@ public class OpretbilDialog extends JDialog
   private JButton forwardButton;
 
   
-  public OpretbilDialog()
+  public OpretbilDialog(Kunde kunde)
   {
+    this.kunde = kunde;
     contentPanel = new JPanel();
     setLocation( 400, 200 );
     setBackground(Color.BLACK);
@@ -64,9 +65,9 @@ public class OpretbilDialog extends JDialog
   }
   
   
-  public OpretbilDialog(Bil bil, Kunde kunde)
+  public OpretbilDialog(Kunde kunde, Bil bil)
   {
-    this();
+    this(kunde);
     this.bil = bil;
     this.kunde = kunde;
     
@@ -258,7 +259,8 @@ public class OpretbilDialog extends JDialog
     
     backButton.addActionListener( event ->
     {
-      
+      this.dispose();
+      new OpretkundeDialog(kunde);
       
     });
     
@@ -285,7 +287,8 @@ public class OpretbilDialog extends JDialog
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-      
+      this.dispose();
+      new OpretlåneaftaleDialog(kunde, bil);
     });
     
     

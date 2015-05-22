@@ -39,8 +39,10 @@ public class OpretkundeDialog extends JDialog
   private JButton forwardButton;
   
   
-  public OpretkundeDialog()
+  public OpretkundeDialog(String cprnummer)
   {
+    kunde = new Kunde();
+    kunde.setCprnummer( cprnummer );
     contentPanel = new JPanel();
     setLocation( 400, 200 );
     setBackground(Color.BLACK);
@@ -64,9 +66,9 @@ public class OpretkundeDialog extends JDialog
   
   public OpretkundeDialog(Kunde kunde)
   {
-    this();
+    this(kunde.getCprnummer());
     this.kunde = kunde;
-
+    
     navnField.setText( kunde.getNavn() );
     adresseField.setText( kunde.getAdresse() );
     telefonField.setText( kunde.getTelefonnummer() );
@@ -303,7 +305,8 @@ public class OpretkundeDialog extends JDialog
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-      
+      this.dispose();
+      new OpretbilDialog(kunde);
       
       
     });

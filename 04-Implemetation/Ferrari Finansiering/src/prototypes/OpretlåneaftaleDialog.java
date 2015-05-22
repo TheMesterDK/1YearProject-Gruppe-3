@@ -1,11 +1,13 @@
 package prototypes;
 
 import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.border.*;
 
 import domain.Bil;
 import domain.Finansieringsaftale;
+import domain.Kunde;
 import logic.FinansieringsaftaleLogik;
 import logic.SælgerLogik;
 
@@ -16,6 +18,7 @@ public class OpretlåneaftaleDialog extends JDialog
   
   private Finansieringsaftale aftale = null;
   private Bil bil = null;
+  private Kunde kunde = null;
   
   private JTextField afviklingsperiodeField;
   private JTextField sælgerField;
@@ -31,8 +34,11 @@ public class OpretlåneaftaleDialog extends JDialog
   private JButton forwardButton;
   
 
-  public OpretlåneaftaleDialog()
+  public OpretlåneaftaleDialog(Kunde kunde, Bil bil)
   {
+    this.kunde = kunde;
+    this.bil = bil;
+    
     contentPanel = new JPanel();
     setLocation( 400, 200 );
     setBackground(Color.BLACK);
@@ -302,7 +308,8 @@ public class OpretlåneaftaleDialog extends JDialog
     
     backButton.addActionListener( event ->
     {
-
+      this.dispose();
+      new OpretbilDialog(kunde, bil);
       
     });
     
@@ -332,7 +339,8 @@ public class OpretlåneaftaleDialog extends JDialog
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-//      JOptionPane.showMessageDialog( this, "" );
+      this.dispose();
+      JOptionPane.showMessageDialog( this, "Låneaftalen er oprettet" );
       
     });      
     
