@@ -11,9 +11,12 @@ import domain.Kunde;
 
 public class KundeAccess
 {
-  private static final String SELECT = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar FROM kunde WHERE cprid = ?";
-  private static final String INSERT = "INSERT INTO kunde(cprid, navn, adresse, telefonnummer, postnummer, email, kommentar) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  private static final String SELECTCPRNUMMER = "SELECT cprnummer, cprid FROM cprnummer WHERE cprid = ? OR cprnummer = ?";
+  private static final String SELECTKUNDE = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar FROM kunde WHERE cprid = ?";
+  private static final String INSERTCPRNUMMER = "INSERT INTO cprnummer(cprnummer) VALUES(?)";
+  private static final String INSERTKUNDE = "INSERT INTO kunde(cprid, navn, adresse, telefonnummer, postnummer, email, kommentar) VALUES (?, ?, ?, ?, ?, ?, ?)";
   private static final String UPDATE = "UPDATE kunde SET navn = ?, adresse = ?, telefonnummer = ?, postnummer = ?, email = ?, kommentar = ? WHERE cprid = ?";
+  private static final String DELETE = "DELETE FROM cprnummer WHERE cprid = ?";
   
   
   public KundeAccess()
@@ -45,21 +48,35 @@ public class KundeAccess
   public void createKunde(Connection connection, Kunde kunde) throws SQLException
   {
     PreparedStatement statement = null;
+    ResultSet resultset = null;
     try
     {
-      statement = connection.prepareStatement( INSERT );
-      statement.setInt( 1, kunde.getCprid() );
-      statement.setString( 2, kunde.getNavn() );
-      statement.setString( 3, kunde.getAdresse() );
-      statement.setString( 4, kunde.getTelefonnummer() );
-      statement.setString( 5, kunde.getPostnummer() );
-      statement.setString( 6, kunde.getEmail() );
-      statement.setString( 7, kunde.getKommentar() );
+      statement = connection.prepareStatement( INSERTCPRNUMMER, PreparedStatement.RETURN_GENERATED_KEYS );
+      statement.setString( 1, kunde.getCprnummer() );
       statement.execute();
-      connection.commit();
+      resultset = statement.getGeneratedKeys();
+      statement.close();
+      if ( resultset.next() )
+      {
+        statement = connection.prepareStatement( INSERTKUNDE );
+        statement.setInt( 1, resultset.getInt( 1 ) );
+        statement.setString( 2, kunde.getNavn() );
+        statement.setString( 3, kunde.getAdresse() );
+        statement.setString( 4, kunde.getTelefonnummer() );
+        statement.setString( 5, kunde.getPostnummer() );
+        statement.setString( 6, kunde.getEmail() );
+        statement.setString( 7, kunde.getKommentar() );
+        statement.execute();
+        connection.commit();
+      }
+      
     }
     finally
     {
+      if ( resultset != null )
+      {
+        resultset.close();
+      }
       if ( statement != null )
       {
         statement.close();
@@ -72,6 +89,94 @@ public class KundeAccess
   /*
    * Read
    */
+  public String readCprnummer( int cprid ) throws SQLException
+  {
+    Connection connection = null;
+    try
+    {
+      connection = new DbConnection().getConnection();
+      return readCprnummer( connection, cprid );
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+ 
+  public String readCprnummer( Connection connection, int cprid ) throws SQLException
+  {
+    PreparedStatement statement = null;
+    ResultSet resultset = null;    
+    try
+    {
+      statement = connection.prepareStatement( SELECTCPRNUMMER );
+      statement.setInt( 1, cprid );
+      resultset = statement.executeQuery();
+      String cprnummer = new String();
+      while ( resultset.next() )
+      {
+      cprnummer = resultset.getString( "cprnummer" );
+      }
+      return cprnummer;
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+
+  public Kunde readCprnummer( String cprnummer ) throws SQLException
+  {
+    Connection connection = null;
+    try
+    {
+      connection = new DbConnection().getConnection();
+      return readCprnummer( connection, cprnummer );
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+//NEDENSTÅENDE ER IKKE FÆRDIG!!!  
+  public Kunde readCprnummer( Connection connection, String cprnummer ) throws SQLException
+  {
+    PreparedStatement statement = null;
+    ResultSet resultset = null;  
+    Kunde kunde = null;
+//    KundeAccess ka = new KundeAccess();
+    try
+    {
+      statement = connection.prepareStatement( SELECTCPRNUMMER );
+      statement.setString( 1, cprnummer );
+      resultset = statement.executeQuery();
+      kunde = new Kunde();
+      kunde.setCprnummer( cprnummer );
+      while ( resultset.next() )
+      {
+      kunde.setCprid( resultset.getInt( "cprid" ));
+      }
+      return kunde;
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+  
+  
   public Kunde readKunde(int cprid) throws SQLException
   {
     Connection connection = null;
@@ -96,7 +201,7 @@ public class KundeAccess
     Kunde kunde = null;
     try
     {
-      statement = connection.prepareStatement( SELECT );
+      statement = connection.prepareStatement( SELECTKUNDE );
       statement.setInt( 1, cprid );
       resultset = statement.executeQuery();
       kunde = new Kunde();
@@ -150,7 +255,6 @@ public class KundeAccess
     PreparedStatement statement = null;
     ResultSet resultset = null;
     List<Kunde> list = new ArrayList<>();
-    CprnummerAccess cpraccess = new CprnummerAccess();
     try
     {
       String SEARCH = "SELECT cprid ,navn, adresse, postnummer, telefonnummer, email, kommentar FROM kunde where " + searchitem + " LIKE ?";
@@ -237,9 +341,40 @@ public class KundeAccess
     /*
      * Delete
      */  
-//
-//   DeleteKunde er ikke nødvendig idet at et delete på cprid i CprnummerAccess
-//   vil cascade og delete tilhørende kunde.
-
+  public void deleteCprnummer( int cprid ) throws SQLException
+  {
+    Connection connection = null;
+    try
+    {
+      connection = new DbConnection().getConnection();
+      deleteCprnummer( connection, cprid );
+    }
+    finally
+    {
+      if ( connection != null )
+      {
+        connection.close();
+      }
+    }
+  }
+  
+  public void deleteCprnummer( Connection connection, int cprid ) throws SQLException
+  {
+    PreparedStatement statement = null;
+    try
+    {
+      statement = connection.prepareStatement( DELETE );
+      statement.setInt( 1, cprid );
+      statement.execute();
+      connection.commit();
+    }
+    finally
+    {
+      if ( statement != null )
+      {
+        statement.close();
+      }
+    }
+  }
 
 }

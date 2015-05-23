@@ -14,7 +14,6 @@ public class KreditværdighedDialog extends JDialog
   
   private final JPanel contentPanel;
   
-  private Kunde kunde = null;
   private JTextField returnField;
   private JTextField cprnummerField;
   private JButton NyKundeButton;

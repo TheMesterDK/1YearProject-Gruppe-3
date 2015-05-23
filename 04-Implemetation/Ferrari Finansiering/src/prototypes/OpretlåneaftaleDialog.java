@@ -318,7 +318,7 @@ public class OpretlåneaftaleDialog extends JDialog
     
     forwardButton.addActionListener( event ->
     {
-      SælgerLogik sl = new SælgerLogik();
+//      SælgerLogik sl = new SælgerLogik();
       
       aftale.setBeløb( Double.parseDouble( beløbField.getText() ) );
       aftale.setUdbetaling( Double.parseDouble( udbetalingField.getText() ) );

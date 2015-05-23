@@ -5,9 +5,9 @@ import java.util.List;
 
 import dataAccess.DbConnection;
 import dataAccess.KundeAccess;
-import dataAccess.CprnummerAccess;
 import domain.Kunde;
 import exceptions.KundeAllreadyExist;
+import exceptions.KundeDoesNotExist;
 
 
 public class KundeLogik
@@ -22,8 +22,8 @@ public class KundeLogik
     try
     {
       dbcon = new DbConnection();
-      CprnummerAccess cpraccess = new CprnummerAccess();
-      cpraccess.createCprnummer( kunde );
+      KundeAccess kundeaccess = new KundeAccess();
+      kundeaccess.createKunde( kunde );
     }
     catch ( Exception e )
     {
@@ -80,9 +80,9 @@ public class KundeLogik
     try
     {
       dbcon = new DbConnection();
-//    KundeAccess kundeaccess = new KundeAccess();
-      CprnummerAccess cpraccess = new CprnummerAccess();
-    Kunde kunde = cpraccess.readCprnummer( cprnummer );
+    KundeAccess kundeaccess = new KundeAccess();
+//      CprnummerAccess cpraccess = new CprnummerAccess();
+    Kunde kunde = kundeaccess.readCprnummer( cprnummer );
     
     return kunde;
     }
@@ -110,10 +110,10 @@ public class KundeLogik
     {
       dbcon = new DbConnection();
       KundeAccess kundeaccess = new KundeAccess();
-      if(searchitem == "cprnummer")
-      {
-        List<Kunde> list = kundeaccess.listKunder( searchitem, search );
-      }
+//      if(searchitem == "cprnummer")
+//      {
+//        List<Kunde> list = kundeaccess.listKunder( searchitem, search );
+//      }
       List<Kunde> list = kundeaccess.listKunder( searchitem, search );
       return list;
     }
@@ -140,7 +140,7 @@ public class KundeLogik
   /*
    * Update
    */
-  public void updateKunde(Kunde kunde) throws SQLException, KundeAllreadyExist
+  public void updateKunde(Kunde kunde) throws SQLException, KundeDoesNotExist
   {
     DbConnection dbcon = null;
     try
@@ -172,14 +172,14 @@ public class KundeLogik
     /*
      * Delete
      */  
-    public void deleteKunde(int cprid) throws SQLException, KundeAllreadyExist
+    public void deleteKunde(int cprid) throws SQLException, KundeDoesNotExist
     {
       DbConnection dbcon = null;
       try
       {
         dbcon = new DbConnection();
-      CprnummerAccess cpraccess = new CprnummerAccess();
-      cpraccess.deleteCprnummer( cprid );
+      KundeAccess kundeaccess = new KundeAccess();
+      kundeaccess.deleteCprnummer( cprid );
 //      dbcon.commit();
       }
       catch ( Exception e )
