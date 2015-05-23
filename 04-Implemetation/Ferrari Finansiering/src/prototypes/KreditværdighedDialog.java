@@ -6,12 +6,13 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import logic.LåneberegningsLogik;
-import domain.Kunde;
 
 
 public class KreditværdighedDialog extends JDialog
 {
   
+  private static final long serialVersionUID = 1L;
+
   private final JPanel contentPanel;
   
   private JTextField returnField;

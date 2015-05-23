@@ -9,11 +9,12 @@ import domain.Bil;
 import domain.Finansieringsaftale;
 import domain.Kunde;
 import logic.FinansieringsaftaleLogik;
-import logic.SælgerLogik;
 
 public class OpretlåneaftaleDialog extends JDialog
 {
-  
+
+  private static final long serialVersionUID = 1L;
+
   private final JPanel contentPanel;
   
   private Finansieringsaftale aftale = null;

@@ -23,6 +23,8 @@ import logic.KundeLogik;
 public class OpretkundeDialog extends JDialog
 {
   
+  private static final long serialVersionUID = 1L;
+
   private final JPanel contentPanel;
   
   private Kunde kunde = null;

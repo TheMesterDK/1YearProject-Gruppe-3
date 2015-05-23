@@ -2,7 +2,6 @@ package prototypes;
 
 
 import java.awt.*;
-import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,11 +14,13 @@ import logic.*;
 
 public class MainWindow extends JFrame
 {
+
+  private static final long serialVersionUID = 1L;
   private JPanel contentPane;
   private CustomTableModel model;
   private CustomTableRenderer table;
   private JTextField searchField;
-  private JComboBox comboBox;
+  private JComboBox<String> comboBox;
   private String comboString[];
   private String[] columnNames;
   private JButton redigerButton;
@@ -250,8 +251,8 @@ public class MainWindow extends JFrame
   {
     JPanel searchpanel = new JPanel();
     searchpanel.setBackground( Color.BLACK );
-    comboBox = new JComboBox();
-    comboBox.setModel( new DefaultComboBoxModel( comboString ) );
+    comboBox = new JComboBox<String>();
+    comboBox.setModel( new DefaultComboBoxModel<String>( comboString ) );
     searchpanel.add( comboBox );
 
     searchField = new JTextField();
@@ -281,12 +282,12 @@ public class MainWindow extends JFrame
     table.setRowSorter(new TableRowSorter<>(model));
     table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
     model.setColumnIdentifiers(columnNames);
-    int width = 0;
-    int frameHeight = 550;
-    for (int i = 0; i < table.getColumnCount() ; i++) 
-    {
-        width += table.getColumnModel().getColumn(i).getWidth();
-    }
+//    int width = 0;
+//    int frameHeight = 550;
+//    for (int i = 0; i < table.getColumnCount() ; i++) 
+//    {
+//        width += table.getColumnModel().getColumn(i).getWidth();
+//    }
     ListSelectionModel listSelectionModel = table.getSelectionModel();
     listSelectionModel.addListSelectionListener(e -> 
     {

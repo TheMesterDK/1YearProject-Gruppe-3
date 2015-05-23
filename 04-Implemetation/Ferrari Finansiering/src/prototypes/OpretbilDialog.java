@@ -24,6 +24,8 @@ import logic.BilLogik;
 public class OpretbilDialog extends JDialog
 {
   
+  private static final long serialVersionUID = 1L;
+
   private final JPanel contentPanel;
   
   private Bil bil = null;
