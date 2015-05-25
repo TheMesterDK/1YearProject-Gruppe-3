@@ -5,6 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import com.ferrari.finances.dk.rki.CreditRator;
+
 import logic.LåneberegningsLogik;
 
 
@@ -140,13 +142,19 @@ public class KreditværdighedDialog extends JDialog
 // Nedenstående actionlistener fungerer ikke korrekt(Kreditværdigheden hentes ikke)!     
       button.addActionListener( event -> 
       {
+
         LåneberegningsLogik lblogic = new LåneberegningsLogik();
         kreditværdighed = lblogic.getKreditVærdighed( cprnummerField.getText() );
         returnField.setText(kreditværdighed);
-//        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
-//        {
+        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C")
+        {
           NyKundeButton.setEnabled( true );
-//        }
+          returnField.setBackground( Color.GREEN );
+        }
+        else
+        {
+          returnField.setBackground( Color.RED );
+        }
         cprpanel.repaint();
       });
       cprpanel.add(button, gbc_button);
@@ -170,6 +178,8 @@ public class KreditværdighedDialog extends JDialog
       cprpanel.add(label_1, gbc_label_1);
       
       returnField = new JTextField();
+      returnField.setFont(new Font("Tahoma", Font.BOLD, 12));
+      returnField.setHorizontalAlignment(SwingConstants.CENTER);
       returnField.setEditable(false);
       returnField.setColumns(10);
       GridBagConstraints gbc_textField_1 = new GridBagConstraints();
@@ -190,7 +200,7 @@ public class KreditværdighedDialog extends JDialog
 //        kunde.setCprnummer( cprnummerField.getText() );
         
         this.dispose();
-        new OpretkundeDialog(cprnummerField.getText());
+        new OpretkundeDialog(cprnummerField.getText(), kreditværdighed);
         
         
         

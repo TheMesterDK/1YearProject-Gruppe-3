@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import domain.Kunde;
 import logic.KundeLogik;
+import javax.swing.SwingConstants;
 
 public class OpretkundeDialog extends JDialog
 {
@@ -41,10 +42,12 @@ public class OpretkundeDialog extends JDialog
   private JButton forwardButton;
   
   
-  public OpretkundeDialog(String cprnummer)
+
+  public OpretkundeDialog(String cprnummer, String kreditværdighed)
   {
     kunde = new Kunde();
     kunde.setCprnummer( cprnummer );
+    kunde.setKreditværdighed( kreditværdighed );
     contentPanel = new JPanel();
     setLocation( 400, 200 );
     setBackground(Color.BLACK);
@@ -68,7 +71,7 @@ public class OpretkundeDialog extends JDialog
   
   public OpretkundeDialog(Kunde kunde)
   {
-    this(kunde.getCprnummer());
+    this(kunde.getCprnummer(), kunde.getKreditværdighed());
     this.kunde = kunde;
     
     navnField.setText( kunde.getNavn() );
@@ -133,15 +136,16 @@ public class OpretkundeDialog extends JDialog
     gbc_label_6.gridy = 1;
     kundepanel.add(label_6, gbc_label_6);
     
-    cpridField = new JTextField(5);
+    cpridField = new JTextField();
+    cpridField.setEditable(false);
     cpridField.setBackground(new Color(192, 192, 192));
     GridBagConstraints gbc_cpridField = new GridBagConstraints();
-    gbc_cpridField.insets = new Insets(0, 0, 5, 0);
     gbc_cpridField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_cpridField.insets = new Insets(0, 0, 5, 0);
     gbc_cpridField.gridx = 1;
     gbc_cpridField.gridy = 1;
     kundepanel.add(cpridField, gbc_cpridField);
-    cpridField.setColumns(5);
+    cpridField.setColumns( 20 );
     
     JLabel label_5 = new JLabel("Navn:");
     label_5.setForeground(new Color(150, 0, 0));
@@ -154,12 +158,12 @@ public class OpretkundeDialog extends JDialog
     
     navnField = new JTextField();
     GridBagConstraints gbc_navnField = new GridBagConstraints();
-    gbc_navnField.insets = new Insets(0, 0, 5, 0);
     gbc_navnField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_navnField.insets = new Insets(0, 0, 5, 0);
     gbc_navnField.gridx = 1;
     gbc_navnField.gridy = 2;
     kundepanel.add(navnField, gbc_navnField);
-    navnField.setColumns(10);
+    navnField.setColumns(30);
     
     JLabel label_4 = new JLabel("Adresse:");
     label_4.setForeground(new Color(150, 0, 0));
@@ -172,8 +176,8 @@ public class OpretkundeDialog extends JDialog
     
     adresseField = new JTextField();
     GridBagConstraints gbc_adresseField = new GridBagConstraints();
-    gbc_adresseField.insets = new Insets(0, 0, 5, 0);
     gbc_adresseField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_adresseField.insets = new Insets(0, 0, 5, 0);
     gbc_adresseField.gridx = 1;
     gbc_adresseField.gridy = 3;
     kundepanel.add(adresseField, gbc_adresseField);
@@ -190,8 +194,8 @@ public class OpretkundeDialog extends JDialog
     
     telefonField = new JTextField();
     GridBagConstraints gbc_telefonField = new GridBagConstraints();
-    gbc_telefonField.insets = new Insets(0, 0, 5, 0);
     gbc_telefonField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_telefonField.insets = new Insets(0, 0, 5, 0);
     gbc_telefonField.gridx = 1;
     gbc_telefonField.gridy = 4;
     kundepanel.add(telefonField, gbc_telefonField);
@@ -208,8 +212,8 @@ public class OpretkundeDialog extends JDialog
     
     postnrField = new JTextField();
     GridBagConstraints gbc_postnrField = new GridBagConstraints();
-    gbc_postnrField.insets = new Insets(0, 0, 5, 0);
     gbc_postnrField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_postnrField.insets = new Insets(0, 0, 5, 0);
     gbc_postnrField.gridx = 1;
     gbc_postnrField.gridy = 5;
     kundepanel.add(postnrField, gbc_postnrField);
@@ -226,8 +230,8 @@ public class OpretkundeDialog extends JDialog
     
     emailField = new JTextField();
     GridBagConstraints gbc_emailField = new GridBagConstraints();
-    gbc_emailField.insets = new Insets(0, 0, 5, 0);
     gbc_emailField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_emailField.insets = new Insets(0, 0, 5, 0);
     gbc_emailField.gridx = 1;
     gbc_emailField.gridy = 6;
     kundepanel.add(emailField, gbc_emailField);
@@ -244,18 +248,19 @@ public class OpretkundeDialog extends JDialog
     
     kommentarField = new JTextField();
     GridBagConstraints gbc_kommentarField = new GridBagConstraints();
-    gbc_kommentarField.insets = new Insets(0, 0, 5, 0);
     gbc_kommentarField.fill = GridBagConstraints.HORIZONTAL;
+    gbc_kommentarField.insets = new Insets(0, 0, 5, 0);
     gbc_kommentarField.gridx = 1;
     gbc_kommentarField.gridy = 7;
     kundepanel.add(kommentarField, gbc_kommentarField);
-    kommentarField.setColumns(10);
+    kommentarField.setColumns(30);
     
     
     JPanel buttonpanel = ButtonPanel();
     GridBagConstraints gbc_newpanel = new GridBagConstraints();
+    gbc_newpanel.anchor = GridBagConstraints.EAST;
     gbc_newpanel.insets = new Insets(0, 0, 5, 0);
-    gbc_newpanel.fill = GridBagConstraints.BOTH;
+    gbc_newpanel.fill = GridBagConstraints.VERTICAL;
     gbc_newpanel.gridx = 1;
     gbc_newpanel.gridy = 9;
     kundepanel.add(buttonpanel, gbc_newpanel);
@@ -301,12 +306,14 @@ public class OpretkundeDialog extends JDialog
       try
       {
         kl.createKunde( kunde );
+        kunde = kl.readKunde( kunde.getCprnummer() ); 
       }
       catch ( Exception e )
       {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
+      
       this.dispose();
       new OpretbilDialog(kunde);
       

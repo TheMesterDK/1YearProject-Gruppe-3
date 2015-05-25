@@ -27,11 +27,22 @@ public class APIConnection
   {
     Thread kvthread = new Thread()
     {
+      @Override
       public void run()
       {
         kreditværdighed = getRKIKredit(cprnummer);
       }
     };
+    kvthread.start();
+   
+    try 
+    {
+      kvthread.join();
+    } 
+    catch (InterruptedException e1) 
+    {
+      System.out.println("Exception fra getKreditVærdighed");
+    }
     
     return kreditværdighed;
   }
@@ -41,11 +52,22 @@ public class APIConnection
   {
     Thread rentethread = new Thread()
     {
+      @Override
       public void run()
       {
         rente = getBankRente();
       }
     };
+    rentethread.start();
+    
+    try 
+    {
+      rentethread.join();
+    } 
+    catch (InterruptedException e1) 
+    {
+      System.out.println("Exception fra getRente");
+    }
     
     return rente;
   }

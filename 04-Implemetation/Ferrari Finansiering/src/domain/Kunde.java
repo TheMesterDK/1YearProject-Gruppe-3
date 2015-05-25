@@ -10,6 +10,7 @@ public class Kunde
   private String postnummer;
   private String email;
   private String kommentar;
+  private String kreditværdighed;
   
   
   public int getCprid()
@@ -100,6 +101,16 @@ public class Kunde
   }
 
   
+  public String getKreditværdighed()
+  {
+    return kreditværdighed;
+  }
+
+  public void setKreditværdighed( String kreditværdighed )
+  {
+    this.kreditværdighed = kreditværdighed;
+  }
+
   public String toString()
   {
     return "Kunde [cprid=" + cprid + ", cprnummer=" + cprnummer + ", navn=" + navn + ", adresse=" + adresse + ", telefonnummer=" + telefonnummer + ", postnummer=" + postnummer + ", email=" + email + ", kommentar=" + kommentar + "]";

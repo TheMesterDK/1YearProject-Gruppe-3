@@ -9,6 +9,7 @@ import domain.Bil;
 import domain.Finansieringsaftale;
 import domain.Kunde;
 import logic.FinansieringsaftaleLogik;
+import logic.LåneberegningsLogik;
 
 public class OpretlåneaftaleDialog extends JDialog
 {
@@ -28,7 +29,7 @@ public class OpretlåneaftaleDialog extends JDialog
   private JTextField udbetalingField;
   private JTextField beløbField;
   private JTextField renteField;
-  private JTextField kundeField;
+  private JTextField navnField;
   private JTextField chassisnummerField;
   
   private JButton backButton;
@@ -53,9 +54,17 @@ public class OpretlåneaftaleDialog extends JDialog
     JPanel logopanel = LogoPanel();
     contentPanel.add(logopanel, BorderLayout.EAST);
 
-    
     JPanel aftalepanel = LåneaftalePanel();
     contentPanel.add( aftalepanel, BorderLayout.CENTER );
+    
+    navnField.setText( kunde.getNavn() );
+    beløbField.setText( "" + bil.getPris() );
+    chassisnummerField.setText( bil.getChassisnummer() );
+    
+//    LåneberegningsLogik lblogic = new LåneberegningsLogik();
+//    double rente = lblogic.getRente();
+    
+//    renteField.setText(  );
     
     
     this.setVisible( true );
@@ -115,16 +124,16 @@ public class OpretlåneaftaleDialog extends JDialog
       gbc_kundelabel.gridy = 2;
       lbpanel.add(kundelabel, gbc_kundelabel);
 
-      kundeField = new JTextField();
-      kundeField.setMinimumSize(new Dimension(100, 20));
-      kundeField.setEditable(false);
+      navnField = new JTextField();
+      navnField.setMinimumSize(new Dimension(100, 20));
+      navnField.setEditable(false);
       GridBagConstraints gbc_textField_2 = new GridBagConstraints();
       gbc_textField_2.anchor = GridBagConstraints.WEST;
       gbc_textField_2.insets = new Insets(0, 0, 5, 5);
       gbc_textField_2.gridx = 1;
       gbc_textField_2.gridy = 2;
-      lbpanel.add(kundeField, gbc_textField_2);
-      kundeField.setColumns(10);
+      lbpanel.add(navnField, gbc_textField_2);
+      navnField.setColumns(25);
       
       JLabel rentelabel = new JLabel("Rente:");
       rentelabel.setForeground(new Color(150, 0, 0));
@@ -164,7 +173,7 @@ public class OpretlåneaftaleDialog extends JDialog
       gbc_textField_4.gridx = 1;
       gbc_textField_4.gridy = 4;
       lbpanel.add(beløbField, gbc_textField_4);
-      beløbField.setColumns(10);
+      beløbField.setColumns(15);
 
       JLabel udbetalinglabel = new JLabel("Udbetaling:");
       udbetalinglabel.setForeground(new Color(150, 0, 0));
@@ -183,7 +192,7 @@ public class OpretlåneaftaleDialog extends JDialog
       gbc_textField_5.gridx = 1;
       gbc_textField_5.gridy = 5;
       lbpanel.add(udbetalingField, gbc_textField_5);
-      udbetalingField.setColumns(10);
+      udbetalingField.setColumns(15);
 
       JLabel afviklingsperiodelabel = new JLabel("Afviklingsperiode:");
       afviklingsperiodelabel.setForeground(new Color(150, 0, 0));
@@ -220,7 +229,7 @@ public class OpretlåneaftaleDialog extends JDialog
       gbc_textField_7.gridx = 1;
       gbc_textField_7.gridy = 7;
       lbpanel.add(førsteudbetalingField, gbc_textField_7);
-      førsteudbetalingField.setColumns(10);
+      førsteudbetalingField.setColumns(15);
 
       JLabel chassisnummerlabel = new JLabel("Chassis-Nummer:");
       chassisnummerlabel.setForeground(new Color(150, 0, 0));
@@ -240,7 +249,7 @@ public class OpretlåneaftaleDialog extends JDialog
       gbc_textField_8.gridx = 1;
       gbc_textField_8.gridy = 8;
       lbpanel.add(chassisnummerField, gbc_textField_8);
-      chassisnummerField.setColumns(10);
+      chassisnummerField.setColumns(20);
 
       JLabel sælgerlabel = new JLabel("Sælger:");
       sælgerlabel.setForeground(new Color(150, 0, 0));
@@ -259,7 +268,7 @@ public class OpretlåneaftaleDialog extends JDialog
       gbc_textField_9.gridx = 1;
       gbc_textField_9.gridy = 9;
       lbpanel.add(sælgerField, gbc_textField_9);
-      sælgerField.setColumns(10);
+      sælgerField.setColumns(20);
 
       JLabel datolabel = new JLabel("Dato:");
       datolabel.setForeground(new Color(150, 0, 0));
@@ -328,7 +337,7 @@ public class OpretlåneaftaleDialog extends JDialog
       aftale.setOprettelsesdato( datoField.getText() );
       aftale.setSælgerid( Integer.parseInt( sælgerField.getText() ) );
       aftale.setChassisnummer( bil.getChassisnummer() );
-      aftale.setCprid( Integer.parseInt( kundeField.getText() ) );
+      aftale.setCprid( Integer.parseInt( navnField.getText() ) );
       
       FinansieringsaftaleLogik fal = new FinansieringsaftaleLogik();
       try

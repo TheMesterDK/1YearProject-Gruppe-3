@@ -12,6 +12,7 @@ import domain.Kunde;
 public class KundeAccess
 {
   private static final String SELECTCPRNUMMER = "SELECT cprnummer, cprid FROM cprnummer WHERE cprid = ? OR cprnummer = ?";
+  private static final String SELECTCPRKUNDE = "SELECT cprnummer, cprnummer.cprid, navn, adresse, telefonnummer, postnummer, email, kommentar FROM cprnummer INNER JOIN kunde ON cprnummer.cprid = kunde.cprid WHERE cprnummer = ?";
   private static final String SELECTKUNDE = "SELECT navn, adresse, telefonnummer, postnummer, email, kommentar FROM kunde WHERE cprid = ?";
   private static final String INSERTCPRNUMMER = "INSERT INTO cprnummer(cprnummer) VALUES(?)";
   private static final String INSERTKUNDE = "INSERT INTO kunde(cprid, navn, adresse, telefonnummer, postnummer, email, kommentar) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -131,13 +132,13 @@ public class KundeAccess
     }
   }
 
-  public Kunde readCprnummer( String cprnummer ) throws SQLException
+  public Kunde readKunde( String cprnummer ) throws SQLException
   {
     Connection connection = null;
     try
     {
       connection = new DbConnection().getConnection();
-      return readCprnummer( connection, cprnummer );
+      return readKunde( connection, cprnummer );
     }
     finally
     {
@@ -147,16 +148,15 @@ public class KundeAccess
       }
     }
   }
-//NEDENSTÅENDE ER IKKE FÆRDIG!!!  
-  public Kunde readCprnummer( Connection connection, String cprnummer ) throws SQLException
+
+  public Kunde readKunde( Connection connection, String cprnummer ) throws SQLException
   {
     PreparedStatement statement = null;
     ResultSet resultset = null;  
     Kunde kunde = null;
-//    KundeAccess ka = new KundeAccess();
     try
     {
-      statement = connection.prepareStatement( SELECTCPRNUMMER );
+      statement = connection.prepareStatement( SELECTCPRKUNDE );
       statement.setString( 1, cprnummer );
       resultset = statement.executeQuery();
       kunde = new Kunde();
@@ -164,7 +164,14 @@ public class KundeAccess
       while ( resultset.next() )
       {
       kunde.setCprid( resultset.getInt( "cprid" ));
+      kunde.setNavn( resultset.getString( "navn" ) );
+      kunde.setAdresse( resultset.getString( "adresse" ) );
+      kunde.setPostnummer( resultset.getString( "postnummer" ) );
+      kunde.setTelefonnummer( resultset.getString( "telefonnummer" ) );
+      kunde.setEmail( resultset.getString( "email" ) );
+      kunde.setKommentar( resultset.getString( "kommentar" ) );
       }
+      
       return kunde;
     }
     finally

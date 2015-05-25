@@ -73,7 +73,7 @@ public class KundeLogik
       }
     }
   }
-// NEDENSTÅENDE ER ENDNU IKKE FÆRDIG!!!  
+  
   public Kunde readKunde(String cprnummer) throws SQLException
   {
     DbConnection dbcon = null;
@@ -81,8 +81,7 @@ public class KundeLogik
     {
       dbcon = new DbConnection();
     KundeAccess kundeaccess = new KundeAccess();
-//      CprnummerAccess cpraccess = new CprnummerAccess();
-    Kunde kunde = kundeaccess.readCprnummer( cprnummer );
+    Kunde kunde = kundeaccess.readKunde( cprnummer );
     
     return kunde;
     }

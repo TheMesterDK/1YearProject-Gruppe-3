@@ -42,6 +42,9 @@ public class OpretbilDialog extends JDialog
   private JButton forwardButton;
 
   
+  /**
+   * @wbp.parser.constructor
+   */
   public OpretbilDialog(Kunde kunde)
   {
     this.kunde = kunde;
@@ -142,7 +145,7 @@ public class OpretbilDialog extends JDialog
     gbc_chassisnummerField.gridx = 1;
     gbc_chassisnummerField.gridy = 1;
     bilpanel.add(chassisnummerField, gbc_chassisnummerField);
-    chassisnummerField.setColumns(10);
+    chassisnummerField.setColumns(20);
     
     JLabel lblRegNummer = new JLabel("Reg.-nummer:");
     lblRegNummer.setForeground(Color.RED);
@@ -160,7 +163,7 @@ public class OpretbilDialog extends JDialog
     gbc_regnummerField.gridx = 1;
     gbc_regnummerField.gridy = 2;
     bilpanel.add(regnummerField, gbc_regnummerField);
-    regnummerField.setColumns(10);
+    regnummerField.setColumns(20);
     
     JLabel lblPris = new JLabel("Pris:");
     lblPris.setForeground(Color.RED);
@@ -196,7 +199,7 @@ public class OpretbilDialog extends JDialog
     gbc_modelField.gridx = 1;
     gbc_modelField.gridy = 4;
     bilpanel.add(modelField, gbc_modelField);
-    modelField.setColumns(10);
+    modelField.setColumns(20);
     
     JLabel lblrgang = new JLabel("årgang:");
     lblrgang.setForeground(Color.RED);
@@ -231,13 +234,14 @@ public class OpretbilDialog extends JDialog
     gbc_bemærkningField.gridx = 1;
     gbc_bemærkningField.gridy = 6;
     bilpanel.add(bemærkningField, gbc_bemærkningField);
-    bemærkningField.setColumns(10);
+    bemærkningField.setColumns(35);
     
     
     JPanel buttonpanel = ButtonPanel();
     GridBagConstraints gbc_newpanel = new GridBagConstraints();
+    gbc_newpanel.anchor = GridBagConstraints.EAST;
     gbc_newpanel.insets = new Insets(0, 0, 5, 0);
-    gbc_newpanel.fill = GridBagConstraints.BOTH;
+    gbc_newpanel.fill = GridBagConstraints.VERTICAL;
     gbc_newpanel.gridx = 1;
     gbc_newpanel.gridy = 9;
     bilpanel.add(buttonpanel, gbc_newpanel);

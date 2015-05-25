@@ -11,6 +11,10 @@ public class Finansieringsaftale
   private double rente;
   private int afviklingsperiode;
   private String oprettelsesdato;
+  private String førsteafbetalingdato;
+  private String sidsteafbetalingdato;
+  private double afdragsbeløb;
+  private double sidsteafdragsbeløb;
   
   
   public int getAftaleid()
@@ -112,10 +116,47 @@ public class Finansieringsaftale
   }
 
   
-  @Override
-  public String toString()
+  public String getFørsteafbetalingdato()
   {
-    return "Finansieringsaftale [aftaleid=" + aftaleid + ", cprid=" + cprid + ", sælgerid=" + sælgerid + ", chassisnummer=" + chassisnummer + ", beløb=" + beløb + ", udbetaling=" + udbetaling + ", rente=" + rente + ", afviklingsperiode=" + afviklingsperiode + ", oprettelsesdato=" + oprettelsesdato + "]";
+    return førsteafbetalingdato;
+  }
+
+  public void setFørsteafbetalingdato( String førsteafbetalingdato )
+  {
+    this.førsteafbetalingdato = førsteafbetalingdato;
+  }
+
+  
+  public String getSidsteafbetalingdato()
+  {
+    return sidsteafbetalingdato;
+  }
+
+  public void setSidsteafbetalingdato( String sidsteafbetalingdato )
+  {
+    this.sidsteafbetalingdato = sidsteafbetalingdato;
+  }
+
+  
+  public double getAfdragsbeløb()
+  {
+    return afdragsbeløb;
+  }
+
+  public void setAfdragsbeløb( double afdragsbeløb )
+  {
+    this.afdragsbeløb = afdragsbeløb;
+  }
+
+  
+  public double getSidsteafdragsbeløb()
+  {
+    return sidsteafdragsbeløb;
+  }
+
+  public void setSidsteafdragsbeløb( double sidsteafdragsbeløb )
+  {
+    this.sidsteafdragsbeløb = sidsteafdragsbeløb;
   }
   
   
