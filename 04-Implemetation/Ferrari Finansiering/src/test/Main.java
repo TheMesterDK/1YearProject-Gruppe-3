@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import domain.*;
 import exceptions.KundeAllreadyExist;
+import presentation.MainWindow;
 import prototypes.*;
 import logic.*;
 

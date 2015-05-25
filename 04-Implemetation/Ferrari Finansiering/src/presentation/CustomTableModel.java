@@ -1,4 +1,4 @@
-package prototypes;
+package presentation;
 
 import javax.swing.table.DefaultTableModel;
 
