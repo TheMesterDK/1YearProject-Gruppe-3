@@ -12,9 +12,9 @@ public class Finansieringsaftale
   private int afviklingsperiode;
   private String oprettelsesdato;
   private String førsteafbetalingdato;
-  private String sidsteafbetalingdato;
   private double afdragsbeløb;
-  private double sidsteafdragsbeløb;
+  private double ekstraomkostninger;
+  private double åop;
   
   
   public int getAftaleid()
@@ -126,18 +126,6 @@ public class Finansieringsaftale
     this.førsteafbetalingdato = førsteafbetalingdato;
   }
 
-  
-  public String getSidsteafbetalingdato()
-  {
-    return sidsteafbetalingdato;
-  }
-
-  public void setSidsteafbetalingdato( String sidsteafbetalingdato )
-  {
-    this.sidsteafbetalingdato = sidsteafbetalingdato;
-  }
-
-  
   public double getAfdragsbeløb()
   {
     return afdragsbeløb;
@@ -147,17 +135,28 @@ public class Finansieringsaftale
   {
     this.afdragsbeløb = afdragsbeløb;
   }
-
   
-  public double getSidsteafdragsbeløb()
+  
+  public double getEkstraomkostninger()
   {
-    return sidsteafdragsbeløb;
+    return ekstraomkostninger;
   }
 
-  public void setSidsteafdragsbeløb( double sidsteafdragsbeløb )
+  public void setEkstraomkostninger( double ekstraomkostninger )
   {
-    this.sidsteafdragsbeløb = sidsteafdragsbeløb;
+    this.ekstraomkostninger = ekstraomkostninger;
   }
+
+  public double getÅop()
+  {
+    return åop;
+  }
+
+  public void setÅop( double åop )
+  {
+    this.åop = åop;
+  }
+  
   
   
 }

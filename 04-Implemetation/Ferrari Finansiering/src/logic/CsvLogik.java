@@ -10,17 +10,24 @@ public class CsvLogik
 {
   private static final String DELIMITER = ",";
   private static final String LINE_SEPARATOR = "\n";
-  private static final String OVERSKRIFT = "Finansieringsaftale-id,Cpr-nummer,Navn";
+  private static final String aftaleString = "Aftale-ID,Cpr-ID,Lånebeløb,Udbetaling,Afdragsbeløb,Afviklingsperiode,Rente,Oprettelsesdato,Første_Betaling_Dato,Sælger-ID,Chassisnummer,ÅOP";
+  private static final String låneplanString = "Betaling,År,Ydelse,Rentebeløb,Gældsnedskrivning,Restgæld";
   
-  public void writeCsvFile(Finansieringsaftale aftale, String placering )
+  
+  public void writeCsvFile(Finansieringsaftale aftale, String placering, String titel )
   {
     try
     {
-      BufferedWriter bw = new BufferedWriter(new FileWriter(placering));
-      bw.write( OVERSKRIFT );
+      BufferedWriter bw = new BufferedWriter(new FileWriter(new File(placering, titel)));
+      bw.write( aftaleString );
       bw.newLine();
       bw.write( format(aftale) );
+      bw.newLine();
+      bw.write( låneplanString );
+      bw.newLine();
+      bw.write( betalingsplan(aftale) );
       bw.flush();
+      
       bw.close();
     }
     catch ( IOException e )
@@ -30,41 +37,70 @@ public class CsvLogik
     }
 
     System.out.println( "CSV file was created successfully !!!" );
-    
   }
   
   
   private String format(Finansieringsaftale aftale)
   {
-    StringBuilder aftaleString = new StringBuilder();
-    aftaleString.append( aftale.getAftaleid() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getBeløb() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getUdbetaling() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getRente() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getAfviklingsperiode() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getOprettelsesdato() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getFørsteafbetalingdato() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getSidsteafbetalingdato() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getAfdragsbeløb() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getSidsteafdragsbeløb() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getSælgerid() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getChassisnummer() );
-    aftaleString.append( DELIMITER );
-    aftaleString.append( aftale.getCprid() );
-    aftaleString.append( LINE_SEPARATOR );
+    StringBuilder aString = new StringBuilder();
+    aString.append( aftale.getAftaleid() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getCprid() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getBeløb() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getUdbetaling() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getAfdragsbeløb() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getAfviklingsperiode() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getRente() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getOprettelsesdato() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getFørsteafbetalingdato() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getSælgerid() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getChassisnummer() );
+    aString.append( DELIMITER );
+    aString.append( aftale.getÅop() );
+    aString.append( LINE_SEPARATOR );
     
-    return aftaleString.toString();
+    return aString.toString();
+  }
+  
+  
+  /*
+   * IKKE TESTET
+   */
+  private String betalingsplan(Finansieringsaftale aftale)
+  {
+    double restgæld = aftale.getBeløb();
+    double rentebeløb = 0;
+    StringBuilder bpString = new StringBuilder();
+    for(int i=0; i<aftale.getAfviklingsperiode(); i++)
+    {
+      bpString.append( i );
+      bpString.append( DELIMITER );
+      bpString.append( i/12 );
+      bpString.append( DELIMITER );
+      bpString.append( aftale.getAfdragsbeløb() );
+      bpString.append( DELIMITER );
+      bpString.append( rentebeløb );
+      bpString.append( DELIMITER );
+      bpString.append( aftale.getAfdragsbeløb() - rentebeløb  );
+      bpString.append( DELIMITER );
+      bpString.append( restgæld );
+      bpString.append( LINE_SEPARATOR );
+      
+      rentebeløb = (restgæld * ((aftale.getRente()/100)/12));
+      restgæld = restgæld - (aftale.getAfdragsbeløb() - rentebeløb );
+    }
+    
+    
+    return bpString.toString();
   }
   
 }

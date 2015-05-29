@@ -31,9 +31,11 @@ public class OpretlåneaftaleDialog extends JDialog
   private JTextField renteField;
   private JTextField navnField;
   private JTextField chassisnummerField;
+  private JTextField afdragField;
   
   private JButton backButton;
   private JButton forwardButton;
+
   
 
   public OpretlåneaftaleDialog(Kunde kunde, Bil bil)
@@ -101,7 +103,7 @@ public class OpretlåneaftaleDialog extends JDialog
     GridBagLayout gbl_lbpanel = new GridBagLayout();
     gbl_lbpanel.columnWidths = new int[]{0, 0, 0};
     gbl_lbpanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    gbl_lbpanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+    gbl_lbpanel.columnWeights = new double[]{0.0, 1.0, 1.0};
     gbl_lbpanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
     lbpanel.setLayout(gbl_lbpanel);
     contentPanel.add( lbpanel, BorderLayout.CENTER );
@@ -128,7 +130,7 @@ public class OpretlåneaftaleDialog extends JDialog
       navnField.setMinimumSize(new Dimension(100, 20));
       navnField.setEditable(false);
       GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-      gbc_textField_2.anchor = GridBagConstraints.WEST;
+      gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_2.insets = new Insets(0, 0, 5, 5);
       gbc_textField_2.gridx = 1;
       gbc_textField_2.gridy = 2;
@@ -148,7 +150,7 @@ public class OpretlåneaftaleDialog extends JDialog
       renteField.setMinimumSize(new Dimension(100, 20));
       renteField.setEditable(false);
       GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-      gbc_textField_3.anchor = GridBagConstraints.WEST;
+      gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_3.insets = new Insets(0, 0, 5, 5);
       gbc_textField_3.gridx = 1;
       gbc_textField_3.gridy = 3;
@@ -168,7 +170,7 @@ public class OpretlåneaftaleDialog extends JDialog
       beløbField.setMinimumSize(new Dimension(100, 20));
       beløbField.setEditable(false);
       GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-      gbc_textField_4.anchor = GridBagConstraints.WEST;
+      gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_4.insets = new Insets(0, 0, 5, 5);
       gbc_textField_4.gridx = 1;
       gbc_textField_4.gridy = 4;
@@ -187,12 +189,22 @@ public class OpretlåneaftaleDialog extends JDialog
       udbetalingField = new JTextField();
       udbetalingField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-      gbc_textField_5.anchor = GridBagConstraints.WEST;
+      gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_5.insets = new Insets(0, 0, 5, 5);
       gbc_textField_5.gridx = 1;
       gbc_textField_5.gridy = 5;
       lbpanel.add(udbetalingField, gbc_textField_5);
       udbetalingField.setColumns(15);
+      
+      afdragField = new JTextField();
+      afdragField.setEditable(false);
+      GridBagConstraints gbc_afdragField = new GridBagConstraints();
+      gbc_afdragField.fill = GridBagConstraints.HORIZONTAL;
+      gbc_afdragField.insets = new Insets(0, 0, 5, 0);
+      gbc_afdragField.gridx = 2;
+      gbc_afdragField.gridy = 5;
+      lbpanel.add(afdragField, gbc_afdragField);
+      afdragField.setColumns(20);
 
       JLabel afviklingsperiodelabel = new JLabel("Afviklingsperiode:");
       afviklingsperiodelabel.setForeground(new Color(150, 0, 0));
@@ -205,14 +217,14 @@ public class OpretlåneaftaleDialog extends JDialog
       
       afviklingsperiodeField = new JTextField();
       GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-      gbc_textField_6.anchor = GridBagConstraints.WEST;
+      gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_6.insets = new Insets(0, 0, 5, 5);
       gbc_textField_6.gridx = 1;
       gbc_textField_6.gridy = 6;
       lbpanel.add(afviklingsperiodeField, gbc_textField_6);
       afviklingsperiodeField.setColumns(10);
 
-      JLabel førsteudbetalinglabel = new JLabel("Første Afbetaling:");
+      JLabel førsteudbetalinglabel = new JLabel("F\u00F8rste AfdragsDato:");
       førsteudbetalinglabel.setForeground(new Color(150, 0, 0));
       GridBagConstraints gbc_førsteudbetalinglabel = new GridBagConstraints();
       gbc_førsteudbetalinglabel.anchor = GridBagConstraints.EAST;
@@ -224,7 +236,7 @@ public class OpretlåneaftaleDialog extends JDialog
       førsteudbetalingField = new JTextField();
       førsteudbetalingField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-      gbc_textField_7.anchor = GridBagConstraints.WEST;
+      gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_7.insets = new Insets(0, 0, 5, 5);
       gbc_textField_7.gridx = 1;
       gbc_textField_7.gridy = 7;
@@ -244,7 +256,7 @@ public class OpretlåneaftaleDialog extends JDialog
       chassisnummerField.setMinimumSize(new Dimension(100, 20));
       chassisnummerField.setEditable(false);
       GridBagConstraints gbc_textField_8 = new GridBagConstraints();
-      gbc_textField_8.anchor = GridBagConstraints.WEST;
+      gbc_textField_8.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_8.insets = new Insets(0, 0, 5, 5);
       gbc_textField_8.gridx = 1;
       gbc_textField_8.gridy = 8;
@@ -263,13 +275,13 @@ public class OpretlåneaftaleDialog extends JDialog
       sælgerField = new JTextField();
       sælgerField.setMinimumSize(new Dimension(100, 20));
       GridBagConstraints gbc_textField_9 = new GridBagConstraints();
-      gbc_textField_9.anchor = GridBagConstraints.WEST;
+      gbc_textField_9.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_9.insets = new Insets(0, 0, 5, 5);
       gbc_textField_9.gridx = 1;
       gbc_textField_9.gridy = 9;
       lbpanel.add(sælgerField, gbc_textField_9);
       sælgerField.setColumns(20);
-
+ 
       JLabel datolabel = new JLabel("Dato:");
       datolabel.setForeground(new Color(150, 0, 0));
       GridBagConstraints gbc_datolabel = new GridBagConstraints();
@@ -284,7 +296,7 @@ public class OpretlåneaftaleDialog extends JDialog
       datoField.setPreferredSize(new Dimension(50, 20));
       GridBagConstraints gbc_textField_10 = new GridBagConstraints();
       gbc_textField_10.insets = new Insets(0, 0, 0, 5);
-      gbc_textField_10.anchor = GridBagConstraints.WEST;
+      gbc_textField_10.fill = GridBagConstraints.HORIZONTAL;
       gbc_textField_10.gridx = 1;
       gbc_textField_10.gridy = 10;
       lbpanel.add(datoField, gbc_textField_10);
@@ -299,10 +311,37 @@ public class OpretlåneaftaleDialog extends JDialog
       lbpanel.add(buttonpanel, gbc_buttonpanel);
       
       
+      JButton ltbutton = new JButton("Beregn lånetilbud");
+      GridBagConstraints gbc_button = new GridBagConstraints();
+      gbc_button.anchor = GridBagConstraints.WEST;
+      gbc_button.insets = new Insets(0, 0, 5, 0);
+      gbc_button.gridx = 2;
+      gbc_button.gridy = 8;
+      lbpanel.add(ltbutton, gbc_button);
+      ltbutton.addActionListener( event ->
+      {
+        
+      });
+      
+      
+      
+      JButton csvbutton = new JButton("Udskriv CSV-fil");
+      GridBagConstraints gbc_button_1 = new GridBagConstraints();
+      gbc_button_1.anchor = GridBagConstraints.WEST;
+      gbc_button_1.insets = new Insets(0, 0, 5, 0);
+      gbc_button_1.gridx = 2;
+      gbc_button_1.gridy = 9;
+      lbpanel.add(csvbutton, gbc_button_1);
+      csvbutton.addActionListener( event ->
+      {
+        
+      });
+
+      
       
 
       
-    this.setSize( 650, 340 );
+    this.setSize( 800, 340 );
     return lbpanel;
   }
   
@@ -328,13 +367,13 @@ public class OpretlåneaftaleDialog extends JDialog
     
     forwardButton.addActionListener( event ->
     {
-//      SælgerLogik sl = new SælgerLogik();
       
       aftale.setBeløb( Double.parseDouble( beløbField.getText() ) );
       aftale.setUdbetaling( Double.parseDouble( udbetalingField.getText() ) );
       aftale.setRente( Double.parseDouble( renteField.getText() ) );
       aftale.setAfviklingsperiode( Integer.parseInt( afviklingsperiodeField.getText() ) );
       aftale.setOprettelsesdato( datoField.getText() );
+      
       aftale.setSælgerid( Integer.parseInt( sælgerField.getText() ) );
       aftale.setChassisnummer( bil.getChassisnummer() );
       aftale.setCprid( Integer.parseInt( navnField.getText() ) );

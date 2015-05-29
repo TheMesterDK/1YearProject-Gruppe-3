@@ -1,4 +1,4 @@
-package test;
+package main;
 
 import java.sql.SQLException;
 
@@ -14,11 +14,7 @@ public class Main
   
   public static void main( String[] args ) throws SQLException, KundeAllreadyExist
   {
-    new MainWindow().SælgerMainPanel();
-//    KundeLogik kl = new KundeLogik();
-//    Kunde kunde = kl.readKunde( 20 );
-//    new EditDialog(kunde);
-    
+    new MainWindow().SælgerMainPanel();    
   }
   
 }

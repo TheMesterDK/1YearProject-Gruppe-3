@@ -49,18 +49,19 @@ public class KundeAccess
   public void createKunde(Connection connection, Kunde kunde) throws SQLException
   {
     PreparedStatement statement = null;
+    PreparedStatement statement1 = null;
     ResultSet resultset = null;
     try
     {
-      statement = connection.prepareStatement( INSERTCPRNUMMER, PreparedStatement.RETURN_GENERATED_KEYS );
-      statement.setString( 1, kunde.getCprnummer() );
-      statement.execute();
-      resultset = statement.getGeneratedKeys();
-      statement.close();
+      statement1 = connection.prepareStatement( INSERTCPRNUMMER, PreparedStatement.RETURN_GENERATED_KEYS );
+      statement1.setString( 1, kunde.getCprnummer() );
+      statement1.execute();
+      resultset = statement1.getGeneratedKeys();
       if ( resultset.next() )
       {
+        kunde.setCprid( resultset.getInt( 1 ) );
         statement = connection.prepareStatement( INSERTKUNDE );
-        statement.setInt( 1, resultset.getInt( 1 ) );
+        statement.setInt( 1, kunde.getCprid() );
         statement.setString( 2, kunde.getNavn() );
         statement.setString( 3, kunde.getAdresse() );
         statement.setString( 4, kunde.getTelefonnummer() );
@@ -69,7 +70,9 @@ public class KundeAccess
         statement.setString( 7, kunde.getKommentar() );
         statement.execute();
         connection.commit();
+//        createKunde( connection, kunde);
       }
+      connection.commit();
       
     }
     finally
@@ -83,8 +86,34 @@ public class KundeAccess
         statement.close();
       }
     }
-    
   }
+  
+//  public void createKunde(Connection connection, Kunde kunde) throws SQLException
+//  {
+//    PreparedStatement statement = null;
+//    try
+//    {
+//        statement = connection.prepareStatement( INSERTKUNDE );
+//        statement.setInt( 1, kunde.getCprid() );
+//        statement.setString( 2, kunde.getNavn() );
+//        statement.setString( 3, kunde.getAdresse() );
+//        statement.setString( 4, kunde.getTelefonnummer() );
+//        statement.setString( 5, kunde.getPostnummer() );
+//        statement.setString( 6, kunde.getEmail() );
+//        statement.setString( 7, kunde.getKommentar() );
+//        statement.execute();
+//        connection.commit();
+//      
+//    }
+//    finally
+//    {
+//      if ( statement != null )
+//      {
+//        statement.close();
+//      }
+//    }
+//    
+//  }
   
   
   /*

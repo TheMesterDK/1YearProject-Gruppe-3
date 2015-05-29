@@ -66,18 +66,6 @@ public class EditDialog extends JDialog
     JPanel toppanel2 = LogoPanel2();
     contentPanel.add(toppanel2, BorderLayout.EAST);
     
-//    JPanel bilpanel = BilPanel();
-//    contentPanel.add(bilpanel, BorderLayout.CENTER);
-    
-//  JPanel sælgerpanel = SælgerPanel();
-//  contentPanel.add(sælgerpanel, BorderLayout.CENTER);
-    
-//    JPanel kundepanel = KundePanel();
-//    contentPanel.add(kundepanel, BorderLayout.CENTER);
-    
-//  JPanel aftalepanel = FinansieringsaftalePanel();
-//  contentPanel.add(aftalepanel, BorderLayout.CENTER);
-    
     this.setVisible( true );
   }
   
@@ -930,9 +918,6 @@ public class EditDialog extends JDialog
     
     okButton = new JButton("OK");
     editbuttonpanel.add(okButton);
-
-    editbuttonpanel.setVisible( false );
-    editbuttonpanel.setEnabled( false );
       
     return editbuttonpanel;
   }

@@ -140,7 +140,7 @@ public class OpretbilDialog extends JDialog
     
     chassisnummerField = new JTextField();
     GridBagConstraints gbc_chassisnummerField = new GridBagConstraints();
-    gbc_chassisnummerField.anchor = GridBagConstraints.WEST;
+    gbc_chassisnummerField.fill = GridBagConstraints.HORIZONTAL;
     gbc_chassisnummerField.insets = new Insets(0, 0, 5, 0);
     gbc_chassisnummerField.gridx = 1;
     gbc_chassisnummerField.gridy = 1;
@@ -158,7 +158,7 @@ public class OpretbilDialog extends JDialog
     
     regnummerField = new JTextField();
     GridBagConstraints gbc_regnummerField = new GridBagConstraints();
-    gbc_regnummerField.anchor = GridBagConstraints.WEST;
+    gbc_regnummerField.fill = GridBagConstraints.HORIZONTAL;
     gbc_regnummerField.insets = new Insets(0, 0, 5, 0);
     gbc_regnummerField.gridx = 1;
     gbc_regnummerField.gridy = 2;
@@ -176,7 +176,7 @@ public class OpretbilDialog extends JDialog
     
     prisField = new JTextField();
     GridBagConstraints gbc_prisField = new GridBagConstraints();
-    gbc_prisField.anchor = GridBagConstraints.WEST;
+    gbc_prisField.fill = GridBagConstraints.HORIZONTAL;
     gbc_prisField.insets = new Insets(0, 0, 5, 0);
     gbc_prisField.gridx = 1;
     gbc_prisField.gridy = 3;
@@ -194,7 +194,7 @@ public class OpretbilDialog extends JDialog
     
     modelField = new JTextField();
     GridBagConstraints gbc_modelField = new GridBagConstraints();
-    gbc_modelField.anchor = GridBagConstraints.WEST;
+    gbc_modelField.fill = GridBagConstraints.HORIZONTAL;
     gbc_modelField.insets = new Insets(0, 0, 5, 0);
     gbc_modelField.gridx = 1;
     gbc_modelField.gridy = 4;
@@ -212,7 +212,7 @@ public class OpretbilDialog extends JDialog
     
     årgangField = new JTextField();
     GridBagConstraints gbc_årgangField = new GridBagConstraints();
-    gbc_årgangField.anchor = GridBagConstraints.WEST;
+    gbc_årgangField.fill = GridBagConstraints.HORIZONTAL;
     gbc_årgangField.insets = new Insets(0, 0, 5, 0);
     gbc_årgangField.gridx = 1;
     gbc_årgangField.gridy = 5;
@@ -230,7 +230,7 @@ public class OpretbilDialog extends JDialog
     
     bemærkningField = new JTextField();
     GridBagConstraints gbc_bemærkningField = new GridBagConstraints();
-    gbc_bemærkningField.anchor = GridBagConstraints.WEST;
+    gbc_bemærkningField.fill = GridBagConstraints.HORIZONTAL;
     gbc_bemærkningField.gridx = 1;
     gbc_bemærkningField.gridy = 6;
     bilpanel.add(bemærkningField, gbc_bemærkningField);
@@ -276,6 +276,7 @@ public class OpretbilDialog extends JDialog
     
     forwardButton.addActionListener( event ->
     {
+      bil = new Bil();
       bil.setChassisnummer( chassisnummerField.getText() );
       bil.setRegistreringsnummer( regnummerField.getText() );
       bil.setPris( Double.parseDouble( prisField.getText() ) );
