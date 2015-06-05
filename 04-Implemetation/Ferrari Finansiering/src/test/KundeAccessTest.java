@@ -1,12 +1,8 @@
 package test;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import domain.Kunde;
-import exceptions.*;
-import dataAccess.*;
-import logic.KundeLogik;
+import exceptions.KundeAllreadyExist;
 
 public class KundeAccessTest
 {

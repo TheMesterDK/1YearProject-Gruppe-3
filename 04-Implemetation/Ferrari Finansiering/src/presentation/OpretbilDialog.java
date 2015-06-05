@@ -17,9 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import logic.BilLogik;
 import domain.Bil;
 import domain.Kunde;
-import logic.BilLogik;
 
 public class OpretbilDialog extends JDialog
 {

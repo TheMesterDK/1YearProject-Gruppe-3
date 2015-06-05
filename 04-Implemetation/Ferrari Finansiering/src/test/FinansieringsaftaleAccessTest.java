@@ -1,10 +1,6 @@
 package test;
 
 import java.sql.SQLException;
-import java.util.List;
-
-import logic.FinansieringsaftaleLogik;
-import domain.Finansieringsaftale;
 
 
 public class FinansieringsaftaleAccessTest

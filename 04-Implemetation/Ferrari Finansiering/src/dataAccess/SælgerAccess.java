@@ -1,6 +1,9 @@
 package dataAccess;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import domain.Sælger;
 
@@ -8,7 +11,6 @@ import domain.Sælger;
 public class SælgerAccess
 {
   private static final String SELECT = "SELECT sælgernavn FROM sælger WHERE sælgerid = ?";
-  //  private static final String SELECT_MANY = "SELECT  FROM  WHERE ";
   private static final String INSERT = "INSERT INTO sælger(sælgernavn) VALUES (?)";
   private static final String UPDATE = "UPDATE sælger SET sælgernavn = ? WHERE sælgerid = ?";
   private static final String DELETE = "DELETE FROM sælger WHERE sælgerid = ?";
@@ -36,7 +38,6 @@ public class SælgerAccess
       if ( connection != null )
       {
         connection.close();
-        //        System.out.println("sælger, connection close");
       }
     }
   }
@@ -56,7 +57,6 @@ public class SælgerAccess
       if ( statement != null )
       {
         statement.close();
-        //        System.out.println("sælger, statement close");
       }
     }
   }

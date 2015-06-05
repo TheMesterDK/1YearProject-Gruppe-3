@@ -1,7 +1,7 @@
 package logic;
 
-import domain.*;
-import dataAccess.*;
+import dataAccess.APIConnection;
+import domain.Finansieringsaftale;
 
 
 public class LåneberegningsLogik
@@ -73,7 +73,8 @@ public class LåneberegningsLogik
    */
   private double beregnÅOP(Finansieringsaftale aftale)
   {
-    double åop = (100 * (((aftale.getAfdragsbeløb()*aftale.getAfviklingsperiode()) - aftale.getBeløb()) / aftale.getBeløb()));
+    double åop = (((aftale.getAfdragsbeløb()*aftale.getAfviklingsperiode())-aftale.getBeløb())/aftale.getBeløb())/(aftale.getAfviklingsperiode()*12);
+//    double åop = (100 * (((aftale.getAfdragsbeløb()*aftale.getAfviklingsperiode()) - aftale.getBeløb()) / aftale.getBeløb()));
     return åop;
   }
   

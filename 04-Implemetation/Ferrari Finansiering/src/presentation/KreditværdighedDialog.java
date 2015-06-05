@@ -1,11 +1,22 @@
 package presentation;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
-import javax.swing.border.*;
-
-import com.ferrari.finances.dk.rki.CreditRator;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import logic.LåneberegningsLogik;
 
@@ -139,7 +150,7 @@ public class KreditværdighedDialog extends JDialog
       gbc_button.gridx = 2;
       gbc_button.gridy = 3;
       
-// Nedenstående actionlistener fungerer ikke korrekt(Kreditværdigheden hentes ikke)!     
+    
       button.addActionListener( event -> 
       {
 
@@ -195,15 +206,10 @@ public class KreditværdighedDialog extends JDialog
       gbc_btnNewButton.gridx = 2;
       gbc_btnNewButton.gridy = 10;
       NyKundeButton.addActionListener( event -> 
-      {
-//        kunde = new Kunde();
-//        kunde.setCprnummer( cprnummerField.getText() );
-        
+      {        
         this.dispose();
         new OpretkundeDialog(cprnummerField.getText(), kreditværdighed);
-        
-        
-        
+
       });
       NyKundeButton.setEnabled( false );
       cprpanel.add(NyKundeButton, gbc_btnNewButton);

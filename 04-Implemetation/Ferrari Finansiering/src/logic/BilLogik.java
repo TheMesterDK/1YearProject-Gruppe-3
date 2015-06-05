@@ -3,8 +3,8 @@ package logic;
 import java.sql.SQLException;
 import java.util.List;
 
-import dataAccess.DbConnection;
 import dataAccess.BilAccess;
+import dataAccess.DbConnection;
 import domain.Bil;
 
 

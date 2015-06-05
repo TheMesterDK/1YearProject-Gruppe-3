@@ -1,15 +1,28 @@
 package presentation;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+import logic.FinansieringsaftaleLogik;
+import logic.LåneberegningsLogik;
 import domain.Bil;
 import domain.Finansieringsaftale;
 import domain.Kunde;
-import logic.FinansieringsaftaleLogik;
-import logic.LåneberegningsLogik;
 
 public class OpretlåneaftaleDialog extends JDialog
 {
@@ -62,11 +75,7 @@ public class OpretlåneaftaleDialog extends JDialog
     navnField.setText( kunde.getNavn() );
     beløbField.setText( "" + bil.getPris() );
     chassisnummerField.setText( bil.getChassisnummer() );
-    
-//    LåneberegningsLogik lblogic = new LåneberegningsLogik();
-//    double rente = lblogic.getRente();
-    
-//    renteField.setText(  );
+
     
     
     this.setVisible( true );
@@ -311,6 +320,19 @@ public class OpretlåneaftaleDialog extends JDialog
       lbpanel.add(buttonpanel, gbc_buttonpanel);
       
       
+      
+      JButton csvbutton = new JButton("Udskriv CSV-fil");
+      csvbutton.setEnabled( false );
+      GridBagConstraints gbc_button_1 = new GridBagConstraints();
+      gbc_button_1.anchor = GridBagConstraints.WEST;
+      gbc_button_1.insets = new Insets(0, 0, 5, 0);
+      gbc_button_1.gridx = 2;
+      gbc_button_1.gridy = 9;
+      lbpanel.add(csvbutton, gbc_button_1);
+      csvbutton.addActionListener( event -> new CsvDialog(aftale));
+      
+      
+      
       JButton ltbutton = new JButton("Beregn lånetilbud");
       GridBagConstraints gbc_button = new GridBagConstraints();
       gbc_button.anchor = GridBagConstraints.WEST;
@@ -320,22 +342,14 @@ public class OpretlåneaftaleDialog extends JDialog
       lbpanel.add(ltbutton, gbc_button);
       ltbutton.addActionListener( event ->
       {
-        
+        LåneberegningsLogik lbl = new LåneberegningsLogik();
+        aftale = lbl.beregnTilbud( kunde.getKreditværdighed(), aftale );
+        renteField.setText( "" + aftale.getRente() );
+        afdragField.setText( "" + aftale.getAfdragsbeløb() );
+        forwardButton.setEnabled( true );
+        csvbutton.setEnabled( true );
       });
-      
-      
-      
-      JButton csvbutton = new JButton("Udskriv CSV-fil");
-      GridBagConstraints gbc_button_1 = new GridBagConstraints();
-      gbc_button_1.anchor = GridBagConstraints.WEST;
-      gbc_button_1.insets = new Insets(0, 0, 5, 0);
-      gbc_button_1.gridx = 2;
-      gbc_button_1.gridy = 9;
-      lbpanel.add(csvbutton, gbc_button_1);
-      csvbutton.addActionListener( event ->
-      {
-        
-      });
+
 
       
       
@@ -363,6 +377,7 @@ public class OpretlåneaftaleDialog extends JDialog
     });
     
     forwardButton = new JButton("Opret Lånetilbud");
+    forwardButton.setEnabled( false );
     buttonpanel.add( forwardButton );
     
     forwardButton.addActionListener( event ->

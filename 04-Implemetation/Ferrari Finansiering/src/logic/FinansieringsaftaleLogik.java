@@ -3,8 +3,8 @@ package logic;
 import java.sql.SQLException;
 import java.util.List;
 
-import dataAccess.FinansieringsaftaleAccess;
 import dataAccess.DbConnection;
+import dataAccess.FinansieringsaftaleAccess;
 import domain.Finansieringsaftale;
 
 public class FinansieringsaftaleLogik

@@ -1,12 +1,30 @@
 package presentation;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-import logic.*;
-import domain.*;
+import logic.BilLogik;
+import logic.FinansieringsaftaleLogik;
+import logic.KundeLogik;
+import logic.SælgerLogik;
+import domain.Bil;
+import domain.Finansieringsaftale;
+import domain.Kunde;
+import domain.Sælger;
 
 
 

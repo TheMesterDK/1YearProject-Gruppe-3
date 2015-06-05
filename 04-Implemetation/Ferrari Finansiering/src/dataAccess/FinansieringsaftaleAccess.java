@@ -1,19 +1,20 @@
 package dataAccess;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import domain.Finansieringsaftale;
 
 
 public class FinansieringsaftaleAccess
 {
-  private static final String SELECT = "SELECT beløb, udbetaling, rente, afviklingsperiode, oprettelsesdato, førsteafbetalingdato, sidsteafbetalingdato, afdragsbeløb, sidsteafdragsbeløb, sælgerid, chassisnummer, cprid FROM finansieringsaftale WHERE aftaleid = ?";
-//  private static final String SELECT_MANY = "SELECT  FROM finansieringsaftale WHERE ";
-  private static final String INSERT = "INSERT INTO finansieringsaftale(beløb, udbetaling, rente, afviklingsperiode, oprettelsesdato, førsteafbetalingdato, sidsteafbetalingdato, afdragsbeløb, sidsteafdragsbeløb, sælgerid, chassisnummer, cprid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-  private static final String UPDATE = "UPDATE finansieringsaftale SET beløb = ?, udbetaling = ?, rente = ?, afviklingsperiode = ?, oprettelsesdato = ?, førsteafbetalingdato = ?, sidsteafbetalingdato = ?, afdragsbeløb = ?, sidsteafdragsbeløb = ?, sælgerid = ?, chassisnummer = ?, cprid = ? WHERE aftaleid = ?";
+  private static final String SELECT = "SELECT beløb, udbetaling, rente, afviklingsperiode, oprettelsesdato, førsteafbetalingdato, afdragsbeløb, sælgerid, chassisnummer, cprid FROM finansieringsaftale WHERE aftaleid = ?";
+  private static final String INSERT = "INSERT INTO finansieringsaftale(beløb, udbetaling, rente, afviklingsperiode, oprettelsesdato, førsteafbetalingdato, afdragsbeløb, sælgerid, chassisnummer, cprid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  private static final String UPDATE = "UPDATE finansieringsaftale SET beløb = ?, udbetaling = ?, rente = ?, afviklingsperiode = ?, oprettelsesdato = ?, førsteafbetalingdato = ?, afdragsbeløb = ?, sælgerid = ?, chassisnummer = ?, cprid = ? WHERE aftaleid = ?";
   private static final String DELETE = "DELETE FROM finansieringsaftale WHERE aftaleid = ?";
   
   
@@ -55,9 +56,7 @@ public class FinansieringsaftaleAccess
       statement.setInt( 4, aftale.getAfviklingsperiode() );
       statement.setString( 5, aftale.getOprettelsesdato() );
       statement.setString( 6, aftale.getFørsteafbetalingdato() );
-      statement.setString( 7, aftale.getSidsteafbetalingdato() );
       statement.setDouble( 8, aftale.getAfdragsbeløb() );
-      statement.setDouble( 9, aftale.getSidsteafdragsbeløb() );
       statement.setInt( 10, aftale.getSælgerid() );
       statement.setString( 11, aftale.getChassisnummer() );
       statement.setInt( 12, aftale.getCprid() );
@@ -116,9 +115,7 @@ public class FinansieringsaftaleAccess
       aftale.setAfviklingsperiode( resultset.getInt( "afviklingsperiode" ) );
       aftale.setOprettelsesdato( resultset.getString( "oprettelsesdato" ) );
       aftale.setFørsteafbetalingdato( resultset.getString( "førsteafbetalingdato" ) );
-      aftale.setSidsteafbetalingdato( resultset.getString("sidsteafbetalingdato") );
       aftale.setAfdragsbeløb( resultset.getDouble( "afdragsbeløb" ) );
-      aftale.setSidsteafdragsbeløb( resultset.getDouble("sidsteafdragsbeløb" ) );
       aftale.setSælgerid( resultset.getInt( "sælgerid" ) );
       aftale.setChassisnummer( resultset.getString( "chassisnummer" ) );
       aftale.setCprid( resultset.getInt( "cprid" ) );
@@ -178,9 +175,7 @@ public class FinansieringsaftaleAccess
         aftale.setAfviklingsperiode( resultset.getInt( "afviklingsperiode" ) );
         aftale.setOprettelsesdato( resultset.getString( "oprettelsesdato" ) );
         aftale.setFørsteafbetalingdato( resultset.getString( "førsteafbetalingdato" ) );
-        aftale.setSidsteafbetalingdato( resultset.getString("sidsteafbetalingdato") );
         aftale.setAfdragsbeløb( resultset.getDouble( "afdragsbeløb" ) );
-        aftale.setSidsteafdragsbeløb( resultset.getDouble("sidsteafdragsbeløb" ) );
         aftale.setSælgerid( resultset.getInt( "sælgerid" ) );
         aftale.setChassisnummer( resultset.getString( "chassisnummer" ) );
         aftale.setCprid( resultset.getInt( "cprid" ) );
@@ -234,9 +229,7 @@ public class FinansieringsaftaleAccess
       statement.setInt( 4, aftale.getAfviklingsperiode() );
       statement.setString( 5, aftale.getOprettelsesdato() );
       statement.setString( 6, aftale.getFørsteafbetalingdato() );
-      statement.setString( 7, aftale.getSidsteafbetalingdato() );
       statement.setDouble( 8, aftale.getAfdragsbeløb() );
-      statement.setDouble( 9, aftale.getSidsteafdragsbeløb() );
       statement.setInt( 10, aftale.getSælgerid() );
       statement.setString( 11, aftale.getChassisnummer() );
       statement.setInt( 12, aftale.getCprid() );

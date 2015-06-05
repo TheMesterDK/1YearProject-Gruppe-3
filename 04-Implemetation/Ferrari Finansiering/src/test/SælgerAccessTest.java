@@ -1,9 +1,6 @@
 package test;
 
 import java.sql.SQLException;
-import dataAccess.SælgerAccess;
-import logic.SælgerLogik;
-import domain.Sælger;
 
 public class SælgerAccessTest
 {

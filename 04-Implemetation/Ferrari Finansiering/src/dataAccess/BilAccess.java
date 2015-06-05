@@ -1,6 +1,9 @@
 package dataAccess;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +13,6 @@ import domain.Bil;
 public class BilAccess
 {
   private static final String SELECT = "SELECT registreringsnummer, pris, model, årgang, bemærkninger FROM bil WHERE chassisnummer = ?";
-//  private static final String SELECT_MANY = "SELECT registreringsnummer, pris, model, årgang, bemærkninger FROM bil WHERE ";
   private static final String INSERT = "INSERT INTO bil(chassisnummer, registreringsnummer, pris, model, årgang, bemærkninger) VALUES (?, ?, ?, ?, ?, ?)";
   private static final String UPDATE = "UPDATE bil SET registreringsnummer = ?, pris = ?, model = ?, årgang = ?, bemærkninger = ? WHERE chassisnummer = ?";
   private static final String DELETE = "DELETE FROM bil WHERE chassisnummer = ?";
@@ -45,7 +47,6 @@ public class BilAccess
   public void createBil(Connection connection, Bil bil) throws SQLException
   {
     PreparedStatement statement = null;
-//    ResultSet resultset = null;
     try
     {
       statement = connection.prepareStatement( INSERT );
@@ -60,15 +61,10 @@ public class BilAccess
     }
     finally
     {
-//      if ( resultset != null )
-//      {
-//        resultset.close();
-//        System.out.println("Bil, resultset close");
-//      }
       if ( statement != null )
       {
         statement.close();
-//        System.out.println("Bil, statement close");
+
       }
     }
     

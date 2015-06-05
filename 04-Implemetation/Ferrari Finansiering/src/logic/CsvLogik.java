@@ -1,6 +1,10 @@
 package logic;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import domain.Finansieringsaftale;
 
 /*
@@ -12,7 +16,8 @@ public class CsvLogik
   private static final String LINE_SEPARATOR = "\n";
   private static final String aftaleString = "Aftale-ID,Cpr-ID,Lånebeløb,Udbetaling,Afdragsbeløb,Afviklingsperiode,Rente,Oprettelsesdato,Første_Betaling_Dato,Sælger-ID,Chassisnummer,ÅOP";
   private static final String låneplanString = "Betaling,År,Ydelse,Rentebeløb,Gældsnedskrivning,Restgæld";
-  
+  private double restgæld;
+  private double rentebeløb = 0;
   
   public void writeCsvFile(Finansieringsaftale aftale, String placering, String titel )
   {
@@ -23,11 +28,18 @@ public class CsvLogik
       bw.newLine();
       bw.write( format(aftale) );
       bw.newLine();
+      bw.newLine();
       bw.write( låneplanString );
       bw.newLine();
-      bw.write( betalingsplan(aftale) );
-      bw.flush();
       
+      restgæld = aftale.getBeløb();
+      for(int i=0; i<=aftale.getAfviklingsperiode(); i++)
+      {
+      bw.write( betalingsplan(i, aftale) );
+      bw.newLine();
+      }
+      
+      bw.flush();
       bw.close();
     }
     catch ( IOException e )
@@ -39,7 +51,9 @@ public class CsvLogik
     System.out.println( "CSV file was created successfully !!!" );
   }
   
-  
+  /*
+   * Istedet for kunde-ID skal ændres til navn og cpr. Sælger-ID skal ændres til navn.
+   */
   private String format(Finansieringsaftale aftale)
   {
     StringBuilder aString = new StringBuilder();
@@ -51,7 +65,7 @@ public class CsvLogik
     aString.append( DELIMITER );
     aString.append( aftale.getUdbetaling() );
     aString.append( DELIMITER );
-    aString.append( aftale.getAfdragsbeløb() );
+    aString.append( afrunding(aftale.getAfdragsbeløb()) );
     aString.append( DELIMITER );
     aString.append( aftale.getAfviklingsperiode() );
     aString.append( DELIMITER );
@@ -65,7 +79,7 @@ public class CsvLogik
     aString.append( DELIMITER );
     aString.append( aftale.getChassisnummer() );
     aString.append( DELIMITER );
-    aString.append( aftale.getÅop() );
+    aString.append( afrunding(aftale.getÅop() ));
     aString.append( LINE_SEPARATOR );
     
     return aString.toString();
@@ -73,34 +87,51 @@ public class CsvLogik
   
   
   /*
-   * IKKE TESTET
+   * Ikke kigget efter for fejl
    */
-  private String betalingsplan(Finansieringsaftale aftale)
+  private String betalingsplan(int i, Finansieringsaftale aftale)
   {
-    double restgæld = aftale.getBeløb();
-    double rentebeløb = 0;
     StringBuilder bpString = new StringBuilder();
-    for(int i=0; i<aftale.getAfviklingsperiode(); i++)
-    {
+    
       bpString.append( i );
       bpString.append( DELIMITER );
       bpString.append( i/12 );
       bpString.append( DELIMITER );
-      bpString.append( aftale.getAfdragsbeløb() );
+      if(i==0)
+      {
+        bpString.append( 0.0 );
+      }
+      else
+      {
+        bpString.append( afrunding(aftale.getAfdragsbeløb()) );
+      }
       bpString.append( DELIMITER );
-      bpString.append( rentebeløb );
+      bpString.append( afrunding(rentebeløb) );
       bpString.append( DELIMITER );
-      bpString.append( aftale.getAfdragsbeløb() - rentebeløb  );
+      if(i==0)
+      {
+        bpString.append( 0.0 );
+      }
+      else
+      {
+        bpString.append( afrunding(aftale.getAfdragsbeløb() - rentebeløb)  );
+      }
       bpString.append( DELIMITER );
-      bpString.append( restgæld );
+      bpString.append( afrunding(restgæld) );
       bpString.append( LINE_SEPARATOR );
       
       rentebeløb = (restgæld * ((aftale.getRente()/100)/12));
       restgæld = restgæld - (aftale.getAfdragsbeløb() - rentebeløb );
-    }
-    
     
     return bpString.toString();
+  }
+  
+  private double afrunding(double d)
+  {
+    d = Math.round(d * 100);
+    d = d/100;
+    
+    return d;
   }
   
 }

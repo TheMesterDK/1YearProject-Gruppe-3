@@ -1,16 +1,35 @@
 package presentation;
 
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableRowSorter;
 
-import domain.*;
-import logic.*;
+import logic.BilLogik;
+import logic.FinansieringsaftaleLogik;
+import logic.KundeLogik;
+import domain.Bil;
+import domain.Finansieringsaftale;
+import domain.Kunde;
 
 public class MainWindow extends JFrame
 {
@@ -26,7 +45,6 @@ public class MainWindow extends JFrame
   private JButton redigerButton;
   private JButton tilbageButton;
   
-//  private JComboBox<String> comboBox = new JComboBox<String>();
 
   
   public MainWindow()
@@ -40,23 +58,9 @@ public class MainWindow extends JFrame
     contentPane.setLayout( new BorderLayout( 0, 0 ) );
     contentPane.setBackground( Color.BLACK );
     
-//    JPanel logopanel = LogoPanel();
-//    contentPane.add( logopanel, BorderLayout.NORTH );
-    
     JPanel logopanel2 = LogoPanel2();
     contentPane.add( logopanel2, BorderLayout.EAST );
-    
-//    JPanel sælgermainpanel = SælgerMainPanel();
-//    contentPane.add( sælgermainpanel, BorderLayout.CENTER );
-    
-//     JPanel findkundepanel = FindKundePanel();
-//     contentPane.add(findkundepanel, BorderLayout.CENTER);
-    
-//     JPanel findbilpanel = FindBilPanel();
-//     contentPane.add(findbilpanel, BorderLayout.CENTER);
-    
-//     JPanel findaftalepanel = FindLåneaftalePanel();
-//     contentPane.add(findaftalepanel, BorderLayout.CENTER);
+
     
     this.setVisible( true );
     
@@ -297,7 +301,7 @@ public class MainWindow extends JFrame
     
 //    this.setPreferredSize(new Dimension(width, frameHeight));
     JScrollPane scrollPane = new JScrollPane(table);
-//    scrollPane.setOpaque(true);
+
 
     scrollPane.setForeground(Color.RED);
     scrollPane.setMinimumSize(new Dimension(200, 25));

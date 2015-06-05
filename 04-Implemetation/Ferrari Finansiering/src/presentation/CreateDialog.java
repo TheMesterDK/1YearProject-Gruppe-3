@@ -1,12 +1,33 @@
 package presentation;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-import logic.*;
-import domain.*;
+import logic.BilLogik;
+import logic.FinansieringsaftaleLogik;
+import logic.KundeLogik;
+import logic.LåneberegningsLogik;
+import logic.SælgerLogik;
+import domain.Bil;
+import domain.Finansieringsaftale;
+import domain.Kunde;
 
 public class CreateDialog extends JDialog
 {
@@ -66,15 +87,6 @@ public class CreateDialog extends JDialog
     
     JPanel logopanel = LogoPanel();
     contentPanel.add(logopanel, BorderLayout.EAST);
-    
-//    mainpanel = CprPanel();
-//    contentPanel.add(mainpanel, BorderLayout.CENTER);
-    
-//    JPanel lånepanel = LånebetingelserPanel();
-//    contentPanel.add(lånepanel, BorderLayout.CENTER);
-    
-//    JPanel kundepanel = KundePanel();
-//    contentPanel.add( kundepanel, BorderLayout.CENTER );
     
     
     this.setVisible( true );
@@ -168,16 +180,16 @@ public class CreateDialog extends JDialog
       gbc_button.gridx = 2;
       gbc_button.gridy = 3;
       
-// Nedenstående actionlistener fungerer ikke korrekt(Kreditværdigheden hentes ikke)!     
+// Nedenstående actionlistener fungerer ikke korrekt!     
       button.addActionListener( event -> 
       {
         LåneberegningsLogik lblogic = new LåneberegningsLogik();
         kreditværdighed = lblogic.getKreditVærdighed( cprnummerField.getText() );
         returnField.setText(kreditværdighed);
-//        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C" || kreditværdighed == "D")
-//        {
+        if(kreditværdighed == "A" || kreditværdighed == "B" || kreditværdighed == "C")
+        {
           NyKundeButton.setEnabled( true );
-//        }
+        }
         cprpanel.repaint();
       });
       cprpanel.add(button, gbc_button);

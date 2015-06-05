@@ -2,7 +2,6 @@ package logic;
 
 import java.sql.SQLException;
 
-
 import dataAccess.DbConnection;
 import dataAccess.SælgerAccess;
 import domain.Sælger;

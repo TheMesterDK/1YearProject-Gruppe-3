@@ -1,6 +1,6 @@
 package test;
 
-import logic.*;
+import logic.LåneberegningsLogik;
 
 public class APIConnectionTest
 {

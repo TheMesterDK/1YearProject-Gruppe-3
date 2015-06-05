@@ -2,7 +2,10 @@ package dataAccess;
 
 
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +73,6 @@ public class KundeAccess
         statement.setString( 7, kunde.getKommentar() );
         statement.execute();
         connection.commit();
-//        createKunde( connection, kunde);
       }
       connection.commit();
       
@@ -87,33 +89,6 @@ public class KundeAccess
       }
     }
   }
-  
-//  public void createKunde(Connection connection, Kunde kunde) throws SQLException
-//  {
-//    PreparedStatement statement = null;
-//    try
-//    {
-//        statement = connection.prepareStatement( INSERTKUNDE );
-//        statement.setInt( 1, kunde.getCprid() );
-//        statement.setString( 2, kunde.getNavn() );
-//        statement.setString( 3, kunde.getAdresse() );
-//        statement.setString( 4, kunde.getTelefonnummer() );
-//        statement.setString( 5, kunde.getPostnummer() );
-//        statement.setString( 6, kunde.getEmail() );
-//        statement.setString( 7, kunde.getKommentar() );
-//        statement.execute();
-//        connection.commit();
-//      
-//    }
-//    finally
-//    {
-//      if ( statement != null )
-//      {
-//        statement.close();
-//      }
-//    }
-//    
-//  }
   
   
   /*
@@ -301,7 +276,6 @@ public class KundeAccess
       {
         Kunde kunde = new Kunde();
         kunde.setCprid( resultset.getInt( "cprid" ) );
-//        kunde.setCprnummer( cpraccess.readCprnummer( connection, resultset.getInt( "cprid" ) ) );
         kunde.setNavn( resultset.getString( "navn" ) );
         kunde.setAdresse( resultset.getString( "adresse" ) );
         kunde.setPostnummer( resultset.getString( "postnummer" ) );
