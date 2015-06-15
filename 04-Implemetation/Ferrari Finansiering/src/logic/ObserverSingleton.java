@@ -15,7 +15,6 @@ public class ObserverSingleton
     return instance;
   }
   
-  
   private ObserverSingleton() 
   {
     

@@ -10,5 +10,4 @@ public class CustomTableModel extends DefaultTableModel
   {
     return false;
   }
-  
 }

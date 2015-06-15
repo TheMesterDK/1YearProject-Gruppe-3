@@ -13,7 +13,6 @@ import exceptions.KundeDoesNotExist;
 public class KundeLogik
 {
   
-	
   /*
    * Create
    */

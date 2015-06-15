@@ -10,7 +10,6 @@ import domain.Finansieringsaftale;
 public class FinansieringsaftaleLogik
 {
   
-	
   /*
    * Create
    */

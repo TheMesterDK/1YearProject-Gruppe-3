@@ -6,6 +6,7 @@ import dataAccess.DbConnection;
 import dataAccess.SælgerAccess;
 import domain.Sælger;
 
+
 public class SælgerLogik
 {
   

@@ -11,7 +11,6 @@ public class LåneberegningsLogik
   
   public String getKreditVærdighed(String cprnummer)
   {
-	  
     APIConnection ac = new APIConnection();
     return ac.getKreditVærdighed( cprnummer );
   }

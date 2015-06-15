@@ -77,7 +77,7 @@ public class MainWindow extends JFrame
     FlowLayout flowLayout = (FlowLayout) logopanel2.getLayout();
     flowLayout.setAlignment( FlowLayout.CENTER );
     logopanel2.setBackground( Color.BLACK );
-    JLabel label2 = new JLabel( new ImageIcon("C:\\Users\\Gammel\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Capture.PNG") );
+    JLabel label2 = new JLabel( new ImageIcon( "C:\\Users\\Dennis\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Capture.png" ) );
     label2.setPreferredSize(new Dimension(100, 280));
     label2.setLabelFor( label2 );
     label2.setSize( new Dimension(100, 280) );

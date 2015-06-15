@@ -24,5 +24,4 @@ public class CustomTableRenderer extends JTable
     tableColumn.setPreferredWidth( Math.max( rendererWidth + getIntercellSpacing().width, tableColumn.getPreferredWidth() ) );
     return component;
   }
-  
 }

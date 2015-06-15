@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import domain.Finansieringsaftale;
 
-
 /*
  * IKKE FÆRDIG. MANGLER AT BESTEMME RÆKKEFØLGEN PÅ OPLYSNINGERNE, OG AT TESTE...
  */
