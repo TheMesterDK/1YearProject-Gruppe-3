@@ -8,7 +8,6 @@ import logging.Logger;
 import dataAccess.DbConnection;
 import dataAccess.DatabaseScript;
 
-
 public class DatabaseLogikImpl implements DatabaseLogik
 {
 

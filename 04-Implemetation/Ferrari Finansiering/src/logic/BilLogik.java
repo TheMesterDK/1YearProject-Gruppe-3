@@ -7,7 +7,6 @@ import dataAccess.BilAccess;
 import dataAccess.DbConnection;
 import domain.Bil;
 
-
 public class BilLogik
 {
   

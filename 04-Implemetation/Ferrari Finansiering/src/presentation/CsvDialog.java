@@ -15,8 +15,7 @@ import logic.CsvLogik;
 import domain.Finansieringsaftale;
 
 public class CsvDialog extends JDialog
-{
-  
+{  
   private final JPanel contentPanel = new JPanel();
   private JTextField navnField;
   private JTextField stedField;
