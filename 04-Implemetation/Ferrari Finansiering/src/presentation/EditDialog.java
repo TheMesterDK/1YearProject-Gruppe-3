@@ -686,7 +686,7 @@ public class EditDialog extends JDialog
     aftalepanel.add(aftaleidField, gbc_aftaleidField);
     aftaleidField.setColumns(10);
     
-    JLabel lblLnebelb = new JLabel("L\u00E5nebel\u00F8b:");
+    JLabel lblLnebelb = new JLabel("Lånebeløb:");
     lblLnebelb.setForeground(new Color(150, 0, 0));
     GridBagConstraints gbc_lblLnebelb = new GridBagConstraints();
     gbc_lblLnebelb.anchor = GridBagConstraints.EAST;
@@ -776,7 +776,7 @@ public class EditDialog extends JDialog
     aftalepanel.add(oprettelsesdatoField, gbc_oprettelsesdatoField);
     oprettelsesdatoField.setColumns(10);
     
-    JLabel lblSlger = new JLabel("S\u00E6lger:");
+    JLabel lblSlger = new JLabel("Sælger:");
     lblSlger.setForeground(new Color(150, 0, 0));
     GridBagConstraints gbc_lblSlger = new GridBagConstraints();
     gbc_lblSlger.anchor = GridBagConstraints.EAST;

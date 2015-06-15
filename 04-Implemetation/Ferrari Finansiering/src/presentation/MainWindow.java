@@ -31,6 +31,8 @@ import domain.Bil;
 import domain.Finansieringsaftale;
 import domain.Kunde;
 
+
+
 public class MainWindow extends JFrame
 {
 
@@ -396,20 +398,21 @@ public class MainWindow extends JFrame
       {
         columnNames = new String[] { "Aftale-ID", "Oprettelsesdato", "Cpr-ID", "Beløb", "Udbetaling", "Rente", "Afviklingsperiode", "Bil-Chassisnummer", "SælgerID"};
         
-        if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
-        {
-          
-        }
-        else if(comboBox.getSelectedItem().toString() == "Reg.nummer")
-        {
-          
-        }
-        else
-        {
+        
+//        if(comboBox.getSelectedItem().toString() == "Cpr-nummer")
+//        {
+//          
+//        }
+//        else if(comboBox.getSelectedItem().toString() == "Reg.nummer")
+//        {
+//          
+//        }
+//        else
+//        {
 
             aftalesearchlist = fl.listFinansieringsaftaler( comboBox.getSelectedItem().toString(), searchField.getText() );
             
-        }
+//        }
         
         if(aftalesearchlist.isEmpty()) 
         {
