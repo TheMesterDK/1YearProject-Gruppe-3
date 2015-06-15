@@ -73,7 +73,7 @@ public class KreditværdighedDialog extends JDialog
     FlowLayout flowLayout = (FlowLayout) logopanel.getLayout();
     flowLayout.setAlignment( FlowLayout.LEFT );
     logopanel.setBackground( Color.BLACK );
-    JLabel label2 = new JLabel( new ImageIcon( "C:\\Users\\Dennis\\Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Capture.png" ) );
+    JLabel label2 = new JLabel( new ImageIcon( "C:\\Users\\Gammel\\My Documents\\GitHub\\1YearProject-Gruppe-3\\04-Implemetation\\Ferrari Finansiering\\Capture.png" ) );
     label2.setLabelFor( label2 );
     label2.setSize( new Dimension( 300, 100 ) );
     label2.setBackground( new Color( 200, 50, 50 ) );
