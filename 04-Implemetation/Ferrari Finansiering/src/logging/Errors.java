@@ -1,6 +1,5 @@
 package logging;
 
-public enum Errors
-{
-  INFORMATION,ERROR;
+public enum Errors {
+	INFORMATION, ERROR;
 }
