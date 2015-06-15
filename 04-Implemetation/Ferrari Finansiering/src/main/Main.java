@@ -7,13 +7,14 @@ import logic.DatabaseLogikImpl;
 import presentation.MainWindow;
 import exceptions.KundeAllreadyExist;
 
-public class Main {
-
-	public static void main(String[] args) throws SQLException,
-			KundeAllreadyExist {
-		DatabaseLogik databaseBuilder = new DatabaseLogikImpl();
-		databaseBuilder.createDatabase();
-		new MainWindow().SælgerMainPanel();
-	}
-
+public class Main
+{
+  
+  public static void main( String[] args ) throws SQLException, KundeAllreadyExist
+  {
+    DatabaseLogik databaseBuilder = new DatabaseLogikImpl();
+    databaseBuilder.createDatabase();
+    new MainWindow().SælgerMainPanel();
+  }
+  
 }

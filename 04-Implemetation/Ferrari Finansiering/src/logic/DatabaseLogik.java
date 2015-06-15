@@ -1,5 +1,6 @@
 package logic;
 
-public interface DatabaseLogik {
-	public void createDatabase();
+public interface DatabaseLogik
+{
+  public void createDatabase();
 }
