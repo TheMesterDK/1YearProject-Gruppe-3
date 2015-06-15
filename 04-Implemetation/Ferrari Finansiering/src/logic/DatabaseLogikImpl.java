@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import logging.Errors;
 import logging.Logger;
-import dataAccess.DbConnection;
 import dataAccess.DatabaseScript;
+import dataAccess.DbConnection;
 
 
 public class DatabaseLogikImpl implements DatabaseLogik
